@@ -12,9 +12,9 @@
     src: url("font/Mirza-Regular.ttf");
 }
 /*===========================================================================================*/
-/* menu aside */
+/* menu amenuBar */
 
-.side{
+.menu-bar{
     position:fixed;
     top:10px;
     width:58px;
@@ -25,7 +25,7 @@
     background-size: cover;
     border-radius: 20px 0px 0 20px;
 }
-.side img{
+.menu-bar img{
     position: relative;
     width:52px;
     top:12px;
@@ -33,7 +33,7 @@
     margin-left:5px;
     cursor:pointer;
 }
-.side2{
+.menu-bar2{
     display: block;
     position:fixed;
     top:10px;
@@ -46,7 +46,7 @@
     background-size: cover;
     border-radius: 0 20px 20px 0;
 }
-.side2 img{
+.menu-bar2 img{
     display: none;
     position: relative;
     width:52px;
@@ -55,9 +55,7 @@
     margin-left: 145px;
     cursor:pointer;
 }
-
-
-/* End menu aside*/
+/* End menu amenuBar*/
 /*===========================================================================================*/
 .grid{
     display:grid;
@@ -67,6 +65,9 @@
     border-bottom: black solid 1px;
     padding-bottom: 8px;
     margin-left: 60px;
+}
+.disappear-element{
+    display:none;
 }
 /*===========================================================================================*/
 /* Start Movie Name and Image */
@@ -83,7 +84,7 @@
     text-decoration: none;
     left:35px;
     top:30%;
-    overflow: hidden;     
+    overflow: auto; 
 }
 .filmName a:visited{
     color:navy;
@@ -156,15 +157,16 @@
     width:100%;
     grid-column:2/4;
 }
-
 label{
-    background-color: transparent;
     color: navy;
-    text-align: end;
     font-weight: bolder;
     user-select: none;
     font-family:ElMessiri;
     padding: 5px 0;
+}
+#is-checked{
+    grid-column:2/4;
+    margin-left: 5px;
 }
 .gridAdd button{
     max-width:350px;
@@ -180,6 +182,13 @@ label{
 .gridAdd button:active{
     background-color: #888;
 }
+#txt-area ,#txt-area3{
+    width:100%;
+    height:200px;
+    margin:8px 0 8px 0;
+    grid-column:1/4;
+}
+/* Start with button open  the add form */
 .btn-add{
     font-family: Arial, Helvetica, sans-serif;
     position: fixed;
@@ -201,6 +210,8 @@ label{
 .btn-add:hover{
     opacity:1;
 }
+/* End with button open  the add form */
+/* Start with button close  the add form */
 .btn-close{
     font-family: Arial, Helvetica, sans-serif;
     position: fixed;
@@ -218,15 +229,8 @@ label{
     cursor:pointer;
     user-select:none;
 }
-#txt-area ,#txt-area3{
-    width:100%;
-    height:200px;
-    margin:8px 0 8px 0;
-    grid-column:1/4;
-}
-.txt-area2{
-    display:none;
-}
+/* End with button close  the add form */
+/* Start with search movies */
 #movie-search{
     grid-column:1/5;
     height: 30px;
@@ -235,16 +239,7 @@ label{
 .watched-continar label:first-of-type{
     margin-left: 60px;
 }
-#is-checked{
-    grid-column:2/4;
-    margin-left: 5px;
-}
-#not-watched{
-    margin-left: 5px;
-}
-.lbl-rdo:first-of-type{
-    margin-left: 10%;
-}
+/* End with search movies */
 .head{
     width:100%;
 }
@@ -309,7 +304,16 @@ label{
     }
 
 }
-@media (max-width: 469px) and (min-width: 351px){
+@media (max-width:469px) and (min-width:351px){
+    .grid{
+        grid-template-columns:42% 55% 3%;
+    }
+    .filmName a{
+        position:static;
+    }
+    .fImage{
+        position:static;
+    }
     #movie-search{
         display: block;
         width: 82%;
@@ -321,16 +325,6 @@ label{
     }
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
-    }
-    .grid{
-        grid-template-columns: 42% 55% 3%;
-    }
-    .filmName a{
-        top:40px;
-        left:-8px;
-    }
-    .fImage{
-        top:5px;
     }
 
 }
@@ -351,11 +345,10 @@ label{
         grid-template-columns: 37% 60% 3%;
     }
     .filmName a{
-        top:40px;
-        left:-8px;
+        position:static;
     }
     .fImage{
-        top:5px;
+        position:static;
     }
 
 }
@@ -373,12 +366,10 @@ label{
         margin-left: 60px;
     }
     .filmName a{
-        top:40px;
-        left:-8px;
+        position:static;
     }
     .fImage{
-        top:5px;
+        position:static;
     }
 
 }
-
