@@ -1,0 +1,271 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing:border-box;
+}
+@font-face {
+    font-family:ElMessiri;
+    src: url("font/ElMessiri-Regular.ttf");
+}
+@font-face {
+    font-family: Mirza-Regular;
+    src: url("font/Mirza-Regular.ttf");
+}
+.side{
+    position:fixed;
+    top:10px;
+    width:58px;
+    height:570px;
+    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px 0px 0 20px;
+}
+.side img{
+    position: relative;
+    width:52px;
+    top:12px;
+    height:40px ;
+    margin-left:5px;
+    cursor:pointer;
+}
+.side2{
+    display: none;
+    position:fixed;
+    top:10px;
+    left:58px;
+    width:200px;
+    height:570px;
+    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0 20px 0 20px;
+}
+.side2 img{
+    position: relative;
+    width:52px;
+    height:40px ;
+    top:12px;
+    margin-left: 145px;
+    cursor:pointer;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns: 22% 75% 3%;
+    align-items: center;
+    padding:8px 8px;
+    border-bottom: black solid 1px;
+    padding-bottom: 8px;
+    margin-left: 60px;
+}
+.filmName{
+    color:navy;
+    margin-top:auto;
+    
+    border-bottom:.5px solid #aaa;
+    
+    /*background-color: rgb(240, 232, 232);*/
+    }
+.filmName a{	
+    text-decoration: none;
+    margin-left: 5px;
+    display: inline-block;     
+}
+.filmName a:visited{
+    color:navy;
+}
+.filmName a:hover{
+    color:orangered;
+    font-weight: bolder;
+}
+.whatAbout{
+    margin-top:auto;
+    padding: 8px;
+    font-family: Mirza-Regular;
+    direction: rtl;
+    border-bottom:.5px solid #aaa;
+}
+.wTitle{
+    text-align:right;
+    text-decoration:navy underline double;
+}
+.title{
+    text-decoration:navy underline double;
+}
+.fImage{
+    width:30px;
+    height: 30px;
+    border-radius:5%;
+}
+.fImage:hover{
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:350px;
+    height: 300px;
+}
+/*  الادخالى  */
+.gridAdd{
+    display:none;
+    position: fixed;
+    width: 90%;
+    min-height: 500px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    grid-template-columns:20% 70% 10%;
+    row-gap: 8px;
+    padding: 10px 10px;
+    border-radius: 25px;
+    background-color : rgba(210 , 203 ,203 ,.50);
+}
+.txt{
+    width:75%;
+    height:25px;
+    padding-left:10px;
+    border-radius:10px;
+    grid-column:2/4;
+}
+.txt:focus{
+    outline:none;
+}
+.des{
+    width:100%;
+    grid-column:2/4;
+}
+
+label{
+    background-color: transparent;
+    color: navy;
+    text-align: end;
+    font-weight: bolder;
+    user-select: none;
+    justify-self: end;
+    padding: 5px 0;
+}
+.gridAdd button{
+    max-width:350px;
+    height:30px;
+    grid-column:1/4;
+    margin:8px 0 8px 20%;
+    user-select: none;
+    border-radius:5px ;
+    border: none;
+    outline: none;
+    background-color: #aaa;
+}
+.gridAdd button:active{
+    background-color: #888;
+}
+.btn-add{
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    width:60px;
+    height:60px;
+    background-color: #0f0;
+    border-radius:50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 38px;
+    font-weight: bolder;
+    color:#fff;
+    cursor:pointer;
+    user-select:none;
+    opacity:.7;
+}
+.btn-add:hover{
+    opacity:1;
+}
+.btn-close{
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    width:30px;
+    height:30px;
+    background-color: rgb(187, 59, 59);
+    border-radius:10%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 25px;
+    font-weight: bolder;
+    color:#fff;
+    cursor:pointer;
+    user-select:none;
+}
+#txt-area ,#txt-area3{
+    width:100%;
+    height:200px;
+    margin:8px 0 8px 0;
+    grid-column:1/4;
+}
+.txt-area2{
+    display:none;
+}
+#movie-search{
+    grid-column:1/5;
+    height: 30px;
+    width:50%;
+}
+.watched-continar label:first-of-type{
+    margin-left: 60px;
+}
+.watched-continar label{
+    margin-left: 20px;
+}
+#is-checked{
+    grid-column:2/4;
+    margin-left: 5px;
+}
+#not-watched{
+    margin-left: 5px;
+}
+.lbl-rdo:first-of-type{
+    margin-left: 10%;
+}
+.lbl-rdo input{
+    direction: ltr;
+}
+.head{
+    width:100%;
+}
+@media (max-width: 600px){
+    .gridAdd{
+        grid-template-columns:50% 50%;
+    }
+    .txt{
+        width:100%;
+    }
+    .des{
+        width:100%;
+    }
+    .head button{
+        width:200px;
+    }
+    .lbl1{
+        padding-left: 50px;
+    }
+    .lbl-rdo{
+       margin:5px auto ;
+       display: inline;
+       font-size: 12px;
+    }
+
+    #movie-search{
+        display: block;
+        width: 80%;
+        margin-left: 60px;
+    }
+    .watched-continar label{
+        margin-left: 10px;
+    }
+    .watched-continar label:first-of-type{
+        margin-left: 60px;
+    }
+}
