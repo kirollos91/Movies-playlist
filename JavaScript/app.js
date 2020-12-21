@@ -313,7 +313,6 @@ function poss(){
             
         }
         pos++;
-        console.log(pos);
     }else{
         clearInterval(funpos1);
     }
@@ -325,7 +324,6 @@ function poss2(){
            side.children[0].style.display = "block";
         }
         pos--;
-        console.log(pos);
     }else{
         clearInterval(funpos2);
         
