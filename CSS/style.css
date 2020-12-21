@@ -20,7 +20,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 20px 0px 0 20px;
 }
 .side img{
     position: relative;
@@ -41,7 +41,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 0 20px 20px 0;
 }
 .side2 img{
     position: relative;
@@ -144,7 +144,7 @@ label{
     text-align: end;
     font-weight: bolder;
     user-select: none;
-    justify-self: end;
+    
     padding: 5px 0;
 }
 .gridAdd button{
@@ -216,9 +216,6 @@ label{
 .watched-continar label:first-of-type{
     margin-left: 60px;
 }
-.watched-continar label{
-    margin-left: 20px;
-}
 #is-checked{
     grid-column:2/4;
     margin-left: 5px;
@@ -229,13 +226,12 @@ label{
 .lbl-rdo:first-of-type{
     margin-left: 10%;
 }
-.lbl-rdo input{
-    direction: ltr;
-}
 .head{
     width:100%;
 }
-@media (max-width: 600px){
+
+
+@media (max-width: 812px){
     .gridAdd{
         grid-template-columns:50% 50%;
     }
@@ -252,9 +248,8 @@ label{
         padding-left: 50px;
     }
     .lbl-rdo{
-       margin:5px auto ;
+
        display: inline;
-       font-size: 12px;
     }
 
     #movie-search{
@@ -267,5 +262,27 @@ label{
     }
     .watched-continar label:first-of-type{
         margin-left: 60px;
+    }
+}
+@media (max-width: 871px) and (min-width:813px){
+    label.lbl-rdo{
+        font-size: 12px;
+     }
+}
+@media (max-width: 930px) and (min-width:871px){
+    label.lbl-rdo{
+        font-size: 13px;
+     }
+     .watched-continar label{
+        margin-left: 5px;
+    }
+}
+@media (max-width: 1050px) and (min-width:930px){
+    label.lbl-rdo{
+        font-size: 14px;
+        margin:0 auto ;
+     }
+     .watched-continar label{
+        margin-left: 10px;
     }
 }
