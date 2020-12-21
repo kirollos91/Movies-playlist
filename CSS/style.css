@@ -323,7 +323,7 @@ label{
         margin-left: 60px;
     }
     .grid{
-        grid-template-columns: 37% 60% 3%;
+        grid-template-columns: 42% 55% 3%;
     }
     .filmName a{
         top:40px;
