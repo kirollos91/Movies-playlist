@@ -283,6 +283,12 @@ btnAdd.addEventListener("click",function(){
 
 btnClose.addEventListener("click",function(){returnPage();});
 window.addEventListener("keydown",function(event){if(event.key == "Escape" && addGrid.style.display == "grid")returnPage();});
+
+for(let grid of whatAbout1){
+    grid.setAttribute("contenteditable","true");
+}
+//===================================================================================================
+// start animation with open menu bar side
 let pos = 0;
 let funpos1;
 let funpos2;
@@ -290,20 +296,15 @@ let funpos2;
 side.children[0].addEventListener("click",function(){
     this.classList.add(["txt-area2"]);
     side.children[0].style.display = "none";
-     funpos1 = setInterval(poss,1);
+     funpos1 = setInterval(poss,0.5);
 
 });
 side2.children[0].addEventListener("click",function(){
     side.children[0].classList.remove(["txt-area2"]);
     document.querySelector(".side2").children[0].style.display = "none";
-    funpos2 = setInterval(poss2,1);
+    funpos2 = setInterval(poss2,0.5);
 });
 
-for(let grid of whatAbout1){
-    grid.setAttribute("contenteditable","true");
-}
-//===================================================================================================
-// start animation
 function poss(){
     if(pos < 201){
         document.querySelector(".side2").style.width = pos +"px";
@@ -320,7 +321,7 @@ function poss(){
 function poss2(){
     if(pos >= 0){
         document.querySelector(".side2").style.width = pos +"px";
-        if(document.querySelector(".side2").style.width == "59px"){  
+        if(document.querySelector(".side2").style.width == "0px"){  
            side.children[0].style.display = "block";
         }
         pos--;
@@ -330,17 +331,17 @@ function poss2(){
         
     }
 }
-// end animation
+// end animation with open menu bar side
 //===================================================================================================
-/*              جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
+//جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
 for(let i = 0;i<watchedBox1.length;i++){
     watchedBox1[i].children[0].addEventListener("change",()=>{
         if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].checked = true;
         else watchedBox1[i].children[0].checked = false;
     });
 }
-*/
-
+// end
+//===================================================================================================
 /** 
  * notWatched.addEventListener("change",function(){
     if(notWatched.checked){
