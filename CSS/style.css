@@ -31,11 +31,11 @@
     cursor:pointer;
 }
 .side2{
-    display: none;
+    display: block;
     position:fixed;
     top:10px;
     left:58px;
-    width:200px;
+    
     height:570px;
     background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
     background-position: center;
@@ -44,6 +44,7 @@
     border-radius: 0 20px 20px 0;
 }
 .side2 img{
+    display: none;
     position: relative;
     width:52px;
     height:40px ;
