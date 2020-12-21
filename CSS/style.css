@@ -11,6 +11,9 @@
     font-family: Mirza-Regular;
     src: url("font/Mirza-Regular.ttf");
 }
+/*===========================================================================================*/
+/* menu aside */
+
 .side{
     position:fixed;
     top:10px;
@@ -53,6 +56,9 @@
     cursor:pointer;
 }
 
+
+/* End menu aside*/
+/*===========================================================================================*/
 .grid{
     display:grid;
     grid-template-columns: 22% 75% 3%;
@@ -62,18 +68,21 @@
     padding-bottom: 8px;
     margin-left: 60px;
 }
+/*===========================================================================================*/
+/* Start Movie Name and Image */
 .filmName{
     color:navy;
-    margin-top:auto;
-    
+    padding-top:5px;
     border-bottom:.5px solid #aaa;
+    height:100%;
+    position: relative;
     
-    /*background-color: rgb(240, 232, 232);*/
     }
 .filmName a{	
+    position: absolute;
     text-decoration: none;
-    margin-left: 5px;
-    display: inline-block;     
+    left:35px;
+    top:30%;     
 }
 .filmName a:visited{
     color:navy;
@@ -82,21 +91,11 @@
     color:orangered;
     font-weight: bolder;
 }
-.whatAbout{
-    margin-top:auto;
-    padding: 8px;
-    font-family: Mirza-Regular;
-    direction: rtl;
-    border-bottom:.5px solid #aaa;
-}
-.wTitle{
-    text-align:right;
-    text-decoration:navy underline double;
-}
-.title{
-    text-decoration:navy underline double;
-}
+/* image */
 .fImage{
+    top:30%;
+    display:block;
+    position: absolute;
     width:30px;
     height: 30px;
     border-radius:5%;
@@ -109,6 +108,24 @@
     width:350px;
     height: 300px;
 }
+/* End Movie Name and Image */
+/*===========================================================================================*/
+.whatAbout{
+    margin-top:auto;
+    padding: 8px;
+    font-family: Mirza-Regular;
+    direction: rtl;
+    border-bottom:.5px solid #aaa;
+}
+/*===========================================================================================*/
+.wTitle{
+    text-align:right;
+    text-decoration:navy underline double;
+}
+.title{
+    text-decoration:navy underline double;
+}
+/*===========================================================================================*/
 /*  الادخالى  */
 .gridAdd{
     display:none;
@@ -230,6 +247,7 @@ label{
 .head{
     width:100%;
 }
+/*===========================================================================================*/
 @media (max-width: 1050px) and (min-width:931px){
     label.lbl-rdo{
         font-size: 14px;
@@ -249,7 +267,7 @@ label{
         font-size: 12px;
      }
 }
-@media (max-width: 865px) and (min-width:422px){
+@media (max-width: 865px) and (min-width:470px){
     .gridAdd{
         grid-template-columns:50% 50%;
     }
@@ -278,8 +296,19 @@ label{
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
     }
+    .grid{
+        grid-template-columns: 27% 70% 3%;
+    }
+    .filmName a{
+        top:5px;
+
+    }
+    .fImage{
+        top:5px;
+    }
+
 }
-@media (max-width: 421px){
+@media (max-width: 469px){
     #movie-search{
         display: block;
         width: 82%;
@@ -291,6 +320,14 @@ label{
     }
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
+    }
+    .filmName a{
+        top:40px;
+        left:-8px;
+
+    }
+    .fImage{
+        top:5px;
     }
 
 }
@@ -324,4 +361,3 @@ label{
     }
 
 }
-
