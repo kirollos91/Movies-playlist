@@ -1,3 +1,4 @@
+// اضافة المتغيرات للمشروع
 const imgPath               = document.getElementById("imgPath");                     // 
 const moviePath             = document.getElementById("moviePath");                   //    
 const movieName             = document.getElementById("movieName");
@@ -17,13 +18,52 @@ const rdoWatched            = document.querySelectorAll(".rdo-watched");
 const addGrid               = document.querySelector(".gridAdd");
 const btnAdd                = document.querySelector(".btn-add");
 const btnClose              = document.querySelector(".btn-close");
-const side                  = document.querySelector(".side")
-const side2                 = document.querySelector(".side2")
+const menuBar               = document.querySelector(".menu-bar");
+const menuBar2              = document.querySelector(".menu-bar2");
 const isWatched             = document.querySelector("#is-checked");
 const txtArea               = document.querySelector("#txt-area");
 let textOfRow               = "";
+
+
+
+
+
+// دول الامشروع
+//============================================================
+// اضافة انواع الافلام الى اداة السيلكت عند تحميل الصفحة
+function appendToSelect(){
+    const df = document.createDocumentFragment();
+    for(let ltitle of classTitle){
+        let option = document.createElement("option");
+        option.textContent = ltitle.textContent;
+        df.append(option);
+    }
+    document.querySelector("#moviekind").append(df);
+}
+window.addEventListener("load",appendToSelect,false);
+//============================================================
+// دالة اخفاء فورم الاضافة
+function returnPage(){
+    watchedContinar.classList.remove(["disappear-element"]);
+    menuBar.classList.remove(["disappear-element"]);
+    for(let grid of allgrid){
+        grid.classList.remove(["disappear-element"]);
+    }
+    addGrid.style.display = "none";
+
+}
+//============================================================
+// دالة تفريغ العناصر فى فورم الاضافة
+function clearText(){
+    imgPath.value ="";
+    moviePath.value ="";
+    movieName.value="";
+    movieDescription.value="";
+    isWatched.checked = false;
+}
+//============================================================
+// دالة اضافة فيلم جديد
 function addMovie(){
-    
     for(let a=0;a<classTitle.length;a++){
         if (classTitle[a].textContent.trim() == moviekind.value){
             if((moviePath.value != "" &&  movieName.value != "" && movieDescription.value != "")){
@@ -67,18 +107,6 @@ function addMovie(){
                 //
                 textOfRow = `<div class="filmName" contenteditable="false"><img class="fImage" src="${imgPath.value}" alt="">       <a href="${moviePath.value}">               ${movieName.value}</a></div>              <div class="whatAbout">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`;
                 txtArea.textContent += textOfRow +"\n=======================================================================================\n";
-                
-                
-                /*
-                let ta = document.querySelector("#txt-area3");
-                ta.textContent = document.children[0].innerHTML;
-                ta.classList.remove(["txt-area2"]);
-                ta.select();
-                document.execCommand('copy');
-                ta.classList.add(["txt-area2"]);
-                */
-                //txtArea.textContent = document.children[0].innerHTML;  // نسخ الصفحة الرئسية فى التكست اريا
-                
                 // تفريغ البيانات من مربعات النص
                 clearText();
                 returnPage();
@@ -86,30 +114,13 @@ function addMovie(){
         }
     }
 }
+//============================================================
+// دالة اظهار واخفاء التكست اريا الخاص بظهور الكود للاضافى الجديدة
 function showHtml(){
-    txtArea.classList.toggle("txt-area2");
-
+    txtArea.classList.toggle("disappear-element");
 }
-
-
-function clearText(){
-    imgPath.value ="";
-    moviePath.value ="";
-    movieName.value="";
-    movieDescription.value="";
-    isWatched.checked = false;
-}
-function appendToSelect(){
-    const df = document.createDocumentFragment();
-    for(let ltitle of classTitle){
-        let option = document.createElement("option");
-        option.textContent = ltitle.textContent;
-        df.append(option);
-    }
-    document.querySelector("#moviekind").append(df);
-}
-window.addEventListener("load",appendToSelect,false);
-window.addEventListener("load",addFilmNameToSearch,false);
+//============================================================
+// دالة اضافة اسماء جميع الافلام الى مربع البحث وعملها عند تحميل الصفحة
 function addFilmNameToSearch(){
     const df = document.createDocumentFragment();
     for(let namefile of txtNameFile){
@@ -119,110 +130,102 @@ function addFilmNameToSearch(){
     }
     datalist.append(df);
 }
-
+window.addEventListener("load",addFilmNameToSearch,false);
+//============================================================
+// دالة عند البحث داخل مربع البحث
+function searchFilm(){
+    if(movieSearch.value.length > 0){
+        for(let i = 0;i < wTitle1.length;i++){
+            wTitle1[i].classList.add(["disappear-element"]);
+            classTitle[i].classList.add(["disappear-element"]);
+            classTitle[i].nextElementSibling.classList.add(["disappear-element"]);
+            wTitle1[i].parentElement.style.borderBottom = "none";
+        }
+        for(let i = 0;i<txtNameFile.length;i++){
+            if(txtNameFile[i].textContent.trim() == movieSearch.value ){
+                txtNameFile[i].classList.remove(["disappear-element"]);
+                whatAbout1[i].classList.remove(["disappear-element"]);
+                watchedBox1[i].classList.remove(["disappear-element"]);
+            }else{
+                txtNameFile[i].classList.add(["disappear-element"]);
+                whatAbout1[i].classList.add(["disappear-element"]);
+                watchedBox1[i].classList.add(["disappear-element"]);
+            }
+        }
+    }else{
+        checkForWatchedMovies();
+    }
+}
+//وضافة الى مربح البحث حدث عندما يحدث تغير و اخر عند الكتابة فية باستخدام دالة السابقة
+movieSearch.addEventListener("change",searchFilm,false);
+movieSearch.addEventListener("keydown",searchFilm,false);
+//============================================================
+// دالة اظهار جميع الافلام 
 function showAllMovies(){
     for(let i = 0;i<txtNameFile.length;i++){
-        txtNameFile[i].classList.remove(["txt-area2"]);
-        whatAbout1[i].classList.remove(["txt-area2"]);
-        watchedBox1[i].classList.remove(["txt-area2"]);
+        txtNameFile[i].classList.remove(["disappear-element"]);
+        whatAbout1[i].classList.remove(["disappear-element"]);
+        watchedBox1[i].classList.remove(["disappear-element"]);
     }
     for(let i = 0;i < wTitle1.length;i++){
-        wTitle1[i].classList.remove(["txt-area2"]);
-        classTitle[i].classList.remove(["txt-area2"]);
-        classTitle[i].nextElementSibling.classList.remove(["txt-area2"]);
+        wTitle1[i].classList.remove(["disappear-element"]);
+        classTitle[i].classList.remove(["disappear-element"]);
+        classTitle[i].nextElementSibling.classList.remove(["disappear-element"]);
         wTitle1[i].parentElement.style.borderBottom = "black solid 1px";
     }
 }
+//============================================================
+// دالة اظهار الافلام التى لم تشاهد
 function showMoviesNotWatched(){
     for(let i = 0;i < wTitle1.length;i++){
-        wTitle1[i].classList.add(["txt-area2"]);
-        classTitle[i].classList.add(["txt-area2"]);
-        classTitle[i].nextElementSibling.classList.add(["txt-area2"]);
+        wTitle1[i].classList.add(["disappear-element"]);
+        classTitle[i].classList.add(["disappear-element"]);
+        classTitle[i].nextElementSibling.classList.add(["disappear-element"]);
         wTitle1[i].parentElement.style.borderBottom = "none";
     }
     for(let i = 0;i<txtNameFile.length;i++){
         if(!watchedBox1[i].children[0].checked){
-            txtNameFile[i].classList.remove(["txt-area2"]);
-            whatAbout1[i].classList.remove(["txt-area2"]);
-            watchedBox1[i].classList.remove(["txt-area2"]);
-            watchedBox1[i].parentElement.children[0].classList.remove(["txt-area2"]);
-            watchedBox1[i].parentElement.children[1].classList.remove(["txt-area2"]);
-            watchedBox1[i].parentElement.children[2].classList.remove(["txt-area2"]);
+            txtNameFile[i].classList.remove(["disappear-element"]);
+            whatAbout1[i].classList.remove(["disappear-element"]);
+            watchedBox1[i].classList.remove(["disappear-element"]);
+            watchedBox1[i].parentElement.children[0].classList.remove(["disappear-element"]);
+            watchedBox1[i].parentElement.children[1].classList.remove(["disappear-element"]);
+            watchedBox1[i].parentElement.children[2].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.style.borderBottom = "black solid 1px";
         }else{
-            txtNameFile[i].classList.add(["txt-area2"]);
-            whatAbout1[i].classList.add(["txt-area2"]);
-            watchedBox1[i].classList.add(["txt-area2"]);
+            txtNameFile[i].classList.add(["disappear-element"]);
+            whatAbout1[i].classList.add(["disappear-element"]);
+            watchedBox1[i].classList.add(["disappear-element"]);
         }
     }
 }
+//============================================================
+// دالة اظهار الافلام التى تمت مشاهدتها
 function showMoviesWatched(){
     for(let i = 0;i < wTitle1.length;i++){
-        wTitle1[i].classList.add(["txt-area2"]);
-        classTitle[i].classList.add(["txt-area2"]);
-        classTitle[i].nextElementSibling.classList.add(["txt-area2"]);
+        wTitle1[i].classList.add(["disappear-element"]);
+        classTitle[i].classList.add(["disappear-element"]);
+        classTitle[i].nextElementSibling.classList.add(["disappear-element"]);
         wTitle1[i].parentElement.style.borderBottom = "none";
     }
     for(let i = 0;i<txtNameFile.length;i++){
         if(!watchedBox1[i].children[0].checked == false){
-            txtNameFile[i].classList.remove(["txt-area2"]);
-            whatAbout1[i].classList.remove(["txt-area2"]);
-            watchedBox1[i].classList.remove(["txt-area2"]);
-            watchedBox1[i].parentElement.children[0].classList.remove(["txt-area2"]);
-            watchedBox1[i].parentElement.children[1].classList.remove(["txt-area2"]);
-            watchedBox1[i].parentElement.children[2].classList.remove(["txt-area2"]);
+            txtNameFile[i].classList.remove(["disappear-element"]);
+            whatAbout1[i].classList.remove(["disappear-element"]);
+            watchedBox1[i].classList.remove(["disappear-element"]);
+            watchedBox1[i].parentElement.children[0].classList.remove(["disappear-element"]);
+            watchedBox1[i].parentElement.children[1].classList.remove(["disappear-element"]);
+            watchedBox1[i].parentElement.children[2].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.style.borderBottom = "black solid 1px";
         }else{
-            txtNameFile[i].classList.add(["txt-area2"]);
-            whatAbout1[i].classList.add(["txt-area2"]);
-            watchedBox1[i].classList.add(["txt-area2"]);
+            txtNameFile[i].classList.add(["disappear-element"]);
+            whatAbout1[i].classList.add(["disappear-element"]);
+            watchedBox1[i].classList.add(["disappear-element"]);
         }
     }
 }
-
-
-
-function searchFilm(){
-        if(movieSearch.value.length > 0){
-            for(let i = 0;i < wTitle1.length;i++){
-                wTitle1[i].classList.add(["txt-area2"]);
-                classTitle[i].classList.add(["txt-area2"]);
-                classTitle[i].nextElementSibling.classList.add(["txt-area2"]);
-                wTitle1[i].parentElement.style.borderBottom = "none";
-            }
-            for(let i = 0;i<txtNameFile.length;i++){
-                if(txtNameFile[i].textContent.trim() == movieSearch.value ){
-                    txtNameFile[i].classList.remove(["txt-area2"]);
-                    whatAbout1[i].classList.remove(["txt-area2"]);
-                    watchedBox1[i].classList.remove(["txt-area2"]);
-                    
-                    //console.log(txtNameFile[i].parentElement);
-                }else{
-                    txtNameFile[i].classList.add(["txt-area2"]);
-                    whatAbout1[i].classList.add(["txt-area2"]);
-                    watchedBox1[i].classList.add(["txt-area2"]);
-                }
-            }
-
-        }else{
-            /*for(let i = 0;i<txtNameFile.length;i++){
-                txtNameFile[i].classList.remove(["txt-area2"]);
-                whatAbout1[i].classList.remove(["txt-area2"]);
-                watchedBox1[i].classList.remove(["txt-area2"]);
-            }
-            for(let i = 0;i < wTitle1.length;i++){
-                wTitle1[i].classList.remove(["txt-area2"]);
-                classTitle[i].classList.remove(["txt-area2"]);
-                classTitle[i].nextElementSibling.classList.remove(["txt-area2"]);
-                wTitle1[i].parentElement.style.borderBottom = "black solid 1px";
-            }*/
-            checkForWatchedMovies();
-        }
-}
-movieSearch.addEventListener("change",searchFilm,false);
-movieSearch.addEventListener("keydown",searchFilm,false);
-
-
+//============================================================
+// دالة التاكد من اظهار الافلام فقط التى تم اختيارها فى الرديو بوتن باستخدم الدوال الثلاث السابقة
 function checkForWatchedMovies(){
     for(let i = 0 ;i<rdoWatched.length;i++){
         if (rdoWatched[i].checked){
@@ -230,7 +233,7 @@ function checkForWatchedMovies(){
                 for(let ele =0 ;ele<datalist.childElementCount;ele++)datalist.children[ele].textContent="";
                 showAllMovies();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
-                    if((txtNameFile[ele].classList.value.indexOf("txt-area2")< 0)){
+                    if((txtNameFile[ele].classList.value.indexOf("disappear-element")< 0)){
                         datalist.children[ele].textContent = txtNameFile[ele].textContent
                     }
                 }
@@ -240,7 +243,7 @@ function checkForWatchedMovies(){
                 showMoviesWatched();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
-                    if((txtNameFile[ele].classList.value.indexOf("txt-area2")< 0)){
+                    if((txtNameFile[ele].classList.value.indexOf("disappear-element")< 0)){
                         datalist.children[ele].textContent = txtNameFile[ele].textContent
                     }
                 }
@@ -250,7 +253,7 @@ function checkForWatchedMovies(){
                 showMoviesNotWatched();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
-                    if((txtNameFile[ele].classList.value.indexOf("txt-area2")< 0)){
+                    if((txtNameFile[ele].classList.value.indexOf("disappear-element")< 0)){
                         datalist.children[ele].textContent = txtNameFile[ele].textContent
                     }
                 }
@@ -258,23 +261,16 @@ function checkForWatchedMovies(){
         }
     }
 }
+// اعطاء لكل راديو بوتن حدث عندما يحدث تغير
 for(let i of rdoWatched){
     i.addEventListener("change",checkForWatchedMovies,false);
 }
-function returnPage(){
-    watchedContinar.classList.remove(["txt-area2"]);
-    side.classList.remove(["txt-area2"]);
-    for(let grid of allgrid){
-        grid.classList.remove(["txt-area2"]);
-    }
-    addGrid.style.display = "none";
-
-}
+//============================================================
 btnAdd.addEventListener("click",function(){
-    watchedContinar.classList.add("txt-area2");
-    side.classList.add(["txt-area2"]);
+    watchedContinar.classList.add("disappear-element");
+    menuBar.classList.add(["disappear-element"]);
     for(let grid of allgrid){
-        grid.classList.add("txt-area2");
+        grid.classList.add("disappear-element");
     }
     addGrid.style.display = "grid";
     
@@ -288,48 +284,44 @@ for(let grid of whatAbout1){
     grid.setAttribute("contenteditable","true");
 }
 //===================================================================================================
-// start animation with open menu bar side
-let pos = 0;
-let funpos1;
-let funpos2;
+// start animation with open menu bar menuBar
+let elementWidth = 0;
+let appearMenu;
+let disappearMenu;
 
-side.children[0].addEventListener("click",function(){
-    this.classList.add(["txt-area2"]);
-    side.children[0].style.display = "none";
-     funpos1 = setInterval(poss,0.5);
-
-});
-side2.children[0].addEventListener("click",function(){
-    side.children[0].classList.remove(["txt-area2"]);
-    document.querySelector(".side2").children[0].style.display = "none";
-    funpos2 = setInterval(poss2,0.5);
-});
-
-function poss(){
-    if(pos < 201){
-        document.querySelector(".side2").style.width = pos +"px";
-        if(document.querySelector(".side2").style.width == "199px"){
-            document.querySelector(".side2").children[0].style.display = "block";
-            
-        }
-        pos++;
-    }else{
-        clearInterval(funpos1);
-    }
+//
+function appearMenuFun(){
+    if(elementWidth < 201){
+        menuBar2.style.width = elementWidth +"px";
+        elementWidth++;
+        if(menuBar2.style.width == "199px")
+            menuBar2.children[0].style.display = "block";
+    }else
+        clearInterval(appearMenu);
 }
-function poss2(){
-    if(pos >= 0){
-        document.querySelector(".side2").style.width = pos +"px";
-        if(document.querySelector(".side2").style.width == "0px"){  
-           side.children[0].style.display = "block";
-        }
-        pos--;
-    }else{
-        clearInterval(funpos2);
-        
-    }
+//
+menuBar.children[0].addEventListener("click",function(){
+    this.classList.add(["disappear-element"]);
+    menuBar.children[0].style.display = "none";
+    appearMenu = setInterval(appearMenuFun,0.5);
+});
+//
+function disappearMenuFun(){
+    if(elementWidth >= 0){
+        menuBar2.style.width = elementWidth +"px";
+        if(menuBar2.style.width == "0px")
+           menuBar.children[0].style.display = "block";
+        elementWidth--;
+    }else
+        clearInterval(disappearMenu);
 }
-// end animation with open menu bar side
+//
+menuBar2.children[0].addEventListener("click",function(){
+    menuBar.children[0].classList.remove(["disappear-element"]);
+    menuBar2.children[0].style.display = "none";
+    disappearMenu = setInterval(disappearMenuFun,0.5);
+});
+// end animation with open menu bar menuBar
 //===================================================================================================
 //جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
 for(let i = 0;i<watchedBox1.length;i++){
@@ -340,121 +332,3 @@ for(let i = 0;i<watchedBox1.length;i++){
 }
 // end
 //===================================================================================================
-/** 
- * notWatched.addEventListener("change",function(){
-    if(notWatched.checked){
-        movieSearch.value = "";
-        for(let i = 0;i < wTitle1.length;i++){
-            wTitle1[i].classList.add(["txt-area2"]);
-            classTitle[i].classList.add(["txt-area2"]);
-            classTitle[i].nextElementSibling.classList.add(["txt-area2"]);
-            wTitle1[i].parentElement.style.borderBottom = "none";
-        }
-        for(let i = 0;i<txtNameFile.length;i++){
-            if(!watchedBox1[i].children[0].checked){
-                txtNameFile[i].classList.remove(["txt-area2"]);
-                whatAbout1[i].classList.remove(["txt-area2"]);
-                watchedBox1[i].classList.remove(["txt-area2"]);
-                watchedBox1[i].parentElement.children[0].classList.remove(["txt-area2"]);
-                watchedBox1[i].parentElement.children[1].classList.remove(["txt-area2"]);
-                watchedBox1[i].parentElement.children[2].classList.remove(["txt-area2"]);
-                watchedBox1[i].parentElement.style.borderBottom = "black solid 1px";
-            }else{
-                txtNameFile[i].classList.add(["txt-area2"]);
-                whatAbout1[i].classList.add(["txt-area2"]);
-                watchedBox1[i].classList.add(["txt-area2"]);
-            }
-        }
-    }
-    else{
-        for(let i = 0;i<txtNameFile.length;i++){
-            txtNameFile[i].classList.remove(["txt-area2"]);
-            whatAbout1[i].classList.remove(["txt-area2"]);
-            watchedBox1[i].classList.remove(["txt-area2"]);
-        }
-        for(let i = 0;i < wTitle1.length;i++){
-            wTitle1[i].classList.remove(["txt-area2"]);
-            classTitle[i].classList.remove(["txt-area2"]);
-            classTitle[i].nextElementSibling.classList.remove(["txt-area2"]);
-            wTitle1[i].parentElement.style.borderBottom = "black solid 1px";
-        }
-    }
-})
- * 
- * 
- * 
- * 
- */
-
-
-/*  عمل ملف وحفظة
-    // Function to download data to a file
-    function download(data, filename, type) {
-        var file = new Blob([data], {type: type});
-        if (window.navigator.msSaveOrOpenBlob) // IE10+
-            window.navigator.msSaveOrOpenBlob(file, filename);
-        else { // Others
-            var a = document.createElement("a"),
-                    url = URL.createObjectURL(file);
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(function() {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);  
-            }, 0); 
-        }
-    }
-*/
-
-/* read file
-document.querySelector("#file-save").addEventListener("change",function(){
-    const fr=new FileReader();
-    fr.onload=function(){ 
-        console.log(fr.result); 
-} 
-    fr.readAsText(this.files[0]); 
-});
-*/
-// const file = new File([0],"kirollos");
-
-
-/*
-    var allImage = document.getElementsByTagName("a");
-    function checkImage(){
-        for(i=0;i<allImage.length;i++){
-            if (allImage[i].getAttribute("href") == "" || !(allImage[i].hasAttribute("href"))){
-                var parentOf = allImage[i].parentElement;
-                parentOf.style.display = "none";
-                parentOf.nextElementSibling.style.display = "none";
-                parentOf.style.borderBottom = "none";
-                parentOf.nextElementSibling.style.borderBottom = "none";
-                parentOf.nextElementSibling.style.borderBottom = "none";
-                parentOf.nextElementSibling.nextElementSibling.style.display= "none";  
-            }
-
-        }
-    }
-onload = checkImage();
-
-function editable(){
-   var s = document.getElementsByClassName("grid");
-   for(i=0;i<s.length;i++){
-    s[i].setAttribute("contenteditable","false");
-   }   
-   alert("تم اغلاق التعديل على الكتابة");
-}
-
-function notEditable(){
-   var s = document.getElementsByClassName("grid");
-   for(i=0;i<s.length;i++){
-    s[i].setAttribute("contenteditable","true");
-   }   
-   alert("يمكنك التعديل الان على الكتابة");
-}
-
-*/
-
-
-
