@@ -145,7 +145,7 @@ label{
     text-align: end;
     font-weight: bolder;
     user-select: none;
-    
+    font-family:ElMessiri;
     padding: 5px 0;
 }
 .gridAdd button{
@@ -230,9 +230,26 @@ label{
 .head{
     width:100%;
 }
-
-
-@media (max-width: 812px){
+@media (max-width: 1050px) and (min-width:931px){
+    label.lbl-rdo{
+        font-size: 14px;
+        margin:0 auto ;
+     }
+}
+@media (max-width: 930px) and (min-width:918px){
+    label.lbl-rdo{
+        font-size: 13px;
+     }
+     .watched-continar label{
+        margin-left: 5px;
+    }
+}
+@media (max-width: 917px) and (min-width:866px){
+    label.lbl-rdo{
+        font-size: 12px;
+     }
+}
+@media (max-width: 865px){
     .gridAdd{
         grid-template-columns:50% 50%;
     }
@@ -249,7 +266,7 @@ label{
         padding-left: 50px;
     }
     .lbl-rdo{
-
+        font-size:large;
        display: inline;
     }
 
@@ -259,31 +276,9 @@ label{
         margin-left: 60px;
     }
     .watched-continar label{
-        margin-left: 10px;
+        margin-left: 20px;
     }
     .watched-continar label:first-of-type{
         margin-left: 60px;
-    }
-}
-@media (max-width: 871px) and (min-width:813px){
-    label.lbl-rdo{
-        font-size: 12px;
-     }
-}
-@media (max-width: 930px) and (min-width:871px){
-    label.lbl-rdo{
-        font-size: 13px;
-     }
-     .watched-continar label{
-        margin-left: 5px;
-    }
-}
-@media (max-width: 1050px) and (min-width:930px){
-    label.lbl-rdo{
-        font-size: 14px;
-        margin:0 auto ;
-     }
-     .watched-continar label{
-        margin-left: 10px;
     }
 }
