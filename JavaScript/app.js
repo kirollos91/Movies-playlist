@@ -88,7 +88,7 @@ function addMovie(){
 }
 function showHtml(){
     txtArea.classList.toggle("txt-area2");
-    
+
 }
 
 
@@ -277,25 +277,70 @@ btnAdd.addEventListener("click",function(){
         grid.classList.add("txt-area2");
     }
     addGrid.style.display = "grid";
+    
 
 });
 
 btnClose.addEventListener("click",function(){returnPage();});
 window.addEventListener("keydown",function(event){if(event.key == "Escape" && addGrid.style.display == "grid")returnPage();});
+let pos = 0;
+let funpos1;
+let funpos2;
 
-side.children[0].addEventListener("click",function(){this.classList.add(["txt-area2"]);document.querySelector(".side2").style.display = "block";});
-side2.children[0].addEventListener("click",function(){side.children[0].classList.remove(["txt-area2"]);document.querySelector(".side2").style.display = "none";});
+side.children[0].addEventListener("click",function(){
+    this.classList.add(["txt-area2"]);
+    side.children[0].style.display = "none";
+     funpos1 = setInterval(poss,1);
 
-//جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
+});
+side2.children[0].addEventListener("click",function(){
+    side.children[0].classList.remove(["txt-area2"]);
+    document.querySelector(".side2").children[0].style.display = "none";
+    funpos2 = setInterval(poss2,1);
+});
+
+for(let grid of whatAbout1){
+    grid.setAttribute("contenteditable","true");
+}
+//===================================================================================================
+// start animation
+function poss(){
+    if(pos < 201){
+        document.querySelector(".side2").style.width = pos +"px";
+        if(document.querySelector(".side2").style.width == "199px"){
+            document.querySelector(".side2").children[0].style.display = "block";
+            
+        }
+        pos++;
+        console.log(pos);
+    }else{
+        clearInterval(funpos1);
+    }
+}
+function poss2(){
+    if(pos >= 0){
+        document.querySelector(".side2").style.width = pos +"px";
+        if(document.querySelector(".side2").style.width == "59px"){  
+           side.children[0].style.display = "block";
+        }
+        pos--;
+        console.log(pos);
+    }else{
+        clearInterval(funpos2);
+        
+    }
+}
+// end animation
+//===================================================================================================
+/*              جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
 for(let i = 0;i<watchedBox1.length;i++){
     watchedBox1[i].children[0].addEventListener("change",()=>{
         if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].checked = true;
         else watchedBox1[i].children[0].checked = false;
     });
 }
-for(let grid of whatAbout1){
-    grid.setAttribute("contenteditable","true");
-}
+*/
+
 /** 
  * notWatched.addEventListener("change",function(){
     if(notWatched.checked){
