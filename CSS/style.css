@@ -321,10 +321,12 @@ label{
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
     }
+    .grid{
+        grid-template-columns: 27% 70% 3%;
+    }
     .filmName a{
         top:40px;
         left:-8px;
-
     }
     .fImage{
         top:5px;
@@ -344,6 +346,9 @@ label{
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
     }
+    .grid{
+        grid-template-columns: 37% 60% 3%;
+    }
 
 }
 @media (max-width: 320px){
@@ -360,4 +365,6 @@ label{
         margin-left: 60px;
     }
 
+
 }
+
