@@ -285,14 +285,14 @@ window.addEventListener("keydown",function(event){if(event.key == "Escape" && ad
 
 side.children[0].addEventListener("click",function(){this.classList.add(["txt-area2"]);document.querySelector(".side2").style.display = "block";});
 side2.children[0].addEventListener("click",function(){side.children[0].classList.remove(["txt-area2"]);document.querySelector(".side2").style.display = "none";});
-/*              جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
+
+//جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
 for(let i = 0;i<watchedBox1.length;i++){
     watchedBox1[i].children[0].addEventListener("change",()=>{
         if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].checked = true;
         else watchedBox1[i].children[0].checked = false;
     });
 }
-*/
 
 /** 
  * notWatched.addEventListener("change",function(){
