@@ -82,7 +82,8 @@
     position: absolute;
     text-decoration: none;
     left:35px;
-    top:30%;     
+    top:30%;
+    overflow: hidden;     
 }
 .filmName a:visited{
     color:navy;
@@ -297,7 +298,7 @@ label{
         margin-left: 60px;
     }
     .grid{
-        grid-template-columns: 27% 70% 3%;
+        grid-template-columns: 32% 65% 3%;
     }
     .filmName a{
         top:5px;
@@ -308,7 +309,7 @@ label{
     }
 
 }
-@media (max-width: 469px){
+@media (max-width: 469px) and (min-width: 351px){
     #movie-search{
         display: block;
         width: 82%;
@@ -349,6 +350,13 @@ label{
     .grid{
         grid-template-columns: 37% 60% 3%;
     }
+    .filmName a{
+        top:40px;
+        left:-8px;
+    }
+    .fImage{
+        top:5px;
+    }
 
 }
 @media (max-width: 320px){
@@ -364,7 +372,13 @@ label{
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
     }
-
+    .filmName a{
+        top:40px;
+        left:-8px;
+    }
+    .fImage{
+        top:5px;
+    }
 
 }
 
