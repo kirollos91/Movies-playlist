@@ -293,8 +293,8 @@ for(let i = 0;i<watchedBox1.length;i++){
         else watchedBox1[i].children[0].checked = false;
     });
 }
-for(let grid of allgrid){
-        grid.setAttribute("contenteditable","false");
+for(let w of whatAbout1 ){
+        w.setAttribute("contenteditable","true");
     }
 /** 
  * notWatched.addEventListener("change",function(){
