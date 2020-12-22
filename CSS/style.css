@@ -315,7 +315,7 @@ label{
 
     #movie-search{
         display: block;
-        width: 90%;
+        width: 80%;
         margin-left: 60px;
     }
     .watched-continar label:nth-last-of-type(3){
