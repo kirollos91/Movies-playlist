@@ -87,7 +87,7 @@
     color:navy;
 } 
 .filmName-in-dark-mode-on{
-    color:white;
+    color:#fff;;
 }  
 .link-film{	
     position: absolute;
@@ -97,14 +97,17 @@
     overflow: auto; 
 }
 .a-in-dark-mode-on{
-    color:white;
+    color:#fff;
+}
+.a-in-dark-mode-on:link{
+    color:#fff;
 }
 .a-in-dark-mode-off:visited{
     color:navy;
 }
 
 .a-in-dark-mode-on:visited{
-    color:white;
+    color:#fff;
 }
 .link-film:hover{
     color:orangered;
