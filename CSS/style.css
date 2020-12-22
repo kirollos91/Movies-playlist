@@ -38,7 +38,7 @@
     position:fixed;
     top:10px;
     left:58px;
-    z-index:1000;
+    z-index:9;
     height:570px;
     background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
     background-position: center;
@@ -62,9 +62,15 @@
     grid-template-columns: 22% 75% 3%;
     align-items: center;
     padding:8px 8px;
-    border-bottom: black solid 1px;
+    
     padding-bottom: 8px;
     margin-left: 60px;
+}
+.grid-in-dark-mode-off{
+    border-bottom: black solid 1px;
+}
+.grid-in-dark-mode-on{
+    border-bottom: white solid 1px;
 }
 .disappear-element{
     display:none;
@@ -72,34 +78,42 @@
 /*===========================================================================================*/
 /* Start Movie Name and Image */
 .filmName{
-    color:navy;
     padding-top:5px;
     border-bottom:.5px solid #aaa;
     height:100%;
     position: relative;
-    
     }
-.filmName a{	
+.filmname-in-dark-mode-off{
+    color:navy;
+} 
+.filmName-in-dark-mode-on{
+    color:wheat;
+}  
+.link-film{	
     position: absolute;
     text-decoration: none;
     left:35px;
-    top:30%;
+    top:25%;
     overflow: auto; 
 }
-.filmName a:visited{
+.a-in-dark-mode-off:visited{
     color:navy;
 }
-.filmName a:hover{
+
+.a-in-dark-mode-on:visited{
+    color:wheat;
+}
+.link-film:hover{
     color:orangered;
     font-weight: bolder;
-}
+} 
 /* image */
 .fImage{
-    top:30%;
+    top:20%;
     display:block;
-    position: absolute;
+    position:absolute;
     width:30px;
-    height: 30px;
+    height:30px;
     border-radius:5%;
 }
 .fImage:hover{
@@ -119,13 +133,32 @@
     direction: rtl;
     border-bottom:.5px solid #aaa;
 }
+.whatAbout-in-dark-mode-off{
+    color:#000;
+}
+.whatAbout-in-dark-mode-on{
+    color:#fff;
+}
 /*===========================================================================================*/
 .wTitle{
     text-align:right;
+    
+}
+.wTitle-in-dark-mode-off{
+    color:#000;
     text-decoration:navy underline double;
 }
-.title{
+.wTitle-in-dark-mode-on{
+    color:#fff;
+    text-decoration:#eee underline double;
+}
+.title-in-dark-mode-off{
+    color:#000;
     text-decoration:navy underline double;
+}
+.title-in-dark-mode-on{
+    color:#fff;
+    text-decoration:#eee underline double;
 }
 /*===========================================================================================*/
 /*  الادخالى  */
@@ -244,6 +277,42 @@ label{
     width:100%;
 }
 /*===========================================================================================*/
+/* Start Dark Mode */
+.dark-mode-stick{
+    width:50px;
+    height: 15px;
+    background-color: #ccc;
+    border-radius: 20px;
+    color:navy;
+    font-size: 13px;
+    line-height: 15px;
+    padding-right: 2px;
+    text-align: right;
+    position: fixed;
+    top:80px;
+    left:5px;
+}
+.dark-mode-off{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #888;
+    position: fixed;
+    top:75px;
+    left:5px;
+}
+.dark-mode-on{
+    display: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #888;
+    position: fixed;
+    top:75px;
+    left:30px;
+}
+/* End Dark Mode */
+/*===========================================================================================*/
 @media (max-width: 1050px) and (min-width:931px){
     label.lbl-rdo{
         font-size: 14px;
@@ -286,7 +355,7 @@ label{
     .wTitle{
         display: none;
     }
-    .filmName a{
+    .a-in-dark-mode-off, .a-in-dark-mode-on{
         position: static;
         margin: 2px auto;
     
