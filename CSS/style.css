@@ -236,7 +236,7 @@ label{
     height: 30px;
     width:50%;
 }
-.watched-continar label:first-of-type{
+.watched-continar{
     margin-left: 60px;
 }
 /* End with search movies */
@@ -310,16 +310,11 @@ label{
     .lbl-rdo{
         font-size:large;
         display: inline;
-        margin: auto;
+       
     }
-
     #movie-search{
         display: block;
-        width: 80%;
-        margin-left: 60px;
-    }
-    .watched-continar label:nth-last-of-type(3){
-        margin-left: 60px;
+        width: 90%;
     }
 }
 @media screen and (max-width: 400px){
