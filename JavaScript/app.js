@@ -20,6 +20,9 @@ const btnAdd                = document.querySelector(".btn-add");
 const btnClose              = document.querySelector(".btn-close");
 const menuBar               = document.querySelector(".menu-bar");
 const menuBar2              = document.querySelector(".menu-bar2");
+const darkModeOff           = document.querySelector("#dark-mode-off");
+const darkModeOn            = document.querySelector("#dark-mode-on");
+const darkModeStick         = document.querySelector("#dark-mode-stick");
 const isWatched             = document.querySelector("#is-checked");
 const txtArea               = document.querySelector("#txt-area");
 let textOfRow               = "";
@@ -92,13 +95,13 @@ function addMovie(){
                 // انشاء فى الدف الاول عنصر الصورة و عنصر اللينك
                 var fImage = document.createElement("img");
                 var ahref = document.createElement("a");
-
+                
                 // اضافة خصائص الى العناصر
                 fImage.setAttribute("class","fImage");
-                if(imgPath.value.trim()>0)
+                if(imgPath.value.trim().startsWith("https://"))
                     fImage.setAttribute("src",imgPath.value);
                 else
-                    fImage.setAttribute("src","https://place-hold.it/30x30");
+                    fImage.setAttribute("src","https://place-hold.it/100x100");
                 ahref.setAttribute("href",moviePath.value);
                 ahref.innerText = movieName.value;
                 // اضافى العناصر الصورة و اللينك الى الديف الاول
@@ -332,3 +335,70 @@ for(let i = 0;i<watchedBox1.length;i++){
 }
 // end
 //===================================================================================================
+// دالة تشغيل الدارك مود
+function darkModeON(){
+    document.body.style.backgroundColor = "#222";
+    for(let wa of whatAbout1){
+        wa.classList.remove(["whatAbout-in-dark-mode-off"]);
+        wa.classList.add(["whatAbout-in-dark-mode-on"]);
+    }
+    for(let a of txtNameFile){
+        a.children[1].classList.remove(["a-in-dark-mode-off"]);
+        a.children[1].classList.add(["a-in-dark-mode-on"]);
+    }
+    for(let wtitle of wTitle1){
+        wtitle.classList.remove(["wTitle-in-dark-mode-off"]);
+        wtitle.classList.add(["wTitle-in-dark-mode-on"]);
+    }
+    for(let title of classTitle){
+        title.classList.remove(["title-in-dark-mode-off"]);
+        title.classList.add(["title-in-dark-mode-on"]);
+    }
+    for(let lbl of document.querySelectorAll("label")){
+        lbl.style.color= "#ddd";
+    }
+}
+// دالة ايقاف الدارك مود
+function darkModeOFF(){
+    document.body.style.backgroundColor = "transparent";
+    for(let wa of whatAbout1){
+        wa.classList.remove(["whatAbout-in-dark-mode-on"]);
+        wa.classList.add(["whatAbout-in-dark-mode-off"]);
+    }
+    for(let a of txtNameFile){
+        a.children[1].classList.remove(["a-in-dark-mode-on"]);
+        a.children[1].classList.add(["a-in-dark-mode-off"]);
+    }
+    for(let wtitle of wTitle1){
+        wtitle.classList.add(["wTitle-in-dark-mode-off"]);
+        wtitle.classList.remove(["wTitle-in-dark-mode-on"]);
+    }
+    for(let title of classTitle){
+        title.classList.add(["title-in-dark-mode-off"]);
+        title.classList.remove(["title-in-dark-mode-on"]);
+    }
+    for(let lbl of document.querySelectorAll("label")){
+        lbl.style.color= "navy";
+    }
+}
+
+// زرار الدارك مود
+darkModeOff.addEventListener("click",function(){
+    this.style.display = "none";
+    darkModeOn.style.display = "inline";
+    darkModeStick.style.color = "white";
+    darkModeStick.style.backgroundColor = "red";
+    darkModeStick.style.textAlign = "left";
+    darkModeStick.style.paddingLeft = "2px";
+    darkModeStick.textContent = "ON";
+    darkModeON();
+});
+darkModeOn.addEventListener("click",function(){
+    this.style.display = "none";
+    darkModeOff.style.display = "inline";
+    darkModeStick.style.color = "navy";
+    darkModeStick.style.backgroundColor = "#ccc";
+    darkModeStick.style.textAlign = "right";
+    darkModeStick.textContent = "OFF";
+    darkModeOFF();
+});
