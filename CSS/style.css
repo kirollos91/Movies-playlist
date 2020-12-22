@@ -263,6 +263,68 @@ label{
         font-size: 12px;
      }
 }
+@media screen and (max-width: 865px){
+    .grid{
+        grid-template-columns: 100%;
+    }
+    .watchedBox{
+        display: none;
+    }
+    .filmName{
+        border: none;
+        margin: 5px auto;
+        text-align: center;
+    }
+    .whatAbout{
+        margin: 5px auto;
+        text-align: center;
+    }
+    .title{
+        margin: 5px auto;
+        text-align: center;
+    }
+    .wTitle{
+        display: none;
+    }
+    .filmName a{
+        position: static;
+        margin: 2px auto;
+    
+    }
+    .fImage{
+        position: static;
+        margin: 2px auto;
+    }
+    .gridAdd{
+        grid-template-columns:50% 50%;
+    }
+    .txt{
+        width:100%;
+    }
+    .des{
+        width:100%;
+    }
+    .head button{
+        width:200px;
+    }
+    .lbl-rdo{
+        font-size:large;
+        display: inline;
+    }
+
+    #movie-search{
+        display: block;
+        width: 90%;
+        margin-left: 60px;
+    }
+    .watched-continar label{
+        margin-left: 10px;
+    }
+    .watched-continar label:nth-last-of-type(3){
+        margin-left: 60px;
+    }
+}
+/*
 @media (max-width: 865px) and (min-width:470px){
     .gridAdd{
         grid-template-columns:50% 50%;
@@ -304,6 +366,8 @@ label{
     }
 
 }
+*/
+/*
 @media (max-width:469px) and (min-width:351px){
     .grid{
         grid-template-columns:42% 55% 3%;
@@ -373,3 +437,4 @@ label{
     }
 
 }
+*/
