@@ -310,6 +310,7 @@ label{
     .lbl-rdo{
         font-size:large;
         display: inline;
+        margin: auto;
     }
 
     #movie-search{
@@ -317,11 +318,19 @@ label{
         width: 90%;
         margin-left: 60px;
     }
-    .watched-continar label{
-        margin-left: 10px;
-    }
     .watched-continar label:nth-last-of-type(3){
         margin-left: 60px;
+    }
+}
+@media screen and (max-width: 400px){
+    .lbl-rdo{
+        font-size:13px;
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 305px){
+    .lbl-rdo{
+        font-size:11px;
     }
 }
 /*
