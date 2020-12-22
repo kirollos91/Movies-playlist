@@ -87,7 +87,7 @@
     color:navy;
 } 
 .filmName-in-dark-mode-on{
-    color:wheat;
+    color:white;
 }  
 .link-film{	
     position: absolute;
@@ -101,7 +101,7 @@
 }
 
 .a-in-dark-mode-on:visited{
-    color:wheat;
+    color:white;
 }
 .link-film:hover{
     color:orangered;
