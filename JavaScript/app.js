@@ -20,9 +20,14 @@ const btnAdd                = document.querySelector(".btn-add");
 const btnClose              = document.querySelector(".btn-close");
 const menuBar               = document.querySelector(".menu-bar");
 const menuBar2              = document.querySelector(".menu-bar2");
+const menuBar3              = document.querySelector(".menu-bar3");
 const darkModeOff           = document.querySelector("#dark-mode-off");
 const darkModeOn            = document.querySelector("#dark-mode-on");
 const darkModeStick         = document.querySelector("#dark-mode-stick");
+const imgOpenMenu           = document.querySelector(".img-open-menu");
+const imgCloseMenu          = document.querySelector(".img-close-menu");
+const imgSearch             = document.querySelector(".img-search");
+const imgCloseMenuSearch    = document.querySelector(".img-close-menu-search");
 const isWatched             = document.querySelector("#is-checked");
 const txtArea               = document.querySelector("#txt-area");
 let   isDarkMode            = false;
@@ -294,41 +299,78 @@ for(let grid of whatAbout1){
 //===================================================================================================
 // start animation with open menu bar menuBar
 let elementWidth = 0;
+let elementWidth2 = 0;
 let appearMenu;
 let disappearMenu;
+let appearMenuSearch;
+let disappearMenuSearch;
+const stepElementWidth =5; 
 
 //
 function appearMenuFun(){
-    if(elementWidth < 201){
+    disappearMenuSearchFun();
+    imgOpenMenu.classList.add(["disappear-element"]);
+    if(elementWidth < 210){
         menuBar2.style.width = elementWidth +"px";
-        elementWidth++;
-        if(menuBar2.style.width == "199px")
-            menuBar2.children[0].style.display = "block";
-    }else
+        elementWidth += stepElementWidth;
+    }else{
         clearInterval(appearMenu);
+        imgCloseMenu.classList.remove(["disappear-element"]);
+    }
 }
 //
-menuBar.children[0].addEventListener("click",function(){
-    this.classList.add(["disappear-element"]);
-    menuBar.children[0].style.display = "none";
-    appearMenu = setInterval(appearMenuFun,0.5);
+imgOpenMenu.addEventListener("click",function(){
+    appearMenu = setInterval(appearMenuFun,.5); 
 });
 //
 function disappearMenuFun(){
+    imgCloseMenu.classList.add(["disappear-element"]);
     if(elementWidth >= 0){
         menuBar2.style.width = elementWidth +"px";
-        if(menuBar2.style.width == "0px")
-           menuBar.children[0].style.display = "block";
-        elementWidth--;
-    }else
+        elementWidth -= stepElementWidth;
+    }else{
         clearInterval(disappearMenu);
+        imgOpenMenu.classList.remove(["disappear-element"]);
+    }
 }
 //
-menuBar2.children[0].addEventListener("click",function(){
-    menuBar.children[0].classList.remove(["disappear-element"]);
-    menuBar2.children[0].style.display = "none";
-    disappearMenu = setInterval(disappearMenuFun,0.5);
+imgCloseMenu.addEventListener("click",function(){  
+    disappearMenu = setInterval(disappearMenuFun,.5);
 });
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// menu 3 (search)
+function appearMenuSearchFun(){
+    disappearMenuFun();
+    imgSearch.classList.add(["disappear-element"]);
+    if(elementWidth2 < 210){
+        menuBar3.style.width = elementWidth2 +"px";
+        elementWidth2 += stepElementWidth;
+    }else{
+        clearInterval(appearMenuSearch);
+        imgCloseMenuSearch.classList.remove(["disappear-element"]);
+    }
+}
+//
+imgSearch.addEventListener("click",function(){
+    appearMenuSearch = setInterval(appearMenuSearchFun,.5); 
+});
+//
+function disappearMenuSearchFun(){
+    imgCloseMenuSearch.classList.add(["disappear-element"]);
+    if(elementWidth2 >= 0){
+        menuBar3.style.width = elementWidth2 +"px";
+        elementWidth2 -= stepElementWidth;
+    }else{
+        clearInterval(disappearMenuSearch);
+        imgSearch.classList.remove(["disappear-element"]);
+    }
+}
+//
+imgCloseMenuSearch.addEventListener("click",function(){  
+    disappearMenuSearch = setInterval(disappearMenuSearchFun,.5);
+});
+
 // end animation with open menu bar menuBar
 //===================================================================================================
 //جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
