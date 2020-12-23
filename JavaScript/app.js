@@ -25,6 +25,7 @@ const darkModeOn            = document.querySelector("#dark-mode-on");
 const darkModeStick         = document.querySelector("#dark-mode-stick");
 const isWatched             = document.querySelector("#is-checked");
 const txtArea               = document.querySelector("#txt-area");
+let   isDarkMode            = false;
 let textOfRow               = "";
 
 
@@ -49,6 +50,7 @@ window.addEventListener("load",appendToSelect,false);
 function returnPage(){
     watchedContinar.classList.remove(["disappear-element"]);
     menuBar.classList.remove(["disappear-element"]);
+    btnAdd.classList.remove(["disappear-element"]);
     for(let grid of allgrid){
         grid.classList.remove(["disappear-element"]);
     }
@@ -67,8 +69,8 @@ function clearText(){
 //============================================================
 // دالة اضافة فيلم جديد
 function addMovie(){
-    for(let a=0;a<classTitle.length;a++){
-        if (classTitle[a].textContent.trim() == moviekind.value){
+    for(let i=0;i<classTitle.length;i++){
+        if (classTitle[i].textContent.trim() == moviekind.value){
             if((moviePath.value != "" &&  movieName.value != "" && movieDescription.value != "")){
                 const filmName = document.createElement("div");
                 const whatAbout = document.createElement("div");
@@ -77,24 +79,25 @@ function addMovie(){
                 filmName.setAttribute("class","filmName");
                 filmName.setAttribute("contenteditable","false");
                 // اضافة خاصية الكلاس للديف الثانى
-                whatAbout.setAttribute("class","whatAbout");    
+                whatAbout.setAttribute("lang","ar");
+                whatAbout.classList.add("whatAbout",isDarkMode?"whatAbout-in-dark-mode-on":"whatAbout-in-dark-mode-off");
                 // اضافة اسم الفيلم للديف الثانى من مربع النص
-                whatAbout.innerText =  movieDescription.value;
+                whatAbout.textContent =  movieDescription.value;
                 // اضافة خاصية الكلاس للديف الثالث
                 watchedBox.setAttribute("class","watchedBox");
                 //
-                var cbx = document.createElement("input");
+                const cbx = document.createElement("input");
                 cbx.setAttribute("type","checkbox");
                 if(isWatched.checked) cbx.setAttribute("checked","true");
                 watchedBox.append(cbx);
 
                 // اضافة الثلاث دفات فى الدف الاب
-                classTitle[a].parentElement.append(filmName);
-                classTitle[a].parentElement.append(whatAbout);
-                classTitle[a].parentElement.append(watchedBox);
+                classTitle[i].parentElement.append(filmName);
+                classTitle[i].parentElement.append(whatAbout);
+                classTitle[i].parentElement.append(watchedBox);
                 // انشاء فى الدف الاول عنصر الصورة و عنصر اللينك
-                var fImage = document.createElement("img");
-                var ahref = document.createElement("a");
+                const fImage = document.createElement("img");
+                const ahref = document.createElement("a");
                 
                 // اضافة خصائص الى العناصر
                 fImage.setAttribute("class","fImage");
@@ -103,12 +106,14 @@ function addMovie(){
                 else
                     fImage.setAttribute("src","https://place-hold.it/100x100");
                 ahref.setAttribute("href",moviePath.value);
-                ahref.innerText = movieName.value;
+                ahref.classList.add("link-film",isDarkMode?"a-in-dark-mode-on":"a-in-dark-mode-off");
+                ahref.textContent = movieName.value;
                 // اضافى العناصر الصورة و اللينك الى الديف الاول
                 filmName.append(fImage);
                 filmName.append(ahref);
                 //
-                textOfRow = `<div class="filmName" contenteditable="false"><img class="fImage" src="${imgPath.value}" alt="">       <a href="${moviePath.value}">               ${movieName.value}</a></div>              <div class="whatAbout">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`;
+                //`<div class="filmName" contenteditable="false"><img class="fImage" src="${imgPath.value}" alt="">       <a href="${moviePath.value}">               ${movieName.value}</a></div>              <div class="whatAbout">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`;
+                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a></div>              <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
                 txtArea.textContent += textOfRow +"\n=======================================================================================\n";
                 // تفريغ البيانات من مربعات النص
                 clearText();
@@ -269,15 +274,15 @@ for(let i of rdoWatched){
     i.addEventListener("change",checkForWatchedMovies,false);
 }
 //============================================================
+// دالة اظهار فروم الاضافة
 btnAdd.addEventListener("click",function(){
+    this.classList.add(["disappear-element"]);
     watchedContinar.classList.add("disappear-element");
     menuBar.classList.add(["disappear-element"]);
     for(let grid of allgrid){
         grid.classList.add("disappear-element");
     }
     addGrid.style.display = "grid";
-    
-
 });
 
 btnClose.addEventListener("click",function(){returnPage();});
@@ -337,12 +342,13 @@ for(let i = 0;i<watchedBox1.length;i++){
 //===================================================================================================
 // دالة تشغيل الدارك مود
 function darkModeON(){
-    document.body.style.backgroundColor = "#222";
-    for(let wa of whatAbout1){
+    isDarkMode = true;
+    document.body.style.backgroundColor = "#333";
+    for(let wa of document.querySelectorAll(".whatAbout")){
         wa.classList.remove(["whatAbout-in-dark-mode-off"]);
         wa.classList.add(["whatAbout-in-dark-mode-on"]);
     }
-    for(let a of txtNameFile){
+    for(let a of  document.querySelectorAll(".filmName")){
         a.children[1].classList.remove(["a-in-dark-mode-off"]);
         a.children[1].classList.add(["a-in-dark-mode-on"]);
     }
@@ -357,15 +363,20 @@ function darkModeON(){
     for(let lbl of document.querySelectorAll("label")){
         lbl.style.color= "#ddd";
     }
+    for(let grid of allgrid){
+        grid.classList.remove("grid-in-dark-mode-off");
+        grid.classList.add("grid-in-dark-mode-on");
+    }
 }
 // دالة ايقاف الدارك مود
 function darkModeOFF(){
+    isDarkMode = false;
     document.body.style.backgroundColor = "transparent";
-    for(let wa of whatAbout1){
+    for(let wa of document.querySelectorAll(".whatAbout")){
         wa.classList.remove(["whatAbout-in-dark-mode-on"]);
         wa.classList.add(["whatAbout-in-dark-mode-off"]);
     }
-    for(let a of txtNameFile){
+    for(let a of document.querySelectorAll(".filmName")){
         a.children[1].classList.remove(["a-in-dark-mode-on"]);
         a.children[1].classList.add(["a-in-dark-mode-off"]);
     }
@@ -379,6 +390,10 @@ function darkModeOFF(){
     }
     for(let lbl of document.querySelectorAll("label")){
         lbl.style.color= "navy";
+    }
+    for(let grid of allgrid){
+        grid.classList.remove("grid-in-dark-mode-on");
+        grid.classList.add("grid-in-dark-mode-off");
     }
 }
 
