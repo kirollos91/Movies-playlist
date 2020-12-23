@@ -434,15 +434,41 @@ label{
         width: 90%;
     }
 }
+@media screen and (max-width: 435px){
+    .link-film{
+        font-size: 14px;
+    }
+}
 @media screen and (max-width: 400px){
     .lbl-rdo{
         font-size:13px;
         margin-left: 0;
     }
+    .link-film{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 370px){
+    .link-film{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 350px){
+    .link-film{
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 326px){
+    .link-film{
+        font-size: 10px;
+    }
 }
 @media screen and (max-width: 305px){
     .lbl-rdo{
         font-size:11px;
+    }
+    .link-film{
+        font-size: 9px;
     }
 }
 /*
