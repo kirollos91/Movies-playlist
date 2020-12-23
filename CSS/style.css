@@ -74,15 +74,14 @@
     grid-template-columns: 22% 75% 3%;
     align-items: center;
     padding:8px 8px;
-    
     padding-bottom: 8px;
     margin-left: 60px;
 }
 .grid-in-dark-mode-off{
-    border-bottom: black solid 1px;
+    border-bottom: #000 solid 2px;
 }
 .grid-in-dark-mode-on{
-    border-bottom: white solid 1px;
+    border-bottom: #fff solid 2px;
 }
 .disappear-element{
     display:none;
@@ -149,7 +148,10 @@
     padding: 8px;
     font-family: Mirza-Regular;
     direction: rtl;
-    border-bottom:.5px solid #aaa;
+    border-bottom:.5px solid #ccc;
+}
+div:nth-last-child(2),div:nth-last-child(3){
+    border-bottom:none;
 }
 .whatAbout-in-dark-mode-off{
     color:#000;
@@ -157,6 +159,7 @@
 .whatAbout-in-dark-mode-on{
     color:#fff;
 }
+
 /*===========================================================================================*/
 .wTitle{
     text-align:right;
@@ -188,42 +191,61 @@
     top:50%;
     left:50%;
     transform:translate(-50%, -50%);
-    grid-template-columns:20% 70% 10%;
+    grid-template-columns:25% 75%; 
     row-gap: 8px;
     padding: 10px 10px;
-    border-radius: 25px;
+    border-radius: 25px 5px 25px 25px;
     background-color : rgba(210 , 203 ,203 ,.50);
 }
 .txt{
-    width:75%;
+    width:95%;
     height:25px;
     padding-left:10px;
-    border-radius:10px;
-    grid-column:2/4;
+    grid-column:1/4;
+    border-radius: 10px;
+    box-shadow: -2px 2px 5px 0px #888;
+    margin-top: -20px;
 }
-.txt:focus{
+.txt:focus,.cbx-kind-movie{
     outline:none;
+}
+.cbx-kind-movie{
+    grid-column:2/4;
+    border-radius: 10px;
+    box-shadow: -2px 2px 5px 0px #888;
+    height:25px;
+    margin-top: -20px;
 }
 .des{
     width:100%;
-    grid-column:2/4;
+    grid-column:1/4;
 }
 label{
     color: navy;
     font-weight: bolder;
     user-select: none;
     font-family:ElMessiri;
-    padding: 5px 0;
+}
+.lbl-all{
+    grid-column:1/4;
+    width: fit-content;
+}
+.lbl-movie-check,.lbl-movie-kind{
+    grid-column:1/2;
+    margin-top: -20px;
 }
 #is-checked{
-    grid-column:2/4;
-    margin-left: 5px;
+    grid-column:2/3;
+    margin-left: -10px;
+    margin-top: -20px;
 }
-.gridAdd button{
+.btn-in-form{
+    display: block;
     max-width:350px;
-    height:30px;
-    grid-column:1/4;
-    margin:8px 0 8px 20%;
+    font-weight: bolder;
+    width:90%;
+    height:40px;
+    padding: 5px;
     user-select: none;
     border-radius:5px ;
     border: none;
@@ -257,6 +279,7 @@ label{
     cursor:pointer;
     user-select:none;
     opacity:.7;
+    z-index: 11;
 }
 .btn-add:hover{
     opacity:1;
@@ -266,12 +289,12 @@ label{
 .btn-close{
     font-family: Arial, Helvetica, sans-serif;
     position: fixed;
-    top: 5px;
-    right: 5px;
+    top: 0px;
+    right: 0px;
     width:30px;
     height:30px;
     background-color: rgb(187, 59, 59);
-    border-radius:10%;
+    border-radius:0 0 0 50% ;
     text-align: center;
     line-height: 30px;
     font-size: 25px;
@@ -287,6 +310,8 @@ label{
     grid-column:1/5;
     height: 30px;
     width:100%;
+    border-radius: 10px;
+    box-shadow: -2px 2px 5px 0px #888;
 }
 .watched-continar{
     margin-left: 60px;
@@ -404,26 +429,28 @@ label{
         color:rgb(11, 14, 49);
         background-color: #aaa;
     }
-
     .whatAbout{
         margin: 15px auto;
         text-align: center;
-        
+        width: 100%;
     }
     .watchedBox{
         display: none;
     }
-    .gridAdd{
-        grid-template-columns:50% 50%;
-    }
+
     .txt{
         width:100%;
     }
     .des{
         width:100%;
     }
-    .head button{
-        width:200px;
+    .btn-in-form{
+    
+    }
+}
+@media screen and (max-width: 440px){
+    .gridAdd{
+        grid-template-columns:30% 70%; 
     }
 }
 @media screen and (max-width: 390px){
@@ -434,6 +461,9 @@ label{
     .lbl1{
         margin-left:5px;
     }
+    .gridAdd{
+        grid-template-columns:35% 65%; 
+    }
 }
 @media screen and (max-width: 365px){
     .lbl-rdo{
@@ -443,124 +473,15 @@ label{
     .lbl1{
         margin-left:5px;
     }
+    .gridAdd{
+        grid-template-columns:40% 60%; 
+    }
 }
 @media screen and (max-width: 310px){
     .lbl-rdo{
        font-size: 65%;
     }
-}
-
-/*
-@media (max-width: 865px) and (min-width:470px){
     .gridAdd{
-        grid-template-columns:50% 50%;
+        grid-template-columns:45% 55%; 
     }
-    .txt{
-        width:100%;
-    }
-    .des{
-        width:100%;
-    }
-    .head button{
-        width:200px;
-    }
-    .lbl-rdo{
-        font-size:large;
-        display: inline;
-    }
-
-    #movie-search{
-        display: block;
-        width: 90%;
-        margin-left: 60px;
-    }
-    .watched-continar label{
-        margin-left: 10px;
-    }
-    .watched-continar label:nth-last-of-type(3){
-        margin-left: 60px;
-    }
-    .grid{
-        grid-template-columns: 32% 65% 3%;
-    }
-    .filmName a{
-        top:5px;
-
-    }
-    .fImage{
-        top:5px;
-    }
-
 }
-*/
-/*
-@media (max-width:469px) and (min-width:351px){
-    .grid{
-        grid-template-columns:42% 55% 3%;
-    }
-    .filmName a{
-        position:static;
-    }
-    .fImage{
-        position:static;
-    }
-    #movie-search{
-        display: block;
-        width: 82%;
-        margin-left: 60px;
-    }
-    .watched-continar label{
-        margin-left: 3px;
-        font-size: 14px;
-    }
-    .watched-continar label:nth-last-of-type(3){
-        margin-left: 60px;
-    }
-
-}
-@media (max-width: 350px){
-    #movie-search{
-        display: block;
-        width: 80%;
-        margin-left: 60px;
-    }
-    .watched-continar label{
-        margin-left: 3px;
-        font-size: 12px;
-    }
-    .watched-continar label:nth-last-of-type(3){
-        margin-left: 60px;
-    }
-    .grid{
-        grid-template-columns: 37% 60% 3%;
-    }
-    .filmName a{
-        position:static;
-    }
-    .fImage{
-        position:static;
-    }
-
-}
-@media (max-width: 320px){
-    #movie-search{
-        display: block;
-        width: 80%;
-        margin-left: 60px;
-    }
-    .watched-continar label{
-        margin-left: 3px;
-        font-size: 11px;
-    }
-    .watched-continar label:nth-last-of-type(3){
-        margin-left: 60px;
-    }
-    .filmName a{
-        position:static;
-    }
-    .fImage{
-        position:static;
-    }
-
-}
-*/
