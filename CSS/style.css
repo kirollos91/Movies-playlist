@@ -19,11 +19,17 @@
     top:10px;
     width:58px;
     height:570px;
-    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+    
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 20px 0px 0 20px;
+}
+.menu-bar-in-dark-mode-off{
+    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+}
+.menu-bar-in-dark-mode-on{
+    
 }
 .menu-bar img{
     position: relative;
@@ -40,11 +46,17 @@
     left:58px;
     z-index:9;
     height:570px;
-    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+    
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0 20px 20px 0;
+}
+.menu-bar2-in-dark-mode-off{
+    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+}
+.menu-bar2-in-dark-mode-on{
+    
 }
 .menu-bar2 img{
     display: none;
@@ -103,7 +115,7 @@
     color:#fff;
 }
 .a-in-dark-mode-off:visited{
-    color:navy;
+    color:rgb(0, 0, 128);
 }
 
 .a-in-dark-mode-on:visited{
@@ -305,7 +317,9 @@ label{
     background-color: #888;
     position: fixed;
     top:75px;
-    left:5px;
+    left:3px;
+    text-align: center;
+    line-height: 25px;
 }
 .dark-mode-on{
     display: none;
@@ -316,6 +330,8 @@ label{
     position: fixed;
     top:75px;
     left:30px;
+    text-align: center;
+    line-height: 25px;
 }
 /* End Dark Mode */
 /*===========================================================================================*/
@@ -342,18 +358,6 @@ label{
     .grid{
         grid-template-columns: 100%;
     }
-    .watchedBox{
-        display: none;
-    }
-    .filmName{
-        border: none;
-        margin: 5px auto;
-        text-align: center;
-    }
-    .whatAbout{
-        margin: 5px auto;
-        text-align: center;
-    }
     .title{
         margin: 5px auto;
         text-align: center;
@@ -361,14 +365,52 @@ label{
     .wTitle{
         display: none;
     }
-    .a-in-dark-mode-off, .a-in-dark-mode-on{
-        position: static;
-        margin: 2px auto;
-    
+    .filmName{
+        border: none;
+
+        text-align: center;
     }
     .fImage{
+        margin: auto;
+        margin-bottom: 15px;
         position: static;
-        margin: 2px auto;
+        width: 60px;
+        height:60px ;
+    }
+    .link-film{
+        position: static;
+        border: 1px solid #ccc;
+    }
+    .link-film:visited{
+        padding: 5px;
+    }
+    .link-film:link{
+        padding: 5px;
+    }
+    .a-in-dark-mode-on{
+        color:rgb(11, 14, 49);
+        background-color: #aaa;
+        box-shadow: -3px 3px 2px 0px #777;
+    }
+    .a-in-dark-mode-off{
+        box-shadow: -2px 1px 2px 0px #888;
+    }
+    .a-in-dark-mode-on:link{
+        color:rgb(11, 14, 49);
+        background-color: #aaa;
+
+    }
+    .a-in-dark-mode-on:visited{
+        color:rgb(11, 14, 49);
+        background-color: #aaa;
+    }
+
+    .whatAbout{
+        margin: 5px auto;
+        text-align: center;
+    }
+    .watchedBox{
+        display: none;
     }
     .gridAdd{
         grid-template-columns:50% 50%;
