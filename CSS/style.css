@@ -283,13 +283,25 @@ label{
 /* End with button close  the add form */
 /* Start with search movies */
 #movie-search{
+    display: block;
     grid-column:1/5;
     height: 30px;
-    width:50%;
+    width:100%;
 }
 .watched-continar{
     margin-left: 60px;
 }
+.lbl-rdo{
+    margin-left: 5%;
+    font-size: 100%;
+}
+.lbl1{
+    margin-left: 5px;
+}
+.rdo-watched-continal{
+
+}
+
 /* End with search movies */
 .head{
     width:100%;
@@ -335,25 +347,7 @@ label{
 }
 /* End Dark Mode */
 /*===========================================================================================*/
-@media (max-width: 1050px) and (min-width:931px){
-    label.lbl-rdo{
-        font-size: 14px;
-        margin:0 auto ;
-     }
-}
-@media (max-width: 930px) and (min-width:918px){
-    label.lbl-rdo{
-        font-size: 13px;
-     }
-     .watched-continar label{
-        margin-left: 5px;
-    }
-}
-@media (max-width: 917px) and (min-width:866px){
-    label.lbl-rdo{
-        font-size: 12px;
-     }
-}
+/*@media (max-width: 1050px) and (min-width:931px){}*/
 @media screen and (max-width: 865px){
     .grid{
         grid-template-columns: 100%;
@@ -367,7 +361,7 @@ label{
     }
     .filmName{
         border: none;
-
+        
         text-align: center;
     }
     .fImage{
@@ -380,12 +374,18 @@ label{
     .link-film{
         position: static;
         border: 1px solid #ccc;
+        overflow: hidden;
+        display: inline-block;
+        padding: 7px;
+        border-radius: 20px;
     }
     .link-film:visited{
-        padding: 5px;
+        
+
     }
     .link-film:link{
-        padding: 5px;
+
+        
     }
     .a-in-dark-mode-on{
         color:rgb(11, 14, 49);
@@ -406,8 +406,9 @@ label{
     }
 
     .whatAbout{
-        margin: 5px auto;
+        margin: 15px auto;
         text-align: center;
+        
     }
     .watchedBox{
         display: none;
@@ -424,53 +425,31 @@ label{
     .head button{
         width:200px;
     }
+}
+@media screen and (max-width: 390px){
     .lbl-rdo{
-        font-size:large;
-        display: inline;
        
+      margin-left: 2%;
     }
-    #movie-search{
-        display: block;
-        width: 90%;
-    }
-}
-@media screen and (max-width: 435px){
-    .link-film{
-        font-size: 14px;
+    .lbl1{
+        margin-left:5px;
     }
 }
-@media screen and (max-width: 400px){
+@media screen and (max-width: 365px){
     .lbl-rdo{
-        font-size:13px;
-        margin-left: 0;
+       font-size: 80%;
+      margin-left: 0.5%;
     }
-    .link-film{
-        font-size: 13px;
-    }
-}
-@media screen and (max-width: 370px){
-    .link-film{
-        font-size: 12px;
+    .lbl1{
+        margin-left:5px;
     }
 }
-@media screen and (max-width: 350px){
-    .link-film{
-        font-size: 11px;
-    }
-}
-@media screen and (max-width: 326px){
-    .link-film{
-        font-size: 10px;
-    }
-}
-@media screen and (max-width: 305px){
+@media screen and (max-width: 310px){
     .lbl-rdo{
-        font-size:11px;
-    }
-    .link-film{
-        font-size: 9px;
+       font-size: 65%;
     }
 }
+
 /*
 @media (max-width: 865px) and (min-width:470px){
     .gridAdd{
