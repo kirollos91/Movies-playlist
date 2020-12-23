@@ -16,10 +16,9 @@
 
 .menu-bar{
     position:fixed;
-    top:10px;
+    top:5px;
     width:58px;
-    height:570px;
-    
+    height:570px; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -31,26 +30,33 @@
 .menu-bar-in-dark-mode-on{
     
 }
-.menu-bar img{
-    position: relative;
+.img{
+    position: fixed;
     width:52px;
-    top:12px;
-    height:40px ;
-    margin-left:5px;
+    height:52px ;
     cursor:pointer;
+    user-select: none;
 }
 .menu-bar2{
-    display: block;
     position:fixed;
-    top:10px;
+    top:5px;
     left:58px;
     z-index:9;
     height:570px;
-    
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0 20px 20px 0;
+}
+.img-open-menu{
+    top:50px;
+    border-radius: 50%;
+    margin-left:5px;
+}
+.img-close-menu{
+    top:16px;
+    border-radius: 50%;
+    margin-left: 145px;
 }
 .menu-bar2-in-dark-mode-off{
     background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
@@ -58,15 +64,35 @@
 .menu-bar2-in-dark-mode-on{
     
 }
-.menu-bar2 img{
-    display: none;
-    position: relative;
-    width:52px;
-    height:40px ;
-    top:12px;
-    margin-left: 145px;
-    cursor:pointer;
+.menu-bar3{
+    position:fixed;
+    top:5px;
+    left:58px;
+    z-index:9;
+    height:570px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0 20px 20px 0;
 }
+.img-search{
+    top:110px;
+    left:5px;
+    border-radius: 50%;
+}
+.img-close-menu-search{
+    top:16px;
+    border-radius: 50%;
+    margin-left: 145px;
+}
+.menu-bar3-in-dark-mode-off{
+    background-image:url("https://i.pinimg.com/736x/24/6c/02/246c02f765304ee5d718143c921d923c.jpg");
+}
+.menu-bar3-in-dark-mode-on{
+    
+}
+
+
 /* End menu amenuBar*/
 /*===========================================================================================*/
 .grid{
@@ -185,12 +211,10 @@ div:nth-last-child(2),div:nth-last-child(3){
 /*  الادخالى  */
 .gridAdd{
     display:none;
-    position: fixed;
-    overflow: scroll;
+    overflow: auto;
     width: 90%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
+    margin-left: 50%;
+    transform:translate(-50%, 5%);
     grid-template-columns:25% 75%; 
     row-gap: 8px;
     padding: 10px 10px;
@@ -211,9 +235,6 @@ div:nth-last-child(2),div:nth-last-child(3){
 }
 .cbx-kind-movie{
     grid-column:2/4;
-    border-radius: 10px;
-    box-shadow: -2px 2px 5px 0px #888;
-    height:25px;
 }
 .des{
     width:100%;
@@ -309,6 +330,10 @@ label{
     width:100%;
     border-radius: 10px;
     box-shadow: -2px 2px 5px 0px #888;
+    outline: none;
+}
+#movie-search:active{
+    outline: none;
 }
 .watched-continar{
     margin-left: 60px;
@@ -341,7 +366,7 @@ label{
     padding-right: 2px;
     text-align: right;
     position: fixed;
-    top:80px;
+    top:25px;
     left:5px;
 }
 .dark-mode-off{
@@ -350,7 +375,7 @@ label{
     border-radius: 50%;
     background-color: #888;
     position: fixed;
-    top:75px;
+    top:20px;
     left:3px;
     text-align: center;
     line-height: 25px;
@@ -362,7 +387,7 @@ label{
     border-radius: 50%;
     background-color: #888;
     position: fixed;
-    top:75px;
+    top:20px;
     left:30px;
     text-align: center;
     line-height: 25px;
