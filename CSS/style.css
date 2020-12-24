@@ -12,16 +12,79 @@
     src: url("font/Mirza-Regular.ttf");
 }
 /*===========================================================================================*/
-/* menu amenuBar */
-
-.menu-bar{
-    position:fixed;
+/**/
+header{
+    width:100%;
+    background-color: #000;
+    height: 40px;
+}
+/**/
+/*===========================================================================================*/
+/* Start Dark Mode */
+.lbl-dark-mode{
+    position: absolute;
+    top:9px;
+    right:66px;
+    color: #fff;
+    font-size: large;
+    font-weight: bold;
+    line-height: 100%;
+}
+.dark-mode-stick{
+    width:55px;
+    height: 24px;
+    border-radius: 7px;
+    font-size: 13px;
+    line-height: 24px;
+    position: absolute;
     top:5px;
-    width:58px;
-    height:570px; 
+    right:9px;
+}
+.dark-mode-stick-off{
+    background-color: #ddd;
+    color:navy;
+    padding-right: 5px;
+    text-align: right;
+}
+.dark-mode-stick-on{
+    background-color: #f00;
+    color:#fff;
+    padding-left: 5px;
+    text-align: left;
+}
+/*------------------------------------*/
+.dark-mode-button{
+    width: 20px;
+    height: 20px;
+    font-size:small;
+    border-radius: 50%;
+    background-color: #555;
+    position: absolute;
+    top:7px;
+    text-align: center;
+    line-height: 20px;
+    cursor:pointer;
+}
+.dark-mode-off{
+    right:41px;
+}
+.dark-mode-on{
+    right:9px;
+}
+/* End Dark Mode */
+/*===========================================================================================*/
+/* menu amenuBar */
+.all-menu-bar{
+    position:fixed;
+    height:570px;
+    top:5px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: 9;
+}
+.main-menu-bar{
+    width:58px;
     border-radius: 20px 0px 0 20px;
 }
 .menu-bar-in-dark-mode-off{
@@ -31,32 +94,27 @@
     
 }
 .img{
-    position: fixed;
+    position: absolute;
     width:52px;
     height:52px ;
     cursor:pointer;
     user-select: none;
 }
-.menu-bar2{
-    position:fixed;
-    top:5px;
+/*--------------------------------------------------*/
+.menu-bar-open1{
     left:58px;
-    z-index:9;
-    height:570px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     border-radius: 0 20px 20px 0;
+    width:0px;
 }
 .img-open-menu{
-    top:50px;
+    top:9px;
     border-radius: 50%;
     margin-left:5px;
 }
 .img-close-menu{
-    top:16px;
+    top:9px;
     border-radius: 50%;
-    margin-left: 145px;
+    right: 0px;
 }
 .menu-bar2-in-dark-mode-off{
     background-image:url("../image/menu_background_image.jpg");
@@ -64,26 +122,24 @@
 .menu-bar2-in-dark-mode-on{
     
 }
-.menu-bar3{
-    position:fixed;
-    top:5px;
+#h1-title-menu1{
+    text-align: center;
+}
+/*--------------------------------------------------*/
+.menu-bar-open2{
     left:58px;
-    z-index:9;
-    height:570px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     border-radius: 0 20px 20px 0;
+    width:0px;
 }
 .img-search{
-    top:110px;
+    top:65px;
     left:5px;
     border-radius: 50%;
 }
 .img-close-menu-search{
-    top:16px;
+    top:9px;
     border-radius: 50%;
-    margin-left: 145px;
+    right: 0px;
 }
 .menu-bar3-in-dark-mode-off{
     background-image:url("../image/menu_background_image.jpg");
@@ -91,7 +147,9 @@
 .menu-bar3-in-dark-mode-on{
     
 }
-
+#h1-title-menu2{
+    text-align: center;
+}
 
 /* End menu amenuBar*/
 /*===========================================================================================*/
@@ -111,6 +169,9 @@
 }
 .disappear-element{
     display:none;
+}
+.hide-element{
+    visibility: hidden;
 }
 /*===========================================================================================*/
 /* Start Movie Name and Image */
@@ -210,7 +271,6 @@ div:nth-last-child(2),div:nth-last-child(3){
 /*===========================================================================================*/
 /*  الادخالى  */
 .gridAdd{
-    display:none;
     overflow: auto;
     width: 90%;
     margin-left: 50%;
@@ -220,6 +280,9 @@ div:nth-last-child(2),div:nth-last-child(3){
     padding: 10px 10px;
     border-radius: 25px 5px 25px 25px;
     background-color : rgba(210 , 203 ,203 ,.50);
+}
+.grid-add-appear{
+    display: grid;
 }
 .txt{
     width:95%;
@@ -322,6 +385,7 @@ label{
     user-select:none;
 }
 /* End with button close  the add form */
+/*======================================================================*/
 /* Start with search movies */
 #movie-search{
     display: block;
@@ -353,46 +417,6 @@ label{
 .head{
     width:100%;
 }
-/*===========================================================================================*/
-/* Start Dark Mode */
-.dark-mode-stick{
-    width:50px;
-    height: 15px;
-    background-color: #ccc;
-    border-radius: 20px;
-    color:navy;
-    font-size: 13px;
-    line-height: 15px;
-    padding-right: 2px;
-    text-align: right;
-    position: fixed;
-    top:25px;
-    left:5px;
-}
-.dark-mode-off{
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: #888;
-    position: fixed;
-    top:20px;
-    left:3px;
-    text-align: center;
-    line-height: 25px;
-}
-.dark-mode-on{
-    display: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: #888;
-    position: fixed;
-    top:20px;
-    left:30px;
-    text-align: center;
-    line-height: 25px;
-}
-/* End Dark Mode */
 /*===========================================================================================*/
 /*@media (max-width: 1050px) and (min-width:931px){}*/
 @media screen and (max-width: 865px){
@@ -466,13 +490,20 @@ label{
     .des{
         width:100%;
     }
-    .btn-in-form{
-    
+    #h1-title-menu1, #h1-title-menu2{
+        font-size: 27px;
+        font-weight: 700;
+        text-align: left;
     }
 }
 @media screen and (max-width: 440px){
     .gridAdd{
         grid-template-columns:30% 70%; 
+    }
+    #h1-title-menu1, #h1-title-menu2{
+        font-size: 22px;
+        font-weight: 700;
+        text-align: left;
     }
 }
 @media screen and (max-width: 390px){
@@ -485,6 +516,11 @@ label{
     }
     .gridAdd{
         grid-template-columns:35% 65%; 
+    }
+    #h1-title-menu1, #h1-title-menu2{
+        font-size: 18px;
+        font-weight: 700;
+        text-align: left;
     }
 }
 @media screen and (max-width: 365px){
