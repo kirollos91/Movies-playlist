@@ -1,4 +1,5 @@
 // اضافة المتغيرات للمشروع
+const header                = document.querySelector("header");
 const imgPath               = document.getElementById("imgPath");                     // 
 const moviePath             = document.getElementById("moviePath");                   //    
 const movieName             = document.getElementById("movieName");
@@ -18,9 +19,9 @@ const rdoWatched            = document.querySelectorAll(".rdo-watched");
 const addGrid               = document.querySelector(".gridAdd");
 const btnAdd                = document.querySelector(".btn-add");
 const btnClose              = document.querySelector(".btn-close");
-const menuBar               = document.querySelector(".menu-bar");
-const menuBar2              = document.querySelector(".menu-bar2");
-const menuBar3              = document.querySelector(".menu-bar3");
+const menuBar               = document.querySelector(".main-menu-bar");
+const menuBar2              = document.querySelector(".menu-bar-open1");
+const menuBar3              = document.querySelector(".menu-bar-open2");
 const darkModeOff           = document.querySelector("#dark-mode-off");
 const darkModeOn            = document.querySelector("#dark-mode-on");
 const darkModeStick         = document.querySelector("#dark-mode-stick");
@@ -51,16 +52,33 @@ function appendToSelect(){
 }
 window.addEventListener("load",appendToSelect,false);
 //============================================================
+// دالة اظهار فروم الاضافة
+btnAdd.addEventListener("click",function(){
+    this.classList.add(["disappear-element"]);
+    header.classList.add("disappear-element");
+    watchedContinar.classList.add("disappear-element");
+    menuBar.classList.add(["disappear-element"]);
+    for(let grid of allgrid){
+        grid.classList.add("disappear-element");
+    }
+    addGrid.classList.remove("disappear-element");
+    addGrid.classList.add("grid-add-appear");
+});
+
+btnClose.addEventListener("click",function(){returnPage();});
+window.addEventListener("keydown",function(event){if(event.key == "Escape" && addGrid.style.display == "grid")returnPage();});
+//============================================================
 // دالة اخفاء فورم الاضافة
 function returnPage(){
     watchedContinar.classList.remove(["disappear-element"]);
+    header.classList.remove("disappear-element");
     menuBar.classList.remove(["disappear-element"]);
     btnAdd.classList.remove(["disappear-element"]);
     for(let grid of allgrid){
         grid.classList.remove(["disappear-element"]);
     }
-    addGrid.style.display = "none";
-
+    addGrid.classList.add("disappear-element");
+    addGrid.classList.remove("grid-add-appear");
 }
 //============================================================
 // دالة تفريغ العناصر فى فورم الاضافة
@@ -278,21 +296,8 @@ function checkForWatchedMovies(){
 for(let i of rdoWatched){
     i.addEventListener("change",checkForWatchedMovies,false);
 }
-//============================================================
-// دالة اظهار فروم الاضافة
-btnAdd.addEventListener("click",function(){
-    this.classList.add(["disappear-element"]);
-    watchedContinar.classList.add("disappear-element");
-    menuBar.classList.add(["disappear-element"]);
-    for(let grid of allgrid){
-        grid.classList.add("disappear-element");
-    }
-    addGrid.style.display = "grid";
-});
-
-btnClose.addEventListener("click",function(){returnPage();});
-window.addEventListener("keydown",function(event){if(event.key == "Escape" && addGrid.style.display == "grid")returnPage();});
-
+//===================================================================================================
+// جعل التعديل على الكتابة ممكن فى وصف الفيلم
 for(let grid of whatAbout1){
     grid.setAttribute("contenteditable","true");
 }
@@ -300,22 +305,26 @@ for(let grid of whatAbout1){
 // start animation with open menu bar menuBar
 let elementWidth = 0;
 let elementWidth2 = 0;
+const stepElementWidth =3; 
+const maxWidth = 50;
+const minWidth = 0;
 let appearMenu;
 let disappearMenu;
 let appearMenuSearch;
 let disappearMenuSearch;
-const stepElementWidth =5; 
+
 
 //
 function appearMenuFun(){
     disappearMenuSearchFun();
     imgOpenMenu.classList.add(["disappear-element"]);
-    if(elementWidth < 210){
-        menuBar2.style.width = elementWidth +"px";
+    if(elementWidth < maxWidth){
+        menuBar2.style.width = elementWidth +"%";
         elementWidth += stepElementWidth;
     }else{
         clearInterval(appearMenu);
         imgCloseMenu.classList.remove(["disappear-element"]);
+        document.querySelector("#h1-title-menu1").classList.remove("hide-element");
     }
 }
 //
@@ -325,8 +334,9 @@ imgOpenMenu.addEventListener("click",function(){
 //
 function disappearMenuFun(){
     imgCloseMenu.classList.add(["disappear-element"]);
-    if(elementWidth >= 0){
-        menuBar2.style.width = elementWidth +"px";
+    document.querySelector("#h1-title-menu1").classList.add("hide-element");
+    if(elementWidth >= minWidth){
+        menuBar2.style.width = elementWidth +"%";
         elementWidth -= stepElementWidth;
     }else{
         clearInterval(disappearMenu);
@@ -343,12 +353,13 @@ imgCloseMenu.addEventListener("click",function(){
 function appearMenuSearchFun(){
     disappearMenuFun();
     imgSearch.classList.add(["disappear-element"]);
-    if(elementWidth2 < 210){
-        menuBar3.style.width = elementWidth2 +"px";
+    if(elementWidth2 < maxWidth){
+        menuBar3.style.width = elementWidth2 +"%";
         elementWidth2 += stepElementWidth;
     }else{
         clearInterval(appearMenuSearch);
         imgCloseMenuSearch.classList.remove(["disappear-element"]);
+        document.querySelector("#h1-title-menu2").classList.remove("hide-element");
     }
 }
 //
@@ -358,8 +369,9 @@ imgSearch.addEventListener("click",function(){
 //
 function disappearMenuSearchFun(){
     imgCloseMenuSearch.classList.add(["disappear-element"]);
-    if(elementWidth2 >= 0){
-        menuBar3.style.width = elementWidth2 +"px";
+    document.querySelector("#h1-title-menu2").classList.add("hide-element");
+    if(elementWidth2 >= minWidth){
+        menuBar3.style.width = elementWidth2 +"%";
         elementWidth2 -= stepElementWidth;
     }else{
         clearInterval(disappearMenuSearch);
@@ -441,21 +453,18 @@ function darkModeOFF(){
 
 // زرار الدارك مود
 darkModeOff.addEventListener("click",function(){
-    this.style.display = "none";
-    darkModeOn.style.display = "inline";
-    darkModeStick.style.color = "white";
-    darkModeStick.style.backgroundColor = "red";
-    darkModeStick.style.textAlign = "left";
-    darkModeStick.style.paddingLeft = "2px";
+    this.classList.add("disappear-element");
+    darkModeOn.classList.remove("disappear-element");
+    darkModeStick.classList.remove("dark-mode-stick-off");
+    darkModeStick.classList.add("dark-mode-stick-on");
     darkModeStick.textContent = "ON";
     darkModeON();
 });
 darkModeOn.addEventListener("click",function(){
-    this.style.display = "none";
-    darkModeOff.style.display = "inline";
-    darkModeStick.style.color = "navy";
-    darkModeStick.style.backgroundColor = "#ccc";
-    darkModeStick.style.textAlign = "right";
+    this.classList.add("disappear-element");
+    darkModeOff.classList.remove("disappear-element");
+    darkModeStick.classList.remove("dark-mode-stick-on");
+    darkModeStick.classList.add("dark-mode-stick-off");
     darkModeStick.textContent = "OFF";
     darkModeOFF();
 });
