@@ -5,6 +5,12 @@ const moviePath             = document.getElementById("moviePath");             
 const movieName             = document.getElementById("movieName");
 const movieDescription      = document.getElementById("movieDescription");
 const moviekind             = document.getElementById("moviekind");
+const filmYear              = document.querySelector("#year-num");
+const actorsName            = document.querySelector("#actors-name");
+const filmsKind             = document.querySelector("#films-kind");
+const addActorsName         = document.querySelector("#add-actors-name");
+const addFilmsKindVar       = document.querySelector("#add-films-kind");
+
 const classTitle            = document.querySelectorAll(".title");
 const txtNameFile           = document.querySelectorAll(".filmName");
 const datalist              = document.querySelector("#film-name");
@@ -65,8 +71,15 @@ btnAdd.addEventListener("click",function(){
     addGrid.classList.add("grid-add-appear");
 });
 
-btnClose.addEventListener("click",function(){returnPage();});
+btnClose.addEventListener("click",returnPage);
 window.addEventListener("keydown",function(event){if(event.key == "Escape" && addGrid.style.display == "grid")returnPage();});
+
+//============================================================
+function clearGrid(){
+    clearText();
+    returnTheAddActor();
+    returnTheAddKind();
+}
 //============================================================
 // دالة اخفاء فورم الاضافة
 function returnPage(){
@@ -79,6 +92,8 @@ function returnPage(){
     }
     addGrid.classList.add("disappear-element");
     addGrid.classList.remove("grid-add-appear");
+
+
 }
 //============================================================
 // دالة تفريغ العناصر فى فورم الاضافة
@@ -87,6 +102,9 @@ function clearText(){
     moviePath.value ="";
     movieName.value="";
     movieDescription.value="";
+    filmYear.value = "";
+    addActorsName.value ="";
+    addFilmsKindVar.value = "";
     isWatched.checked = false;
 }
 //============================================================
@@ -136,7 +154,7 @@ function addMovie(){
                 filmName.append(ahref);
                 //
                 //`<div class="filmName" contenteditable="false"><img class="fImage" src="${imgPath.value}" alt="">       <a href="${moviePath.value}">               ${movieName.value}</a></div>              <div class="whatAbout">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`;
-                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a></div>              <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
+                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span></div>              <div id="actors-name" class="add-actors disappear-element"></div><div id="films-kind" class="add-films-kind disappear-element"></div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
                 txtArea.textContent += textOfRow +"\n=======================================================================================\n";
                 // تفريغ البيانات من مربعات النص
                 clearText();
@@ -468,3 +486,111 @@ darkModeOn.addEventListener("click",function(){
     darkModeStick.textContent = "OFF";
     darkModeOFF();
 });
+//===================================================================================================
+// //دالة اضافة اسم جديد لممثل داخل الفيلم
+let counterOfAddActors = 0;
+let counterOfAddMoviesKind = 0;
+
+document.querySelector(".add-actors-name-a").addEventListener("click",addActors);
+
+function addActors(){
+
+    let inpActor =  document.createElement("input");    
+    inpActor.classList.add("txt","add-anthor","add-actors-name-w");
+    inpActor.setAttribute("id","add-actors-name");
+    inpActor.setAttribute("type","text");
+    
+    let divAAR = document.createElement("div");
+
+    let spanAdd =  document.createElement("span");
+    spanAdd.classList.add("add-anthor-all","add-actors-name-a");
+    spanAdd.textContent = "+";
+
+    let spanRemove =  document.createElement("span");
+    spanRemove.classList.add("remove-anthor-all","remove-actors-name-a");
+    spanRemove.textContent = "-";
+    
+    addGrid.insertBefore(inpActor,document.querySelector(".lbl-add-films-kind"));
+    divAAR.appendChild(spanAdd);
+    divAAR.appendChild(spanRemove);
+    addGrid.insertBefore(divAAR,document.querySelector(".lbl-add-films-kind"));
+    spanRemove.addEventListener("click",removeActorsOrRemoveKind);
+    for(let i = counterOfAddActors+1 ;i< document.querySelectorAll(".add-actors-name-a").length;i++){
+        document.querySelectorAll(".add-actors-name-a")[i].addEventListener("click",addActors);
+    }
+    counterOfAddActors++;
+    this.removeEventListener("click",addActors);
+}
+//دالة اضافة نوع جديد للفيلم
+document.querySelector(".add-kind-a").addEventListener("click",addFilmsKind);
+function addFilmsKind(){
+
+    let inpKind =  document.createElement("input");    
+    inpKind.classList.add("txt","add-anthor","add-kind-w");
+    inpKind.setAttribute("id","add-films-kind");
+    inpKind.setAttribute("type","text");
+    
+    let divAAR = document.createElement("div");
+
+    let spanAddKind =  document.createElement("span");
+    spanAddKind.classList.add("add-anthor-all","add-kind-a");
+    spanAddKind.textContent = "+";
+    
+    let spanRemoveKind =  document.createElement("span");
+    spanRemoveKind.classList.add("remove-anthor-all","remove-kind-a");
+    spanRemoveKind.textContent = "-";
+
+
+    addGrid.insertBefore(inpKind,document.querySelector(".lbl-movie-check"));
+    divAAR.appendChild(spanAddKind);
+    divAAR.appendChild(spanRemoveKind);
+    addGrid.insertBefore(divAAR,document.querySelector(".lbl-movie-check"));
+    spanRemoveKind.addEventListener("click",removeActorsOrRemoveKind);
+    for(let i = counterOfAddMoviesKind+1 ;i< document.querySelectorAll(".add-kind-a").length;i++){
+        document.querySelectorAll(".add-kind-a")[i].addEventListener("click",addFilmsKind);
+    }
+    counterOfAddMoviesKind++;
+    this.removeEventListener("click",addFilmsKind);
+}
+/* -------------------------------------------------------------------------------- */
+//
+
+
+function removeActorsOrRemoveKind(){
+    this.previousElementSibling.remove();
+    this.parentElement.previousElementSibling.remove();
+    this.parentElement.remove();
+    this.remove();
+    if(document.querySelectorAll(".add-kind-a").length == 1){
+        document.querySelector(".add-kind-a").addEventListener("click",addFilmsKind);
+        counterOfAddMoviesKind = 0;
+    }
+    if(document.querySelectorAll(".add-actors-name-a").length == 1){
+        document.querySelector(".add-actors-name-a").addEventListener("click",addActors);
+        counterOfAddActors = 0;
+    }
+}
+
+/* -------------------------------------------------------------------------------- */
+//
+function returnTheAddActor(){
+    counterOfAddActors = 0;
+    const lenOfActorsName = document.querySelectorAll(".add-actors-name-a").length-1;
+    for(let i = lenOfActorsName ;i > 0; i--){
+        document.querySelectorAll(".add-actors-name-w")[i].remove();
+        document.querySelectorAll(".add-actors-name-a")[i].remove();
+        document.querySelectorAll(".remove-actors-name-a")[i].remove();
+    }
+    document.querySelector(".add-actors-name-a").addEventListener("click",addActors);
+}
+function returnTheAddKind(){
+    counterOfAddMoviesKind = 0;
+    const lenOfActorsName = document.querySelectorAll(".add-kind-a").length-1;
+    for(let i = lenOfActorsName ;i > 0; i--){
+        document.querySelectorAll(".add-kind-w")[i].remove();
+        document.querySelectorAll(".add-kind-a")[i].remove();
+        document.querySelectorAll(".remove-kind-a")[i].remove();
+    }
+    document.querySelector(".add-kind-a").addEventListener("click",addFilmsKind);
+}
+//===================================================================================================
