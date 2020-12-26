@@ -1,48 +1,3 @@
-// اضافة المتغيرات للمشروع
-const header                = document.querySelector("header");
-const imgPath               = document.getElementById("imgPath");                     // 
-const moviePath             = document.getElementById("moviePath");                   //    
-const movieName             = document.getElementById("movieName");
-const movieDescription      = document.getElementById("movieDescription");
-const moviekind             = document.getElementById("moviekind");
-const filmYear              = document.querySelector("#year-num");
-const actorsName            = document.querySelector("#actors-name");
-const filmsKind             = document.querySelector("#films-kind");
-const addActorsName         = document.querySelector("#add-actors-name");
-const addFilmsKindVar       = document.querySelector("#add-films-kind");
-
-const classTitle            = document.querySelectorAll(".title");
-const txtNameFile           = document.querySelectorAll(".filmName");
-const datalist              = document.querySelector("#film-name");
-const movieSearch           = document.querySelector("#movie-search");
-const allgrid               = document.querySelectorAll(".grid");
-const wTitle1               = document.querySelectorAll(".wTitle");
-const whatAbout1            = document.querySelectorAll(".whatAbout");
-const watchedBox1           = document.querySelectorAll(".watchedBox");
-const notWatched            = document.querySelector("#not-watched");
-const watchedContinar       = document.querySelector(".watched-continar")
-const rdoWatched            = document.querySelectorAll(".rdo-watched");
-const addGrid               = document.querySelector(".gridAdd");
-const btnAdd                = document.querySelector(".btn-add");
-const btnClose              = document.querySelector(".btn-close");
-const menuBar               = document.querySelector(".main-menu-bar");
-const menuBar2              = document.querySelector(".menu-bar-open1");
-const menuBar3              = document.querySelector(".menu-bar-open2");
-const darkModeOff           = document.querySelector("#dark-mode-off");
-const darkModeOn            = document.querySelector("#dark-mode-on");
-const darkModeStick         = document.querySelector("#dark-mode-stick");
-const imgOpenMenu           = document.querySelector(".img-open-menu");
-const imgCloseMenu          = document.querySelector(".img-close-menu");
-const imgSearch             = document.querySelector(".img-search");
-const imgCloseMenuSearch    = document.querySelector(".img-close-menu-search");
-const isWatched             = document.querySelector("#is-checked");
-const txtArea               = document.querySelector("#txt-area");
-let   isDarkMode            = false;
-let textOfRow               = "";
-
-
-
-
 
 // دول الامشروع
 //============================================================
@@ -70,15 +25,12 @@ btnAdd.addEventListener("click",function(){
     addGrid.classList.remove("disappear-element");
     addGrid.classList.add("grid-add-appear");
 });
-
-btnClose.addEventListener("click",returnPage);
-window.addEventListener("keydown",function(event){if(event.key == "Escape" && addGrid.style.display == "grid")returnPage();});
-
 //============================================================
 function clearGrid(){
     clearText();
     returnTheAddActor();
     returnTheAddKind();
+    txtArea.textContent = "";
 }
 //============================================================
 // دالة اخفاء فورم الاضافة
@@ -92,9 +44,13 @@ function returnPage(){
     }
     addGrid.classList.add("disappear-element");
     addGrid.classList.remove("grid-add-appear");
-
-
 }
+btnClose.addEventListener("click",returnPage);
+window.addEventListener("keydown",function(event){
+    if(event.key == "Escape" && !(addGrid.classList.contains("disappear-element"))){
+        returnPage();
+    }
+});
 //============================================================
 // دالة تفريغ العناصر فى فورم الاضافة
 function clearText(){
@@ -105,6 +61,8 @@ function clearText(){
     filmYear.value = "";
     addActorsName.value ="";
     addFilmsKindVar.value = "";
+    ratingMovie.value = "";
+    filmTime.value = "";
     isWatched.checked = false;
 }
 //============================================================
@@ -153,12 +111,14 @@ function addMovie(){
                 filmName.append(fImage);
                 filmName.append(ahref);
                 //
-                //`<div class="filmName" contenteditable="false"><img class="fImage" src="${imgPath.value}" alt="">       <a href="${moviePath.value}">               ${movieName.value}</a></div>              <div class="whatAbout">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`;
-                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span></div>              <div id="actors-name" class="add-actors disappear-element"></div><div id="films-kind" class="add-films-kind disappear-element"></div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
+
+                //
+                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span><span class="rating-movie disappear-element">${ratingMovie.value}</span><span class="film-time disappear-element">${filmTime.value}</span></div>              <div id="actors-name" class="add-actors disappear-element"></div><div id="films-kind" class="add-films-kind disappear-element"></div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
                 txtArea.textContent += textOfRow +"\n=======================================================================================\n";
                 // تفريغ البيانات من مربعات النص
                 clearText();
-                returnPage();
+                returnTheAddActor();
+                returnTheAddKind();
             }
         }
     }
@@ -215,12 +175,13 @@ function showAllMovies(){
         txtNameFile[i].classList.remove(["disappear-element"]);
         whatAbout1[i].classList.remove(["disappear-element"]);
         watchedBox1[i].classList.remove(["disappear-element"]);
+        watchedBox1[i].parentElement.classList.remove(["disappear-element"]);
     }
     for(let i = 0;i < wTitle1.length;i++){
         wTitle1[i].classList.remove(["disappear-element"]);
         classTitle[i].classList.remove(["disappear-element"]);
         classTitle[i].nextElementSibling.classList.remove(["disappear-element"]);
-        wTitle1[i].parentElement.style.borderBottom = "black solid 1px";
+        //wTitle1[i].parentElement.style.borderBottom = "black solid 1px";
     }
 }
 //============================================================
@@ -230,7 +191,7 @@ function showMoviesNotWatched(){
         wTitle1[i].classList.add(["disappear-element"]);
         classTitle[i].classList.add(["disappear-element"]);
         classTitle[i].nextElementSibling.classList.add(["disappear-element"]);
-        wTitle1[i].parentElement.style.borderBottom = "none";
+        wTitle1[i].parentElement.classList.add(["disappear-element"]);
     }
     for(let i = 0;i<txtNameFile.length;i++){
         if(!watchedBox1[i].children[0].checked){
@@ -240,7 +201,7 @@ function showMoviesNotWatched(){
             watchedBox1[i].parentElement.children[0].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[1].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[2].classList.remove(["disappear-element"]);
-            watchedBox1[i].parentElement.style.borderBottom = "black solid 1px";
+            watchedBox1[i].parentElement.classList.remove(["disappear-element"]);
         }else{
             txtNameFile[i].classList.add(["disappear-element"]);
             whatAbout1[i].classList.add(["disappear-element"]);
@@ -255,17 +216,17 @@ function showMoviesWatched(){
         wTitle1[i].classList.add(["disappear-element"]);
         classTitle[i].classList.add(["disappear-element"]);
         classTitle[i].nextElementSibling.classList.add(["disappear-element"]);
-        wTitle1[i].parentElement.style.borderBottom = "none";
+        wTitle1[i].parentElement.classList.add(["disappear-element"]);
     }
     for(let i = 0;i<txtNameFile.length;i++){
-        if(!watchedBox1[i].children[0].checked == false){
+        if(watchedBox1[i].children[0].checked){
             txtNameFile[i].classList.remove(["disappear-element"]);
             whatAbout1[i].classList.remove(["disappear-element"]);
             watchedBox1[i].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[0].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[1].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[2].classList.remove(["disappear-element"]);
-            watchedBox1[i].parentElement.style.borderBottom = "black solid 1px";
+            watchedBox1[i].parentElement.classList.remove(["disappear-element"]);
         }else{
             txtNameFile[i].classList.add(["disappear-element"]);
             whatAbout1[i].classList.add(["disappear-element"]);
@@ -279,20 +240,22 @@ function checkForWatchedMovies(){
     for(let i = 0 ;i<rdoWatched.length;i++){
         if (rdoWatched[i].checked){
             if(rdoWatched[i].id == "all-movie"){
-                for(let ele =0 ;ele<datalist.childElementCount;ele++)datalist.children[ele].textContent="";
+                for(let ele =0 ;ele<datalist.childElementCount;ele++)
+                    datalist.children[ele].textContent="";
                 showAllMovies();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
-                    if((txtNameFile[ele].classList.value.indexOf("disappear-element")< 0)){
+                    if((txtNameFile[ele].classList.contains("disappear-element"))){
                         datalist.children[ele].textContent = txtNameFile[ele].textContent
                     }
                 }
             }
             else if(rdoWatched[i].id == "is-watched"){
-               for(let ele =0 ;ele<datalist.childElementCount;ele++)datalist.children[ele].textContent="";
+               for(let ele =0 ;ele<datalist.childElementCount;ele++)
+                    datalist.children[ele].textContent="";
                 showMoviesWatched();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
-                    if((txtNameFile[ele].classList.value.indexOf("disappear-element")< 0)){
+                    if((txtNameFile[ele].classList.contains("disappear-element"))){
                         datalist.children[ele].textContent = txtNameFile[ele].textContent
                     }
                 }
@@ -302,7 +265,7 @@ function checkForWatchedMovies(){
                 showMoviesNotWatched();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
-                    if((txtNameFile[ele].classList.value.indexOf("disappear-element")< 0)){
+                    if((txtNameFile[ele].classList.contains("disappear-element"))){
                         datalist.children[ele].textContent = txtNameFile[ele].textContent
                     }
                 }
@@ -378,6 +341,11 @@ function appearMenuSearchFun(){
         clearInterval(appearMenuSearch);
         imgCloseMenuSearch.classList.remove(["disappear-element"]);
         document.querySelector("#h1-title-menu2").classList.remove("hide-element");
+        for(let rdo of document.querySelectorAll(".rdo-watched")){
+            rdo.classList.remove("hide-element");
+            rdo.previousElementSibling.classList.remove("hide-element");
+        }
+        
     }
 }
 //
@@ -388,6 +356,10 @@ imgSearch.addEventListener("click",function(){
 function disappearMenuSearchFun(){
     imgCloseMenuSearch.classList.add(["disappear-element"]);
     document.querySelector("#h1-title-menu2").classList.add("hide-element");
+    for(let rdo of document.querySelectorAll(".rdo-watched")){
+        rdo.classList.add("hide-element");
+        rdo.previousElementSibling.classList.add("hide-element");
+    }
     if(elementWidth2 >= minWidth){
         menuBar3.style.width = elementWidth2 +"%";
         elementWidth2 -= stepElementWidth;
@@ -432,8 +404,9 @@ function darkModeON(){
         title.classList.remove(["title-in-dark-mode-off"]);
         title.classList.add(["title-in-dark-mode-on"]);
     }
-    for(let lbl of document.querySelectorAll("label")){
-        lbl.style.color= "#ddd";
+    for(let lbl of allLbl){
+        lbl.classList.remove(["lbl-dark-mode-off"]);
+        lbl.classList.add(["lbl-dark-mode-on"]);
     }
     for(let grid of allgrid){
         grid.classList.remove("grid-in-dark-mode-off");
@@ -460,8 +433,9 @@ function darkModeOFF(){
         title.classList.add(["title-in-dark-mode-off"]);
         title.classList.remove(["title-in-dark-mode-on"]);
     }
-    for(let lbl of document.querySelectorAll("label")){
-        lbl.style.color= "navy";
+    for(let lbl of allLbl){
+        lbl.classList.remove(["lbl-dark-mode-on"]);
+        lbl.classList.add(["lbl-dark-mode-off"]);
     }
     for(let grid of allgrid){
         grid.classList.remove("grid-in-dark-mode-on");
@@ -593,4 +567,15 @@ function returnTheAddKind(){
     }
     document.querySelector(".add-kind-a").addEventListener("click",addFilmsKind);
 }
+//===================================================================================================
+// 
+function showSettingmenu(){
+    if(darkMode.classList.contains("disappear-element"))
+        darkMode.classList.remove("disappear-element");
+    else
+        darkMode.classList.add("disappear-element");
+}   
+btnSettingMenu.addEventListener("click",showSettingmenu);
+//===================================================================================================
+
 //===================================================================================================
