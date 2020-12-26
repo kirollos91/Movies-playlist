@@ -14,9 +14,43 @@
 /*===========================================================================================*/
 /**/
 header{
+    position: relative;
     width:100%;
-    background-color: #000;
+    background-color: #222;
     height: 40px;
+}
+.setting-menu{
+    position: absolute;
+    width:30px;
+    height: 30px;
+    right: 8px;
+    top: 5px;
+    border-radius: 50%;
+    cursor:pointer;
+}
+.setting-menu:hover{
+    width:31px;
+    height: 31px;
+}
+.setting-menu:active{
+    width:33px;
+    height: 33px;
+    right: 6px;
+    top: 7px;
+}
+/**/
+/*===========================================================================================*/
+/**/
+.dark-mode{
+    width:210px;
+    height:45px;
+    background-color:#222;
+    position: absolute;
+    top:40px;
+    right: 0px;
+    box-shadow: -3px 3px 5px 0px #aaa;
+    border-radius: 0px 0 4px 4px;
+    z-index: 9;
 }
 /**/
 /*===========================================================================================*/
@@ -24,19 +58,19 @@ header{
 .lbl-dark-mode{
     position: absolute;
     top:9px;
-    right:66px;
+    right:110px;
     color: #fff;
     font-size: large;
     font-weight: bold;
     line-height: 100%;
 }
 .dark-mode-stick{
-    width:55px;
+    position: absolute;
+    width:70px;
     height: 24px;
     border-radius: 7px;
     font-size: 13px;
     line-height: 24px;
-    position: absolute;
     top:5px;
     right:9px;
 }
@@ -66,10 +100,10 @@ header{
     cursor:pointer;
 }
 .dark-mode-off{
-    right:41px;
+    right:55px;
 }
 .dark-mode-on{
-    right:9px;
+    right:12px;
 }
 /* End Dark Mode */
 /*===========================================================================================*/
@@ -82,13 +116,18 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 9;
+    
 }
 .main-menu-bar{
     width:58px;
     border-radius: 20px 0px 0 20px;
+    border-right: #888 solid .5px;
+    z-index: 10;
 }
 .menu-bar-in-dark-mode-off{
-    background-image:url("../image/menu_background_image.jpg");
+    /*background-image:url("../image/menu_background_image.jpg");*/
+    background-color: #222;
+    box-shadow: 3px 0px 2px 0px #aaa;
 }
 .menu-bar-in-dark-mode-on{
     
@@ -107,6 +146,7 @@ header{
     width:0px;
 }
 .img-open-menu{
+    right:3px;
     top:9px;
     border-radius: 50%;
     margin-left:5px;
@@ -117,13 +157,15 @@ header{
     right: 0px;
 }
 .menu-bar2-in-dark-mode-off{
-    background-image:url("../image/menu_background_image.jpg");
+    /*background-image:url("../image/menu_background_image.jpg");*/
+    background-color: #222;
 }
 .menu-bar2-in-dark-mode-on{
     
 }
 #h1-title-menu1{
     text-align: center;
+    color: #fff;
 }
 /*--------------------------------------------------*/
 .menu-bar-open2{
@@ -133,7 +175,7 @@ header{
 }
 .img-search{
     top:65px;
-    left:5px;
+    right:3px;
     border-radius: 50%;
 }
 .img-close-menu-search{
@@ -142,20 +184,22 @@ header{
     right: 0px;
 }
 .menu-bar3-in-dark-mode-off{
-    background-image:url("../image/menu_background_image.jpg");
+    /*background-image:url("../image/menu_background_image.jpg");*/
+    background-color: #222;
 }
 .menu-bar3-in-dark-mode-on{
     
 }
 #h1-title-menu2{
     text-align: center;
+    color: #fff;
 }
 
 /* End menu amenuBar*/
 /*===========================================================================================*/
 .grid{
     display:grid;
-    grid-template-columns: 22% 75% 3%;
+    grid-template-columns: 26% 71% 3%;
     align-items: center;
     padding:8px 8px;
     padding-bottom: 8px;
@@ -167,7 +211,10 @@ header{
 .grid-in-dark-mode-on{
     border-bottom: #fff solid 2px;
 }
-div:nth-last-child(2),div:nth-last-child(5){
+.grid :nth-last-child(2){
+    border-bottom:none;
+}
+.grid div:nth-last-child(5){
     border-bottom:none;
 }
 .disappear-element{
@@ -176,6 +223,14 @@ div:nth-last-child(2),div:nth-last-child(5){
 .hide-element{
     visibility: hidden;
 }
+
+.lbl-dark-mode-off{
+    color:navy;
+}
+.lbl-dark-mode-on{
+    color:#fff;
+}
+
 /*===========================================================================================*/
 /* Start Movie Name and Image */
 .filmName{
@@ -304,7 +359,6 @@ div:nth-last-child(2),div:nth-last-child(5){
     grid-column:1/4;
 }
 label{
-    color: navy;
     font-weight: bolder;
     user-select: none;
     font-family:ElMessiri;
@@ -429,11 +483,18 @@ label{
 /* End with button close  the add form */
 /*======================================================================*/
 /* Start with search movies */
+.search-box{
+    margin-left: 60px;
+    display: inline;
+    color:#fff;
+    line-height: 40px;
+}
+#lbl-search-box{
+    
+}
 #movie-search{
-    display: block;
-    grid-column:1/5;
     height: 30px;
-    width:100%;
+    width:40%;
     border-radius: 10px;
     box-shadow: -2px 2px 5px 0px #888;
     outline: none;
@@ -441,18 +502,20 @@ label{
 #movie-search:active{
     outline: none;
 }
+/*----------------------------------------------------------------------------------*/
 .watched-continar{
-    margin-left: 60px;
-}
+    margin-top: 40px;
+    
+} 
 .lbl-rdo{
-    margin-left: 5%;
     font-size: 100%;
+    color:#fff;
 }
 .lbl1{
     margin-left: 5px;
 }
 .rdo-watched-continal{
-
+    display: inline-block;
 }
 
 /* End with search movies */
@@ -573,11 +636,11 @@ label{
 }
 @media screen and (max-width: 390px){
     .lbl-rdo{
-       
+      display: inline-block;
+      text-align: center;
+      direction: rtl;   
+      width: 70%;
       margin-left: 2%;
-    }
-    .lbl1{
-        margin-left:5px;
     }
     .gridAdd{
         grid-template-columns:35% 65%; 
@@ -586,6 +649,24 @@ label{
         font-size: 18px;
         font-weight: 700;
         text-align: left;
+    }
+
+    header{
+        height:60px;
+    }
+    /*.lbl-dark-mode{
+        right: 5px;
+        top:35px;
+        font-size:small ;
+    }*/
+    .search-box{
+        line-height: 60px;
+    }
+    .setting-menu{
+        top:15px;
+    }
+    .dark-mode{
+        top:60px;
     }
 }
 @media screen and (max-width: 365px){
