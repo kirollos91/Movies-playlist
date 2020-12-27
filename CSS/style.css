@@ -18,6 +18,7 @@ header{
     width:100%;
     background-color: #222;
     height: 40px;
+    z-index: 8;
 }
 .setting-menu{
     position: absolute;
@@ -59,10 +60,16 @@ header{
     position: absolute;
     top:9px;
     right:125px;
-    color: #fff;
     font-size: 16px;
     font-weight: bold;
     line-height: 100%;
+}
+.lbl-dark-mode-off{
+    color:#009;
+    
+}
+.lbl-dark-mode-on{
+    color: #fff;
 }
 .dark-mode-stick{
     position: absolute;
@@ -224,12 +231,6 @@ header{
     visibility: hidden;
 }
 
-.lbl-dark-mode-off{
-    color:navy;
-}
-.lbl-dark-mode-on{
-    color:#fff;
-}
 
 /*===========================================================================================*/
 /* Start Movie Name and Image */
@@ -250,7 +251,8 @@ header{
     text-decoration: none;
     left:35px;
     top:22%;
-    overflow: auto; 
+    overflow: auto;
+    margin-right: 27px; 
 }
 .a-in-dark-mode-on{
     color:#fff;
@@ -288,6 +290,37 @@ header{
 }
 /* End Movie Name and Image */
 /*===========================================================================================*/
+/**/
+.info-film{
+    width: 25px;
+    height:25px;
+    text-align: center;
+    line-height: 100%;
+    margin: 15px auto;
+    margin-right: 0;
+    display: block;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bolder;
+    box-shadow: -2px 2px 5px 1px #888;
+    user-select:none;
+    cursor:pointer;
+}
+.info-film:active{
+    width: 28px;
+    height:28px;
+}
+.info-film-dark-mode-off{
+    border: 2px solid #00c;
+    color:#009;
+}
+.info-film-dark-mode-on{
+    border: 2px solid #fff;
+    color:#fff;
+}
+/**/
+/*===========================================================================================*/
+/*  */
 .whatAbout{
     margin-top:auto;
     padding: 8px;
@@ -462,6 +495,35 @@ label{
     opacity:1;
 }
 /* End with button open  the add form */
+/**/
+.btn-top-page{
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    width:30px;
+    height:30px;
+    background-color: #c65;
+    border-radius:50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 26px;
+    font-weight: bolder;
+    color:#fff;
+    cursor:pointer;
+    user-select:none;
+    outline: none;
+    opacity:.7;
+    z-index: 11;
+}
+.btn-top-page:active{
+    opacity:1;
+}
+.btn-top-page a{
+    text-decoration: none;
+    color: #fff;
+}
+/**/
 /* Start with button close  the add form */
 .btn-close{
     font-family: Arial, Helvetica, sans-serif;
@@ -484,7 +546,7 @@ label{
 /*======================================================================*/
 /* Start with search movies */
 .search-box{
-    margin-left: 60px;
+    margin-left: 69px;
     display: inline;
     color:#fff;
     line-height: 40px;
@@ -603,6 +665,9 @@ label{
         border-radius: 0px 20px 20px 0px;
     }
     */
+    .info-film{
+        margin: 7px auto;
+    }
     .whatAbout{
         margin: 15px auto;
         text-align: center;
