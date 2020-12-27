@@ -24,6 +24,7 @@ btnAdd.addEventListener("click",function(){
     }
     addGrid.classList.remove("disappear-element");
     addGrid.classList.add("grid-add-appear");
+    btnGoTop.classList.add("hide-element");
 });
 //============================================================
 function clearGrid(){
@@ -44,6 +45,7 @@ function returnPage(){
     }
     addGrid.classList.add("disappear-element");
     addGrid.classList.remove("grid-add-appear");
+    btnGoTop.classList.remove("hide-element");
 }
 btnClose.addEventListener("click",returnPage);
 window.addEventListener("keydown",function(event){
@@ -71,49 +73,97 @@ function addMovie(){
     for(let i=0;i<classTitle.length;i++){
         if (classTitle[i].textContent.trim() == moviekind.value){
             if((moviePath.value != "" &&  movieName.value != "" && movieDescription.value != "")){
-                const filmName = document.createElement("div");
-                const whatAbout = document.createElement("div");
-                const watchedBox = document.createElement("div");
-                
-                filmName.setAttribute("class","filmName");
-                filmName.setAttribute("contenteditable","false");
-                // اضافة خاصية الكلاس للديف الثانى
+                // <span class="film-time disappear-element">01:31:56</span>
+                const filmName    = document.createElement("div");
+                const actors_name = document.createElement("div");
+                const films_kind  = document.createElement("div");
+                const whatAbout   = document.createElement("div");
+                const watchedBox  = document.createElement("div");
+                // ضافة كلاسات الديف الاول 
+                filmName.classList.add("filmName");
+                //
+                const year_num = document.createElement("span");
+                year_num.classList.add("year-num","disappear-element");
+                year_num.textContent = filmYear.value;
+                //
+                const rating_movie = document.createElement("span");
+                rating_movie.classList.add("rating-movie","disappear-element");
+                rating_movie.textContent = ratingMovie.value;
+                //
+                const film_time = document.createElement("span");
+                film_time.classList.add("film-time","disappear-element");
+                film_time.textContent = filmTime.value;
+                //
+                const info_film = document.createElement("span");
+                info_film.classList.add("info-film",isDarkMode?"info-film-dark-mode-on":"info-film-dark-mode-off");
+                info_film.textContent = "i";
+                //
+                actors_name.classList.add("add-actors","disappear-element");
+                let stractorn = "";
+                for(let actorn of document.querySelectorAll(".add-actors-name-w")){
+                    let sp_actor = document.createElement("span");
+                    sp_actor.textContent = actorn.value;
+                    actors_name.append(sp_actor);    
+                    stractorn += `<span>${actorn.value}</span>` 
+                }
+                //
+                films_kind.classList.add("add-films-kind","disappear-element");
+                let strfilmk = "";
+                for(let filmk of document.querySelectorAll(".add-kind-w")){
+                    let sp_filmk = document.createElement("span");
+                    sp_filmk.textContent = filmk.value;
+                    films_kind.append(sp_filmk);
+                    strfilmk += `<span>${filmk.value}</span>` 
+                }
+                // اضافة خاصية الكلاس للديف الرابع
                 whatAbout.setAttribute("lang","ar");
                 whatAbout.classList.add("whatAbout",isDarkMode?"whatAbout-in-dark-mode-on":"whatAbout-in-dark-mode-off");
-                // اضافة اسم الفيلم للديف الثانى من مربع النص
+                // اضافة اسم الفيلم للديف الرابع من مربع النص
                 whatAbout.textContent =  movieDescription.value;
-                // اضافة خاصية الكلاس للديف الثالث
+                // اضافة خاصية الكلاس للديف الخامس
                 watchedBox.setAttribute("class","watchedBox");
-                //
+                // انشاء الانبوت التابع للدف الخامس
                 const cbx = document.createElement("input");
                 cbx.setAttribute("type","checkbox");
                 if(isWatched.checked) cbx.setAttribute("checked","true");
                 watchedBox.append(cbx);
 
-                // اضافة الثلاث دفات فى الدف الاب
-                classTitle[i].parentElement.append(filmName);
-                classTitle[i].parentElement.append(whatAbout);
-                classTitle[i].parentElement.append(watchedBox);
+                
+
                 // انشاء فى الدف الاول عنصر الصورة و عنصر اللينك
                 const fImage = document.createElement("img");
                 const ahref = document.createElement("a");
                 
                 // اضافة خصائص الى العناصر
                 fImage.setAttribute("class","fImage");
+                // التحقق من ان بداية مسار الصورة يبدا بكذا
                 if(imgPath.value.trim().startsWith("https://"))
                     fImage.setAttribute("src",imgPath.value);
                 else
                     fImage.setAttribute("src","https://place-hold.it/100x100");
+                // اضافة مسار الفيلم    
                 ahref.setAttribute("href",moviePath.value);
+                // اضافة الكلاسات للينك
                 ahref.classList.add("link-film",isDarkMode?"a-in-dark-mode-on":"a-in-dark-mode-off");
+                // اضافة اسم الفيلم    
                 ahref.textContent = movieName.value;
                 // اضافى العناصر الصورة و اللينك الى الديف الاول
                 filmName.append(fImage);
                 filmName.append(ahref);
+                filmName.append(year_num);
+                filmName.append(rating_movie);
+                filmName.append(film_time);
+                filmName.append(info_film);
                 //
 
+                // اضافة الخمس دفات فى الدف الاب
+                classTitle[i].parentElement.append(filmName);
+                classTitle[i].parentElement.append(actors_name);
+                classTitle[i].parentElement.append(films_kind);
+                classTitle[i].parentElement.append(whatAbout);
+                classTitle[i].parentElement.append(watchedBox);
                 //
-                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span><span class="rating-movie disappear-element">${ratingMovie.value}</span><span class="film-time disappear-element">${filmTime.value}</span></div>              <div id="actors-name" class="add-actors disappear-element"></div><div id="films-kind" class="add-films-kind disappear-element"></div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
+                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span><span class="rating-movie disappear-element">${ratingMovie.value}</span><span class="film-time disappear-element">${filmTime.value}</span><span class="info-film info-film-dark-mode-off">i</span></div>              <div class="add-actors disappear-element">${stractorn}</div>  <div class="add-films-kind disappear-element">${strfilmk}</div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
                 txtArea.textContent += textOfRow +"\n=======================================================================================\n";
                 // تفريغ البيانات من مربعات النص
                 clearText();
@@ -412,6 +462,10 @@ function darkModeON(){
         grid.classList.remove("grid-in-dark-mode-off");
         grid.classList.add("grid-in-dark-mode-on");
     }
+    for(let info of informationFilm){
+        info.classList.remove("info-film-dark-mode-off");
+        info.classList.add("info-film-dark-mode-on");
+    }
 }
 // دالة ايقاف الدارك مود
 function darkModeOFF(){
@@ -440,6 +494,10 @@ function darkModeOFF(){
     for(let grid of allgrid){
         grid.classList.remove("grid-in-dark-mode-on");
         grid.classList.add("grid-in-dark-mode-off");
+    }
+    for(let info of informationFilm){
+        info.classList.remove("info-film-dark-mode-on");
+        info.classList.add("info-film-dark-mode-off");
     }
 }
 
@@ -573,9 +631,33 @@ function showSettingmenu(){
     if(darkMode.classList.contains("disappear-element"))
         darkMode.classList.remove("disappear-element");
     else
-        darkMode.classList.add("disappear-element");
+        darkMode.classList.add("disappear-element");   
 }   
 btnSettingMenu.addEventListener("click",showSettingmenu);
+//===================================================================================================
+/*
+//
+function showHideHeader(){
+    setTimeout(function(){ header.style.position = "relative";allgrid[0].style.marginTop = "0px";},5000);
+    header.style.position = "fixed";
+    header.style.top = "0px";
+    allgrid[0].style.marginTop = "60px";
+}
+window.onscroll = showHideHeader;
+*/
+//===================================================================================================
+function showBtnTopPage(){
+    if(pageYOffset > 100)
+        document.querySelector(".btn-top-page").classList.remove("disappear-element");
+    else{
+        document.querySelector(".btn-top-page").classList.add("disappear-element");
+    }
+}
+window.addEventListener("scroll",showBtnTopPage);
+//===================================================================================================
+
+//===================================================================================================
+
 //===================================================================================================
 
 //===================================================================================================
