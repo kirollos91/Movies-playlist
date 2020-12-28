@@ -73,7 +73,7 @@ function addMovie(){
     for(let i=0;i<classTitle.length;i++){
         if (classTitle[i].textContent.trim() == moviekind.value){
             if((moviePath.value != "" &&  movieName.value != "" && movieDescription.value != "")){
-                // <span class="film-time disappear-element">01:31:56</span>
+                //
                 const filmName    = document.createElement("div");
                 const actors_name = document.createElement("div");
                 const films_kind  = document.createElement("div");
@@ -101,19 +101,23 @@ function addMovie(){
                 actors_name.classList.add("add-actors","disappear-element");
                 let stractorn = "";
                 for(let actorn of document.querySelectorAll(".add-actors-name-w")){
-                    let sp_actor = document.createElement("span");
-                    sp_actor.textContent = actorn.value;
-                    actors_name.append(sp_actor);    
-                    stractorn += `<span>${actorn.value}</span>` 
+                    if (actorn.value.trim().langth >0){
+                        let sp_actor = document.createElement("span");
+                        sp_actor.textContent = actorn.value;
+                        actors_name.append(sp_actor);    
+                        stractorn += `<span>${actorn.value}</span>` 
+                    }
                 }
                 //
                 films_kind.classList.add("add-films-kind","disappear-element");
                 let strfilmk = "";
                 for(let filmk of document.querySelectorAll(".add-kind-w")){
-                    let sp_filmk = document.createElement("span");
-                    sp_filmk.textContent = filmk.value;
-                    films_kind.append(sp_filmk);
-                    strfilmk += `<span>${filmk.value}</span>` 
+                    if(filmk.value.trim().langth >0){
+                        let sp_filmk = document.createElement("span");
+                        sp_filmk.textContent = filmk.value;
+                        films_kind.append(sp_filmk);
+                        strfilmk += `<span>${filmk.value}</span>` 
+                    }    
                 }
                 // اضافة خاصية الكلاس للديف الرابع
                 whatAbout.setAttribute("lang","ar");
@@ -316,7 +320,7 @@ function checkForWatchedMovies(){
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
                     if((txtNameFile[ele].classList.contains("disappear-element"))){
-                        datalist.children[ele].textContent = txtNameFile[ele].textContent
+                        datalist.children[ele].textContent = txtNameFile[ele].textContent;
                     }
                 }
             }
