@@ -206,7 +206,7 @@ header{
 /*===========================================================================================*/
 .grid{
     display:grid;
-    grid-template-columns: 26% 71% 3%;
+    grid-template-columns: 26% 73% 1%;
     align-items: center;
     padding:8px 8px;
     padding-bottom: 8px;
@@ -507,7 +507,7 @@ label{
     border-radius:50%;
     text-align: center;
     line-height: 30px;
-    font-size: 26px;
+    font-size: 10px;
     font-weight: bolder;
     color:#fff;
     cursor:pointer;
