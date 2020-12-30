@@ -13,8 +13,8 @@ function appendToSelect(){
 }
 window.addEventListener("load",appendToSelect,false);
 //============================================================
-// دالة اظهار فروم الاضافة
-btnAdd.addEventListener("click",function(){
+// دالة اظهار فروم الاضافة من زرار الاضافة
+function showFormAddMovie(){
     this.classList.add(["disappear-element"]);
     header.classList.add("disappear-element");
     watchedContinar.classList.add("disappear-element");
@@ -25,7 +25,19 @@ btnAdd.addEventListener("click",function(){
     addGrid.classList.remove("disappear-element");
     addGrid.classList.add("grid-add-appear");
     btnGoTop.classList.add("hide-element");
-});
+}
+btnAdd.addEventListener("click",showFormAddMovie);
+//===================================================================================================
+// زرار اعلى الصفحة
+function showBtnTopPage(){
+    if(pageYOffset > 100)
+    btnGoTop.classList.remove("disappear-element");
+    else{
+        btnGoTop.classList.add("disappear-element");
+    }
+}
+window.addEventListener("scroll",showBtnTopPage);
+btnGoTop.addEventListener("click",function(){scrollTo(0,0)});
 //============================================================
 function clearGrid(){
     clearText();
@@ -65,10 +77,12 @@ function clearText(){
     addFilmsKindVar.value = "";
     ratingMovie.value = "";
     filmTime.value = "";
+    directorMovie.value = "";
     isWatched.checked = false;
 }
 //============================================================
 // دالة اضافة فيلم جديد
+//let textOfRow = "";
 function addMovie(){
     for(let i=0;i<classTitle.length;i++){
         if (classTitle[i].textContent.trim() == moviekind.value){
@@ -94,6 +108,10 @@ function addMovie(){
                 film_time.classList.add("film-time","disappear-element");
                 film_time.textContent = filmTime.value;
                 //
+                const film_director = document.createElement("span");
+                film_director.classList.add("director-movie","disappear-element");
+                film_director.textContent = directorMovie.value;
+                //
                 const info_film = document.createElement("span");
                 info_film.classList.add("info-film",isDarkMode?"info-film-dark-mode-on":"info-film-dark-mode-off");
                 info_film.textContent = "i";
@@ -101,7 +119,7 @@ function addMovie(){
                 actors_name.classList.add("add-actors","disappear-element");
                 let stractorn = "";
                 for(let actorn of document.querySelectorAll(".add-actors-name-w")){
-                    if (actorn.value.trim().langth >0){
+                    if (actorn.value.trim() !=""){
                         let sp_actor = document.createElement("span");
                         sp_actor.textContent = actorn.value;
                         actors_name.append(sp_actor);    
@@ -112,28 +130,13 @@ function addMovie(){
                 films_kind.classList.add("add-films-kind","disappear-element");
                 let strfilmk = "";
                 for(let filmk of document.querySelectorAll(".add-kind-w")){
-                    if(filmk.value.trim().langth >0){
+                    if(filmk.value.trim() != ""){
                         let sp_filmk = document.createElement("span");
                         sp_filmk.textContent = filmk.value;
                         films_kind.append(sp_filmk);
                         strfilmk += `<span>${filmk.value}</span>` 
                     }    
                 }
-                // اضافة خاصية الكلاس للديف الرابع
-                whatAbout.setAttribute("lang","ar");
-                whatAbout.classList.add("whatAbout",isDarkMode?"whatAbout-in-dark-mode-on":"whatAbout-in-dark-mode-off");
-                // اضافة اسم الفيلم للديف الرابع من مربع النص
-                whatAbout.textContent =  movieDescription.value;
-                // اضافة خاصية الكلاس للديف الخامس
-                watchedBox.setAttribute("class","watchedBox");
-                // انشاء الانبوت التابع للدف الخامس
-                const cbx = document.createElement("input");
-                cbx.setAttribute("type","checkbox");
-                if(isWatched.checked) cbx.setAttribute("checked","true");
-                watchedBox.append(cbx);
-
-                
-
                 // انشاء فى الدف الاول عنصر الصورة و عنصر اللينك
                 const fImage = document.createElement("img");
                 const ahref = document.createElement("a");
@@ -157,7 +160,21 @@ function addMovie(){
                 filmName.append(year_num);
                 filmName.append(rating_movie);
                 filmName.append(film_time);
+                filmName.append(film_director);
                 filmName.append(info_film);
+
+                // اضافة خاصية الكلاس للديف الرابع
+                whatAbout.setAttribute("lang","ar");
+                whatAbout.classList.add("whatAbout",isDarkMode?"whatAbout-in-dark-mode-on":"whatAbout-in-dark-mode-off");
+                // اضافة اسم الفيلم للديف الرابع من مربع النص
+                whatAbout.textContent =  movieDescription.value;
+                // اضافة خاصية الكلاس للديف الخامس
+                watchedBox.setAttribute("class","watchedBox");
+                // انشاء الانبوت التابع للدف الخامس
+                const cbx = document.createElement("input");
+                cbx.setAttribute("type","checkbox");
+                if(isWatched.checked) cbx.setAttribute("checked","true");
+                watchedBox.append(cbx);
                 //
 
                 // اضافة الخمس دفات فى الدف الاب
@@ -167,7 +184,7 @@ function addMovie(){
                 classTitle[i].parentElement.append(whatAbout);
                 classTitle[i].parentElement.append(watchedBox);
                 //
-                textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span><span class="rating-movie disappear-element">${ratingMovie.value}</span><span class="film-time disappear-element">${filmTime.value}</span><span class="info-film info-film-dark-mode-off">i</span></div>              <div class="add-actors disappear-element">${stractorn}</div>  <div class="add-films-kind disappear-element">${strfilmk}</div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
+                const textOfRow =`<div class="filmName" ><img class="fImage" src="${imgPath.value}" alt="${movieName.value}">       <a class="link-film a-in-dark-mode-off" href="${moviePath.value}">                ${movieName.value}</a><span class="year-num disappear-element">${filmYear.value}</span><span class="rating-movie disappear-element">${ratingMovie.value}</span><span class="film-time disappear-element">${filmTime.value}</span><span class="director-movie disappear-element">${directorMovie.value}</span><span class="info-film info-film-dark-mode-off">i</span></div>              <div class="add-actors disappear-element">${stractorn}</div>  <div class="add-films-kind disappear-element">${strfilmk}</div>         <div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${movieDescription.value}</div>                       <div class="watchedBox"><input type="checkbox" name="watched" ${isWatched.checked?"checked":""}  value="watched"></div>`; 
                 txtArea.textContent += textOfRow +"\n=======================================================================================\n";
                 // تفريغ البيانات من مربعات النص
                 clearText();
@@ -177,6 +194,7 @@ function addMovie(){
         }
     }
 }
+// } END
 //============================================================
 // دالة اظهار واخفاء التكست اريا الخاص بظهور الكود للاضافى الجديدة
 function showHtml(){
@@ -332,10 +350,12 @@ for(let i of rdoWatched){
     i.addEventListener("change",checkForWatchedMovies,false);
 }
 //===================================================================================================
-// جعل التعديل على الكتابة ممكن فى وصف الفيلم
-for(let grid of whatAbout1){
-    grid.setAttribute("contenteditable","true");
-}
+/*
+    // جعل التعديل على الكتابة ممكن فى وصف الفيلم
+    for(let grid of whatAbout1){
+        grid.setAttribute("contenteditable","true");
+    }
+*/
 //===================================================================================================
 // start animation with open menu bar menuBar
 let elementWidth = 0;
@@ -347,9 +367,8 @@ let appearMenu;
 let disappearMenu;
 let appearMenuSearch;
 let disappearMenuSearch;
-
-
-//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// اظهار القيمة الاولى {
 function appearMenuFun(){
     disappearMenuSearchFun();
     imgOpenMenu.classList.add(["disappear-element"]);
@@ -362,11 +381,12 @@ function appearMenuFun(){
         document.querySelector("#h1-title-menu1").classList.remove("hide-element");
     }
 }
-//
 imgOpenMenu.addEventListener("click",function(){
     appearMenu = setInterval(appearMenuFun,.5); 
 });
-//
+// } الانتهاء
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// اخفاء القيمة الاولى {
 function disappearMenuFun(){
     imgCloseMenu.classList.add(["disappear-element"]);
     document.querySelector("#h1-title-menu1").classList.add("hide-element");
@@ -382,9 +402,9 @@ function disappearMenuFun(){
 imgCloseMenu.addEventListener("click",function(){  
     disappearMenu = setInterval(disappearMenuFun,.5);
 });
-//
+// } انتهاء
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// menu 3 (search)
+// menu 3 (search) اظهار {
 function appearMenuSearchFun(){
     disappearMenuFun();
     imgSearch.classList.add(["disappear-element"]);
@@ -396,23 +416,24 @@ function appearMenuSearchFun(){
         imgCloseMenuSearch.classList.remove(["disappear-element"]);
         document.querySelector("#h1-title-menu2").classList.remove("hide-element");
         for(let rdo of document.querySelectorAll(".rdo-watched")){
-            rdo.classList.remove("hide-element");
-            rdo.previousElementSibling.classList.remove("hide-element");
+            rdo.classList.remove("disappear-element");
+            rdo.previousElementSibling.classList.remove("disappear-element");
         }
         
     }
 }
-//
 imgSearch.addEventListener("click",function(){
     appearMenuSearch = setInterval(appearMenuSearchFun,.5); 
 });
-//
+// } الانتهاء
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// اخفاء القيمة الثالثة{ 
 function disappearMenuSearchFun(){
     imgCloseMenuSearch.classList.add(["disappear-element"]);
     document.querySelector("#h1-title-menu2").classList.add("hide-element");
     for(let rdo of document.querySelectorAll(".rdo-watched")){
-        rdo.classList.add("hide-element");
-        rdo.previousElementSibling.classList.add("hide-element");
+        rdo.classList.add("disappear-element");
+        rdo.previousElementSibling.classList.add("disappear-element");
     }
     if(elementWidth2 >= minWidth){
         menuBar3.style.width = elementWidth2 +"%";
@@ -426,19 +447,19 @@ function disappearMenuSearchFun(){
 imgCloseMenuSearch.addEventListener("click",function(){  
     disappearMenuSearch = setInterval(disappearMenuSearchFun,.5);
 });
-
+// } الانتهاء
 // end animation with open menu bar menuBar
 //===================================================================================================
-//جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها
+//جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها {
 for(let i = 0;i<watchedBox1.length;i++){
     watchedBox1[i].children[0].addEventListener("change",()=>{
         if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].checked = true;
         else watchedBox1[i].children[0].checked = false;
     });
 }
-// end
+// } end
 //===================================================================================================
-// دالة تشغيل الدارك مود
+// دالة تشغيل الدارك مود {
 function darkModeON(){
     isDarkMode = true;
     document.body.style.backgroundColor = "#333";
@@ -522,8 +543,9 @@ darkModeOn.addEventListener("click",function(){
     darkModeStick.textContent = "OFF";
     darkModeOFF();
 });
+// } END
 //===================================================================================================
-// //دالة اضافة اسم جديد لممثل داخل الفيلم
+//دالة اضافة اسم جديد لممثل داخل الفيلم {
 let counterOfAddActors = 0;
 let counterOfAddMoviesKind = 0;
 
@@ -557,7 +579,9 @@ function addActors(){
     counterOfAddActors++;
     this.removeEventListener("click",addActors);
 }
-//دالة اضافة نوع جديد للفيلم
+// } END
+//+++++++++++++++++++++++++++++++++++++++++++++++++++
+//دالة اضافة نوع جديد للفيلم  {
 document.querySelector(".add-kind-a").addEventListener("click",addFilmsKind);
 function addFilmsKind(){
 
@@ -588,10 +612,9 @@ function addFilmsKind(){
     counterOfAddMoviesKind++;
     this.removeEventListener("click",addFilmsKind);
 }
+// } END
 /* -------------------------------------------------------------------------------- */
-//
-
-
+// دالة حذف مربع معين من مربعات الادخالة لاسم ممثل {
 function removeActorsOrRemoveKind(){
     this.previousElementSibling.remove();
     this.parentElement.previousElementSibling.remove();
@@ -606,9 +629,9 @@ function removeActorsOrRemoveKind(){
         counterOfAddActors = 0;
     }
 }
-
+// } END
 /* -------------------------------------------------------------------------------- */
-//
+// دالة حذف مربع معين من مربعات الادخالة لنوع الفيلم
 function returnTheAddActor(){
     counterOfAddActors = 0;
     const lenOfActorsName = document.querySelectorAll(".add-actors-name-a").length-1;
@@ -629,8 +652,9 @@ function returnTheAddKind(){
     }
     document.querySelector(".add-kind-a").addEventListener("click",addFilmsKind);
 }
+// انتهاء اضافة او حذف مربع من مربعات الادخال لاسم الممثل او لنوع الفيلم
 //===================================================================================================
-// 
+// دالة لاظهار او اخفاء القائمة داخل زرار السيتنج
 function showSettingmenu(){
     if(darkMode.classList.contains("disappear-element"))
         darkMode.classList.remove("disappear-element");
@@ -650,14 +674,83 @@ function showHideHeader(){
 window.onscroll = showHideHeader;
 */
 //===================================================================================================
-function showBtnTopPage(){
-    if(pageYOffset > 100)
-        document.querySelector(".btn-top-page").classList.remove("disappear-element");
-    else{
-        document.querySelector(".btn-top-page").classList.add("disappear-element");
+// فورم معلومات الفيلم
+function showInformationFilm(){
+    btnAdd.classList.add(["disappear-element"]);
+    header.classList.add("disappear-element");
+    watchedContinar.classList.add("disappear-element");
+    menuBar.classList.add(["disappear-element"]);
+    for(let grid of allgrid){
+        grid.classList.add("disappear-element");
     }
+    btnGoTop.classList.add("hide-element");
+    informationFilmForm.classList.add("information-film-form-appear");
+    informationFilmForm.classList.remove("disappear-element");
+    //
+    putInformationInForm(this);
 }
-window.addEventListener("scroll",showBtnTopPage);
+function returnPageFromInfoFilm(){
+    informationFilmForm.classList.remove("information-film-form-appear");
+    informationFilmForm.classList.add("disappear-element");
+    watchedContinar.classList.remove(["disappear-element"]);
+    header.classList.remove("disappear-element");
+    menuBar.classList.remove(["disappear-element"]);
+    btnAdd.classList.remove(["disappear-element"]);
+    for(let grid of allgrid){
+        grid.classList.remove(["disappear-element"]);
+    }
+    btnGoTop.classList.remove("hide-element");
+    clearInformationFromForm();
+}
+btnFormInformationClose.addEventListener("click",returnPageFromInfoFilm);
+for(let btn of informationFilm )
+btn.addEventListener("click",showInformationFilm);
+//---------------------------------------
+function putInformationInForm(element){
+    const divFilm           = element.parentElement;
+    const imgFilm           = divFilm.children[0];
+    const nameFilm          = divFilm.children[1];
+    const yearFilm          = divFilm.children[2];
+    const ratingFilm        = divFilm.children[3];
+    const timeFilm          = divFilm.children[4];
+    const directorFilm      = divFilm.children[5];
+    const divActors         = divFilm.nextElementSibling;
+    const divKinds          = divActors.nextElementSibling;
+    const divDescription    = divKinds.nextElementSibling;
+
+
+    infoFilmImage.src               = imgFilm.src;
+    infoFilmName.textContent        = nameFilm.textContent;
+    infoFilmRating.textContent      = ratingFilm.textContent;
+    infoFilmYear.textContent        = yearFilm.textContent;
+    infoFilmTime.textContent        = timeFilm.textContent;
+    infoFilmDirector.textContent    = directorFilm.textContent;
+    if(divActors.children.length >-1){
+        for(let fa of divActors.children){
+            infoFilmActors.innerHTML  += "<span class='info-span-actor'>"+fa.textContent + "</span>";
+        }
+    }
+    if(divKinds.children.length >-1){
+        for(let fk of divKinds.children){
+            infoFilmKinds.innerHTML  += "<span class='info-span-kind'>"+fk.textContent + "</span>";
+        }
+    }
+    infoFilmDescription.textContent = divDescription.textContent;
+    
+}
+//---------------------------------------
+function clearInformationFromForm(){
+    infoFilmImage.src               = "";
+    infoFilmName.textContent        = "";
+    infoFilmRating.textContent      = "";
+    infoFilmYear.textContent        = "";
+    infoFilmTime.textContent        = "";
+    infoFilmDirector.textContent    = "";
+    infoFilmActors.textContent      = "";
+    infoFilmKinds.textContent       = "";
+    infoFilmDescription.textContent = "";
+}
+// انتهاء فورم نعلومات الفيلم
 //===================================================================================================
 
 //===================================================================================================
@@ -665,3 +758,6 @@ window.addEventListener("scroll",showBtnTopPage);
 //===================================================================================================
 
 //===================================================================================================
+
+//===================================================================================================
+
