@@ -35,6 +35,7 @@ function showBtnTopPage(){
     else{
         btnGoTop.classList.add("disappear-element");
     }
+    
 }
 window.addEventListener("scroll",showBtnTopPage);
 btnGoTop.addEventListener("click",function(){scrollTo(0,0)});
@@ -675,7 +676,9 @@ window.onscroll = showHideHeader;
 */
 //===================================================================================================
 // فورم معلومات الفيلم
+let pageoffset = 0;
 function showInformationFilm(){
+    pageoffset = pageYOffset;
     btnAdd.classList.add(["disappear-element"]);
     header.classList.add("disappear-element");
     watchedContinar.classList.add("disappear-element");
@@ -687,6 +690,7 @@ function showInformationFilm(){
     informationFilmForm.classList.add("information-film-form-appear");
     informationFilmForm.classList.remove("disappear-element");
     //
+    
     putInformationInForm(this);
 }
 function returnPageFromInfoFilm(){
@@ -701,6 +705,7 @@ function returnPageFromInfoFilm(){
     }
     btnGoTop.classList.remove("hide-element");
     clearInformationFromForm();
+    window.scrollTo(0,pageoffset);
 }
 btnFormInformationClose.addEventListener("click",returnPageFromInfoFilm);
 for(let btn of informationFilm )
