@@ -22,6 +22,7 @@ function getAllData(){
                 [txtNameFile[i].children[2].textContent],
                 [txtNameFile[i].children[3].textContent],
                 [txtNameFile[i].children[4].textContent],
+                [txtNameFile[i].children[5].textContent],
                 actorsNamesArr.trim().split(" "),
                 filmsKindsArr.trim().split(" "),
                 [whatAbout1[i].textContent],
@@ -79,13 +80,17 @@ function showDataAfterOrder(){
         film_time.classList.add("film-time","disappear-element");
         film_time.textContent = l[6];
         //
+        const film_director = document.createElement("span");
+        film_director.classList.add("director-movie","disappear-element");
+        film_director.textContent = l[7];
+        //
         const info_film = document.createElement("span");
         info_film.classList.add("info-film",isDarkMode?"info-film-dark-mode-on":"info-film-dark-mode-off");
         info_film.textContent = "i";
         //
         actors_name.classList.add("add-actors","disappear-element");
         let stractorn = "";
-        for(let actorn of l[7]){
+        for(let actorn of l[8]){
             let sp_actor = document.createElement("span");
             sp_actor.textContent = actorn;
             actors_name.append(sp_actor);    
@@ -93,7 +98,7 @@ function showDataAfterOrder(){
         //
         films_kind.classList.add("add-films-kind","disappear-element");
         let strfilmk = "";
-        for(let filmk of l[8]){
+        for(let filmk of l[9]){
             let sp_filmk = document.createElement("span");
             sp_filmk.textContent = filmk;
             films_kind.append(sp_filmk);     
@@ -102,13 +107,13 @@ function showDataAfterOrder(){
         whatAbout.setAttribute("lang","ar");
         whatAbout.classList.add("whatAbout",isDarkMode?"whatAbout-in-dark-mode-on":"whatAbout-in-dark-mode-off");
         // اضافة اسم الفيلم للديف الرابع من مربع النص
-        whatAbout.textContent =  l[9];
+        whatAbout.textContent =  l[10];
         // اضافة خاصية الكلاس للديف الخامس
         watchedBox.setAttribute("class","watchedBox");
         // انشاء الانبوت التابع للدف الخامس
         const cbx = document.createElement("input");
         cbx.setAttribute("type","checkbox");
-        cbx.setAttribute("checked",l[10]);
+        cbx.setAttribute("checked",l[11]);
         watchedBox.append(cbx);
 
         
@@ -134,6 +139,7 @@ function showDataAfterOrder(){
         filmName.append(year_num);
         filmName.append(rating_movie);
         filmName.append(film_time);
+        filmName.append(film_director);
         filmName.append(info_film);
         //
 
@@ -150,4 +156,3 @@ function showDataAfterOrder(){
     allgrid[4].append(df);
     
 }
-
