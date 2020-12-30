@@ -409,6 +409,7 @@ imgCloseMenu.addEventListener("click",function(){
 function appearMenuSearchFun(){
     disappearMenuFun();
     imgSearch.classList.add(["disappear-element"]);
+    rdoWatchedContinal.classList.add("rdo-watched-continal");
     if(elementWidth2 < maxWidth){
         menuBar3.style.width = elementWidth2 +"%";
         elementWidth2 += stepElementWidth;
@@ -443,7 +444,8 @@ function disappearMenuSearchFun(){
         clearInterval(disappearMenuSearch);
         imgSearch.classList.remove(["disappear-element"]);
     }
-}
+    rdoWatchedContinal.classList.remove("rdo-watched-continal");
+}   
 //
 imgCloseMenuSearch.addEventListener("click",function(){  
     disappearMenuSearch = setInterval(disappearMenuSearchFun,.5);
@@ -492,6 +494,8 @@ function darkModeON(){
         info.classList.remove("info-film-dark-mode-off");
         info.classList.add("info-film-dark-mode-on");
     }
+    informationFilmForm.classList.remove("information-film-form-dark-mode-off");
+    informationFilmForm.classList.add("information-film-form-dark-mode-on");
 }
 // دالة ايقاف الدارك مود
 function darkModeOFF(){
@@ -525,6 +529,8 @@ function darkModeOFF(){
         info.classList.remove("info-film-dark-mode-on");
         info.classList.add("info-film-dark-mode-off");
     }
+    informationFilmForm.classList.remove("information-film-form-dark-mode-on");
+    informationFilmForm.classList.add("information-film-form-dark-mode-off");
 }
 
 // زرار الدارك مود
