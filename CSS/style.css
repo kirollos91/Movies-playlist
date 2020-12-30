@@ -204,6 +204,13 @@ header{
 
 /* End menu amenuBar*/
 /*===========================================================================================*/
+/**/
+.information-film-form{
+    
+}
+/**/
+/*===========================================================================================*/
+/**/
 .grid{
     display:grid;
     grid-template-columns: 26% 73% 1%;
@@ -410,6 +417,9 @@ label{
 .lbl-add-films-kind,.lbl-add-actors-name{
     grid-column:1/3;
 }
+#add-director-movie{
+    width:25%;
+}
 .add-anthor{
     grid-column:1/2;
     width:100%;
@@ -518,10 +528,6 @@ label{
 }
 .btn-top-page:active{
     opacity:1;
-}
-.btn-top-page a{
-    text-decoration: none;
-    color: #fff;
 }
 /**/
 /* Start with button close  the add form */
