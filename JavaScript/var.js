@@ -73,6 +73,7 @@ const movieSearch               = document.querySelector("#movie-search");      
 //const notWatched                = document.querySelector("#not-watched");
 const watchedContinar           = document.querySelector(".watched-continar")
 const rdoWatched                = document.querySelectorAll(".rdo-watched");
+const rdoWatchedContinal        = document.querySelector("#rdo-watched-continal");
 const darkModeOff               = document.querySelector("#dark-mode-off");
 const darkModeOn                = document.querySelector("#dark-mode-on");
 const darkModeStick             = document.querySelector("#dark-mode-stick");
