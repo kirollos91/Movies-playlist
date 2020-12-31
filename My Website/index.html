@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kirollos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="kirollos samir">
+        <meta name="description" content="kirollos samir">
+        <meta charset="UTF-8">
+        <!--<link rel="stylesheet" href="style.css">-->
+        <link rel="shortcut icon" href="" type="image/x-icon">
+        <style>
+            *{
+                margin: 0;
+                padding:0;
+                box-sizing: border-box;
+                
+            }
+            .contianer{
+                display: grid;
+                padding: 5px;
+                
+                border: 2px solid #f00;
+                grid-template-areas:
+                "header"
+                "content_midle"
+                "footer";
+                gap: 5px 0px;
+            }
+            .header{
+                grid-area: header;
+
+                height:100px;
+                width:100%; 
+                border: 1px solid #000;
+                
+                            
+            }
+            .logo{
+                
+                height:100px;
+                width:35%;
+                padding: 5px 0 0 5px;
+                float:left;
+            }
+            #image_logo{
+                height:90%;
+                width:25%;
+                border-radius:50%;
+                float: left;
+                
+            }
+            #title_name{
+               height:100%;
+               width:70%;
+               padding-left: 10px;
+               line-height: 100px;
+               float: left;
+            }
+            .nav{
+                height:100px;
+                width:65%;
+                line-height: 100px;
+                padding-right: 20px;
+                text-align: right;
+                float:left;
+                
+            }
+            .nav_list a{text-decoration-line:none;}
+            .nav_list a:visited{color:navy;}
+            .nav_list li{
+                
+                display: inline-block;
+                list-style: none;
+                
+                width:10%;
+            }
+               /* start Content */
+            .content{
+                grid-area: content_midle;
+                display: grid;
+                justify-content: center;
+                height:700px;
+                width:100%;
+                border: 1px solid #000;
+            }
+            .certificate{
+                display: grid;
+                grid-template-columns: 25% 25% 25% 25%;
+                gap: 5px 5px; 
+                justify-content: center;
+                align-items: center;
+                height:fit-content;
+                width: fit-content;
+                border: 1px solid #000;
+            }
+            .link_certificate{
+                
+               display: inline-block;
+            }
+            .image_certificate{
+                width:100px;
+                border: 1px solid #000;
+                
+            }
+            /* End Content */
+            /* start footer */
+            .footer{
+                display: grid;
+                grid-area: footer;
+                height:100px;
+                width:100%;
+                border: 1px solid #000;
+            }
+            /* End footer */
+
+            /* Mobile And Tablet */
+            @media (max-width:1046px) {
+                .nav_list li{
+                    
+                    width:15%;
+            }
+            @media (max-width:704px) {
+                .nav_list li{
+                    
+                    width:20%;
+            }
+            @media (max-width:539px) {
+                .nav_list li{
+                    font-size: 15px;
+                    width:23%;
+            }
+            @media (max-width:450px) {
+                .header{
+                    height: 200px;
+                }
+                .logo{
+                    
+                    width: 100%;
+                }
+                .nav{
+                   
+                    width: 100%;
+                }
+                .nav_list li{
+                    font-size: medium;
+                    width:23%;
+                }
+                .image_certificate{
+                    width:70px;
+                }
+            
+        </style>
+    </head>
+    <body>
+        <div class="contianer">
+            <!-- start header -->
+            <div class="header">
+                <div class="logo">
+                    <img id="image_logo" src="https://1.bp.blogspot.com/-ySyms4YbxBM/X4x9evicy-I/AAAAAAAAG58/Prn1_dfuH6Ie3IrDnTy90F-pbfclLD8KgCLcBGAsYHQ/s225/images.png" alt="logo photo" title="kirollos">
+                    <span id="title_name">Kirollos</span>
+                </div>
+                <div class="nav">
+                    <ul class="nav_list">
+                        <li><a href="#certificate">Certificate</a></li>
+                        <li><a href="#">list item 2</a></li>
+                        <li><a href="#">list item 3</a></li>
+                        <li><a href="#footer">list item 4</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End header -->
+            <!-- start content -->
+            <div id="content" class="content">
+                <div>
+
+                </div>
+                <div id="certificate" class="certificate">
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                    <a link_certificate href="#"><img class="image_certificate" src="https://place-hold.it/100x100" alt="" title=""></a>
+                </div>
+                <div>
+                    
+                </div>
+                
+            </div>
+            <!-- End content -->
+            <!-- Start footer -->
+            <div id="footer" class="footer">
+                
+            </div>
+            <!-- End footer -->
+        </div>
+
+        <script>
+            
+        </script>
+    </body>
+</html>
