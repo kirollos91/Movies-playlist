@@ -184,3 +184,35 @@ label{
 }
 /* End with button close  the add form */
 /*======================================================================*/
+@media screen and (max-width: 865px){
+    .gridAdd{
+        grid-template-columns:50% 50%; 
+    }
+    .txt{
+        width:100%;
+    }
+    .des{
+        width:100%;
+    }
+}
+/*
+@media screen and (max-width: 440px){
+    .gridAdd{
+        grid-template-columns:30% 70%; 
+    }
+@media screen and (max-width: 390px){
+
+    .gridAdd{
+        grid-template-columns:35% 65%; 
+    }
+@media screen and (max-width: 365px){
+    .gridAdd{
+        grid-template-columns:40% 60%; 
+    }
+}
+@media screen and (max-width: 310px){
+    .gridAdd{
+        grid-template-columns:45% 55%; 
+    }
+}
+*/

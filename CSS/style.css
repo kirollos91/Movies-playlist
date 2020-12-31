@@ -496,13 +496,6 @@ header{
     .watchedBox{
         display: none;
     }
-
-    .txt{
-        width:100%;
-    }
-    .des{
-        width:100%;
-    }
     #h1-title-menu1, #h1-title-menu2{
         font-size: 27px;
         font-weight: 700;
@@ -517,9 +510,7 @@ header{
       }
 }
 @media screen and (max-width: 440px){
-    .gridAdd{
-        grid-template-columns:30% 70%; 
-    }
+
     #h1-title-menu1, #h1-title-menu2{
         font-size: 22px;
         font-weight: 700;
@@ -528,9 +519,6 @@ header{
 }
 @media screen and (max-width: 390px){
 
-    .gridAdd{
-        grid-template-columns:35% 65%; 
-    }
     #h1-title-menu1, #h1-title-menu2{
         font-size: 18px;
         font-weight: 700;
@@ -556,16 +544,6 @@ header{
     }
     .lbl-dark-mode{
         left:65px;
-    }
-}
-@media screen and (max-width: 365px){
-    .gridAdd{
-        grid-template-columns:40% 60%; 
-    }
-}
-@media screen and (max-width: 310px){
-    .gridAdd{
-        grid-template-columns:45% 55%; 
     }
 }
 
