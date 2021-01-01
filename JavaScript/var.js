@@ -47,7 +47,8 @@ const FilmLink                  = document.querySelectorAll(".link-film");
 const yearFilmNumber            = document.querySelectorAll(".year-num");
 const ratingFilm                = document.querySelectorAll(".rating-movie");
 const informationFilm           = document.querySelectorAll(".info-film");                  //  button off information of film
-
+const timeFilm                  = document.querySelectorAll(".film-time");
+const ditectorMovie             = document.querySelectorAll(".director-movie");
 //
 //---------------------------------------------------------------------------
 //
@@ -86,7 +87,13 @@ let   isDarkMode                = false;
 // متفيرات فورم معلومات عن الفيلم
 const informationFilmForm       = document.querySelector(".information-film-form");
 const btnFormInformationClose   = document.querySelector(".btn-form-information-close");
+const btnFormInformationEdit    = document.querySelector(".btn-form-information-edit");
+const infoBtnAddNewActor        = document.querySelector(".info-btn-add-new-actor");
+const infoBtnAddNewKind         = document.querySelector(".info-btn-add-new-kind");
+const infoBtnCancel             = document.querySelector(".info-btn-cancel");
+const infoBtnUpdate             = document.querySelector(".info-btn-update");
 const infoFilmImage             = document.querySelector("#info-film-image");
+const infoFilmImagePath         = document.querySelector("#info-film-image-path");
 const infoFilmName              = document.querySelector("#info-film-name");
 const infoFilmRating            = document.querySelector("#info-film-rating");
 const infoFilmYear              = document.querySelector("#info-film-year");

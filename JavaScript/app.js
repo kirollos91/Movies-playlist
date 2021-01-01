@@ -37,7 +37,7 @@ function addFilmNameToSearch(){
     const df = document.createDocumentFragment();
     for(let namefile of txtNameFile){
         let option = document.createElement("option");
-        option.textContent = namefile.textContent;
+        option.textContent = namefile.children[1].textContent;
         df.append(option);
     }
     datalist.append(df);
@@ -54,7 +54,7 @@ function searchFilm(){
             wTitle1[i].parentElement.style.borderBottom = "none";
         }
         for(let i = 0;i<txtNameFile.length;i++){
-            if(txtNameFile[i].textContent.trim() == movieSearch.value ){
+            if(txtNameFile[i].children[1].textContent.trim() == movieSearch.value ){
                 txtNameFile[i].classList.remove(["disappear-element"]);
                 whatAbout1[i].classList.remove(["disappear-element"]);
                 watchedBox1[i].classList.remove(["disappear-element"]);
@@ -147,8 +147,8 @@ function checkForWatchedMovies(){
                     datalist.children[ele].textContent="";
                 showAllMovies();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
-                    if((txtNameFile[ele].classList.contains("disappear-element"))){
-                        datalist.children[ele].textContent = txtNameFile[ele].textContent
+                    if(!(txtNameFile[ele].classList.contains("disappear-element"))){
+                        datalist.children[ele].textContent = txtNameFile[ele].children[1].textContent;
                     }
                 }
             }
@@ -158,8 +158,8 @@ function checkForWatchedMovies(){
                 showMoviesWatched();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
-                    if((txtNameFile[ele].classList.contains("disappear-element"))){
-                        datalist.children[ele].textContent = txtNameFile[ele].textContent
+                    if(!(txtNameFile[ele].classList.contains("disappear-element"))){
+                        datalist.children[ele].textContent = txtNameFile[ele].children[1].textContent;
                     }
                 }
             }
@@ -168,8 +168,8 @@ function checkForWatchedMovies(){
                 showMoviesNotWatched();
                 for(let ele =0 ;ele<datalist.childElementCount;ele++){
                     
-                    if((txtNameFile[ele].classList.contains("disappear-element"))){
-                        datalist.children[ele].textContent = txtNameFile[ele].textContent;
+                    if(!(txtNameFile[ele].classList.contains("disappear-element"))){
+                        datalist.children[ele].textContent = txtNameFile[ele].children[1].textContent;
                     }
                 }
             }
@@ -404,8 +404,23 @@ window.onscroll = showHideHeader;
 //===================================================================================================
 // فورم معلومات الفيلم
 let pageoffset = 0;
+let thisElement = 0;
+let isEdit = false;
 function showInformationFilm(){
     pageoffset = pageYOffset;
+    // تحديد رقم العنصر الذى تم اختيارة
+    this.classList.add("here");
+    for(let i =0 ;i<document.querySelectorAll(".info-film").length;i++){
+        if (document.querySelectorAll(".info-film")[i].classList.contains("here")){
+            thisElement = i;
+        }
+    }
+    this.classList.remove("here");
+    // انتهاء
+
+    if(thisElement == document.querySelectorAll(".info-film").length-1) document.querySelector(".info-btn-next").classList.add("hide-element");
+    else if(thisElement <= 0) document.querySelector(".info-btn-back").classList.add("hide-element");
+
     btnAdd.classList.add(["disappear-element"]);
     header.classList.add("disappear-element");
     watchedContinar.classList.add("disappear-element");
@@ -420,21 +435,26 @@ function showInformationFilm(){
     
     putInformationInForm(this);
 }
-function returnPageFromInfoFilm(){
-    informationFilmForm.classList.remove("information-film-form-appear");
-    informationFilmForm.classList.add("disappear-element");
-    watchedContinar.classList.remove(["disappear-element"]);
-    header.classList.remove("disappear-element");
-    menuBar.classList.remove(["disappear-element"]);
-    btnAdd.classList.remove(["disappear-element"]);
-    for(let grid of allgrid){
-        grid.classList.remove(["disappear-element"]);
+function returnPageFromInfoFilm(event){
+    if(event.key == "Escape" || event.target.classList.contains("btn-form-information-close")){
+        informationFilmForm.classList.remove("information-film-form-appear");
+        informationFilmForm.classList.add("disappear-element");
+        watchedContinar.classList.remove(["disappear-element"]);
+        header.classList.remove("disappear-element");
+        menuBar.classList.remove(["disappear-element"]);
+        btnAdd.classList.remove(["disappear-element"]);
+        for(let grid of allgrid){
+            grid.classList.remove(["disappear-element"]);
+        }
+        btnGoTop.classList.remove("hide-element");
+        clearInformationFromForm();
+        window.scrollTo(0,pageoffset);
+        btnCancelEdit();
     }
-    btnGoTop.classList.remove("hide-element");
-    clearInformationFromForm();
-    window.scrollTo(0,pageoffset);
 }
 btnFormInformationClose.addEventListener("click",returnPageFromInfoFilm);
+window.addEventListener("keydown",returnPageFromInfoFilm);
+// جمبع ازرار الانفورميشن فى الصفحة
 for(let btn of informationFilm )
 btn.addEventListener("click",showInformationFilm);
 //---------------------------------------
@@ -443,8 +463,8 @@ function putInformationInForm(element){
     const imgFilm           = divFilm.children[0];
     const nameFilm          = divFilm.children[1];
     const yearFilm          = divFilm.children[2];
-    const ratingFilm        = divFilm.children[3];
-    const timeFilm          = divFilm.children[4];
+    const ratingFilms        = divFilm.children[3];
+    const timeFilms          = divFilm.children[4];
     const directorFilm      = divFilm.children[5];
     const divActors         = divFilm.nextElementSibling;
     const divKinds          = divActors.nextElementSibling;
@@ -452,10 +472,11 @@ function putInformationInForm(element){
 
 
     infoFilmImage.src               = imgFilm.src;
+    infoFilmImagePath.textContent   = imgFilm.src;
     infoFilmName.textContent        = nameFilm.textContent;
-    infoFilmRating.textContent      = ratingFilm.textContent;
+    infoFilmRating.textContent      = ratingFilms.textContent;
     infoFilmYear.textContent        = yearFilm.textContent;
-    infoFilmTime.textContent        = timeFilm.textContent;
+    infoFilmTime.textContent        = timeFilms.textContent;
     infoFilmDirector.textContent    = directorFilm.textContent;
     if(divActors.children.length >-1){
         for(let fa of divActors.children){
@@ -468,7 +489,6 @@ function putInformationInForm(element){
         }
     }
     infoFilmDescription.textContent = divDescription.textContent;
-    
 }
 //---------------------------------------
 function clearInformationFromForm(){
@@ -482,9 +502,207 @@ function clearInformationFromForm(){
     infoFilmKinds.textContent       = "";
     infoFilmDescription.textContent = "";
 }
-// انتهاء فورم نعلومات الفيلم
-//===================================================================================================
+//---------------------------------------
+function nextOrPreviousFormInfo(event){
+    if(isEdit == false){
+        if(informationFilmForm.classList.contains("disappear-element")) return;
+        if(event.key){
+            if(event.key == "ArrowRight"){
+            
+                if(thisElement == document.querySelectorAll(".info-film").length-1) {
+                    document.querySelector(".info-btn-next").classList.add("hide-element");
+                    return;
+                }
+                document.querySelector(".info-btn-back").classList.remove("hide-element");
+                thisElement++;
+                
+            }
+            else if(event.key == "ArrowLeft"){
+            
+                if(thisElement <= 0 ) {
+                    document.querySelector(".info-btn-back").classList.add("hide-element");
+                    return;
+                }
+                document.querySelector(".info-btn-next").classList.remove("hide-element");
+                thisElement--;
+            }else{
+                return;
+            }
+        } 
+        else if(this.classList.contains("info-btn-next")){
+            if(thisElement == document.querySelectorAll(".info-film").length-1) {
+                document.querySelector(".info-btn-next").classList.add("hide-element");
+                return;
+            }
+            document.querySelector(".info-btn-back").classList.remove("hide-element");
+            thisElement++;
 
+        }
+        else if(this.classList.contains("info-btn-back") ){
+            if(thisElement <= 0 ){
+                document.querySelector(".info-btn-back").classList.add("hide-element");
+                return;
+            }
+            document.querySelector(".info-btn-next").classList.remove("hide-element");
+            thisElement--;
+        }
+        infoFilmActors.innerHTML ="";
+        infoFilmKinds.innerHTML  ="";
+        infoFilmImage.src               = FilmImage[thisElement].src;
+        infoFilmImagePath.textContent   = FilmImage[thisElement].src;
+        infoFilmName.textContent        = FilmLink[thisElement].textContent;
+        infoFilmRating.textContent      = ratingFilm[thisElement].textContent;
+        infoFilmYear.textContent        = yearFilmNumber[thisElement].textContent;
+        infoFilmTime.textContent        = timeFilm[thisElement].textContent;
+        infoFilmDirector.textContent    = ditectorMovie[thisElement].textContent;
+        if(actorsNames[thisElement].children.length >-1){
+            for(let fa of actorsNames[thisElement].children){
+                infoFilmActors.innerHTML  += "<span class='info-span-actor'>"+fa.textContent + "</span>";
+            }
+        }
+        if(filmsKinds[thisElement].children.length >-1){
+            for(let fk of filmsKinds[thisElement].children){
+                infoFilmKinds.innerHTML  += "<span class='info-span-kind'>"+fk.textContent + "</span>";
+            }
+        }
+        infoFilmDescription.textContent = whatAbout1[thisElement].textContent;
+
+        if(thisElement == document.querySelectorAll(".info-film").length-1) document.querySelector(".info-btn-next").classList.add("hide-element");
+        else if(thisElement <= 0) document.querySelector(".info-btn-back").classList.add("hide-element");
+    }
+}
+
+document.querySelector(".info-btn-next").addEventListener("click",nextOrPreviousFormInfo);
+document.querySelector(".info-btn-back").addEventListener("click",nextOrPreviousFormInfo);
+window.addEventListener("keydown",nextOrPreviousFormInfo);
+// انتهاء فورم معلومات الفيلم
+//===================================================================================================
+function btnEdit(){
+    isEdit = true;
+    if(isEdit){
+        if(event.key == "ArrowLeft" || event.key == "ArrowRight")return;
+    }
+    infoBtnCancel.classList.remove("disappear-element");
+    infoBtnUpdate.classList.remove("disappear-element");
+    infoBtnAddNewActor.classList.remove("disappear-element");
+    infoBtnAddNewKind.classList.remove("disappear-element");
+    infoFilmImagePath.parentElement.classList.remove("disappear-element");
+    document.querySelector("#br-info").classList.remove("br-info");
+
+    infoFilmImagePath.classList.add("info-edit-on");
+    infoFilmImagePath.classList.remove("info-edit-off");
+
+    infoFilmName.setAttribute("contenteditable","true");
+    infoFilmName.classList.remove("info-edit-off");
+    infoFilmName.classList.add("info-edit-on");
+
+    infoFilmRating.setAttribute("contenteditable","true");
+    infoFilmRating.classList.remove("info-edit-off");
+    infoFilmRating.classList.add("info-edit-on");  
+
+    infoFilmYear.setAttribute("contenteditable","true");
+    infoFilmYear.classList.remove("info-edit-off");
+    infoFilmYear.classList.add("info-edit-on");    
+
+    infoFilmTime.setAttribute("contenteditable","true");
+    infoFilmTime.classList.remove("info-edit-off");
+    infoFilmTime.classList.add("info-edit-on");     
+
+    infoFilmDirector.setAttribute("contenteditable","true");
+    infoFilmDirector.classList.remove("info-edit-off");
+    infoFilmDirector.classList.add("info-edit-on");
+
+    for(let fa of infoFilmActors.childNodes){
+        fa.setAttribute("contenteditable","true");
+        fa.classList.remove("info-edit-off");
+        fa.classList.add("info-edit-on");
+    }
+    for(let fk of infoFilmKinds.children){
+        fk.setAttribute("contenteditable","true");
+        fk.classList.remove("info-edit-off");
+        fk.classList.add("info-edit-on");
+    }
+    infoFilmDescription.setAttribute("contenteditable","true");
+    infoFilmDescription.classList.remove("info-edit-off");
+    infoFilmDescription.classList.add("info-edit-on");
+}
+btnFormInformationEdit.addEventListener("click",btnEdit);
+
+function btnCancelEdit(){
+    isEdit = false;
+    infoBtnCancel.classList.add("disappear-element");
+    infoBtnUpdate.classList.add("disappear-element");
+    infoBtnAddNewActor.classList.add("disappear-element");
+    infoBtnAddNewKind.classList.add("disappear-element");
+    infoFilmImagePath.parentElement.classList.add("disappear-element");
+    document.querySelector("#br-info").classList.add("br-info");
+
+    
+
+    infoFilmName.removeAttribute("contenteditable");
+    infoFilmName.classList.add("info-edit-off");
+    infoFilmName.classList.remove("info-edit-on");
+
+    infoFilmRating.removeAttribute("contenteditable");
+    infoFilmRating.classList.add("info-edit-off");
+    infoFilmRating.classList.remove("info-edit-on");
+
+    infoFilmYear.removeAttribute("contenteditable");
+    infoFilmYear.classList.add("info-edit-off");
+    infoFilmYear.classList.remove("info-edit-on");
+
+    infoFilmTime.removeAttribute("contenteditable");
+    infoFilmTime.classList.add("info-edit-off");
+    infoFilmTime.classList.remove("info-edit-on");
+
+    infoFilmDirector.removeAttribute("contenteditable");
+    infoFilmDirector.classList.add("info-edit-off");
+    infoFilmDirector.classList.remove("info-edit-on");
+
+    for(let fa of infoFilmActors.childNodes){
+        fa.removeAttribute("contenteditable");
+        fa.classList.add("info-edit-off");
+        fa.classList.remove("info-edit-on");
+    }
+    for(let fk of infoFilmKinds.children){
+        fk.removeAttribute("contenteditable");
+        fk.classList.add("info-edit-off");
+        fk.classList.remove("info-edit-on");
+    }
+    infoFilmDescription.removeAttribute("contenteditable");
+    infoFilmDescription.classList.add("info-edit-off");
+    infoFilmDescription.classList.remove("info-edit-on");
+}
+
+infoBtnCancel.addEventListener("click",btnCancelEdit);
+
+function addNewActorInIfo(){
+    const span = document.createElement("span");
+    span.setAttribute("contenteditable","true"); 
+    infoFilmActors.append(span);
+}
+
+infoBtnAddNewActor.addEventListener("click",addNewActorInIfo);
+
+function addNewKindInIfo(){
+    const span = document.createElement("span");
+    span.setAttribute("contenteditable","true"); 
+    infoFilmKinds.append(span);
+}
+
+infoBtnAddNewKind.addEventListener("click",addNewKindInIfo);
+
+function updateDataFromInfo(){
+        FilmLink[thisElement].textContent       = infoFilmName.textContent;
+        ratingFilm[thisElement].textContent     = infoFilmRating.textContent;
+        yearFilmNumber[thisElement].textContent = infoFilmYear.textContent;
+        timeFilm[thisElement].textContent       = infoFilmTime.textContent;
+        ditectorMovie[thisElement].textContent  = infoFilmDirector.textContent;
+
+        whatAbout1[thisElement].textContent     = infoFilmDescription.textContent;
+}
+
+infoBtnUpdate.addEventListener("click",updateDataFromInfo);
 //===================================================================================================
 
 //===================================================================================================
