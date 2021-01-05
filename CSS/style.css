@@ -334,6 +334,7 @@ header{
     font-family: Mirza-Regular;
     direction: rtl;
     border-bottom:.5px solid #ccc;
+    text-align: justify;
 }
 .whatAbout-in-dark-mode-off{
     color:#000;
@@ -491,7 +492,7 @@ header{
     }
     .whatAbout{
         margin: 15px auto;
-        text-align: center;
+        /*text-align: justify;*/
         width: 100%;
     }
     .watchedBox{
