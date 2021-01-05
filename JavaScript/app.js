@@ -435,6 +435,10 @@ function showInformationFilm(){
     
     putInformationInForm(this);
 }
+// جمبع ازرار الانفورميشن فى الصفحة
+for(let btn of informationFilm )
+btn.addEventListener("click",showInformationFilm);
+//
 function returnPageFromInfoFilm(event){
     if(event.key == "Escape" || event.target.classList.contains("btn-form-information-close")){
         informationFilmForm.classList.remove("information-film-form-appear");
@@ -454,9 +458,6 @@ function returnPageFromInfoFilm(event){
 }
 btnFormInformationClose.addEventListener("click",returnPageFromInfoFilm);
 window.addEventListener("keydown",returnPageFromInfoFilm);
-// جمبع ازرار الانفورميشن فى الصفحة
-for(let btn of informationFilm )
-btn.addEventListener("click",showInformationFilm);
 //---------------------------------------
 function putInformationInForm(element){
     const divFilm           = element.parentElement;
@@ -505,47 +506,9 @@ function clearInformationFromForm(){
 //---------------------------------------
 function nextOrPreviousFormInfo(event){
     if(isEdit == false){
-        if(informationFilmForm.classList.contains("disappear-element")) return;
-        if(event.key){
-            if(event.key == "ArrowRight"){
-            
-                if(thisElement == document.querySelectorAll(".info-film").length-1) {
-                    document.querySelector(".info-btn-next").classList.add("hide-element");
-                    return;
-                }
-                document.querySelector(".info-btn-back").classList.remove("hide-element");
-                thisElement++;
-                
-            }
-            else if(event.key == "ArrowLeft"){
-            
-                if(thisElement <= 0 ) {
-                    document.querySelector(".info-btn-back").classList.add("hide-element");
-                    return;
-                }
-                document.querySelector(".info-btn-next").classList.remove("hide-element");
-                thisElement--;
-            }else{
-                return;
-            }
-        } 
-        else if(this.classList.contains("info-btn-next")){
-            if(thisElement == document.querySelectorAll(".info-film").length-1) {
-                document.querySelector(".info-btn-next").classList.add("hide-element");
-                return;
-            }
-            document.querySelector(".info-btn-back").classList.remove("hide-element");
-            thisElement++;
-
-        }
-        else if(this.classList.contains("info-btn-back") ){
-            if(thisElement <= 0 ){
-                document.querySelector(".info-btn-back").classList.add("hide-element");
-                return;
-            }
-            document.querySelector(".info-btn-next").classList.remove("hide-element");
-            thisElement--;
-        }
+        if(informationFilmForm.classList.contains("disappear-element")) return;        
+        
+    
         infoFilmActors.innerHTML ="";
         infoFilmKinds.innerHTML  ="";
         infoFilmImage.src               = FilmImage[thisElement].src;
@@ -571,10 +534,89 @@ function nextOrPreviousFormInfo(event){
         else if(thisElement <= 0) document.querySelector(".info-btn-back").classList.add("hide-element");
     }
 }
+function pressKey(event){
+    if(event.key){
+        if(event.key == "ArrowRight"){
+        
+            if(thisElement == document.querySelectorAll(".info-film").length-1) {
+                document.querySelector(".info-btn-next").classList.add("hide-element");
+                return;
+            }
+            document.querySelector(".info-btn-back").classList.remove("hide-element");
+            thisElement++;
+            
+        }
+        else if(event.key == "ArrowLeft"){
+        
+            if(thisElement <= 0 ) {
+                document.querySelector(".info-btn-back").classList.add("hide-element");
+                return;
+            }
+            document.querySelector(".info-btn-next").classList.remove("hide-element");
+            thisElement--;
+        }else{
+            return;
+        }
+    } 
+}
+function clickButton(element){
+    if(element.classList.contains("info-btn-next")){
+        if(thisElement == document.querySelectorAll(".info-film").length-1) {
+            document.querySelector(".info-btn-next").classList.add("hide-element");
+            return;
+        }
+        document.querySelector(".info-btn-back").classList.remove("hide-element");
+        thisElement++;
 
-document.querySelector(".info-btn-next").addEventListener("click",nextOrPreviousFormInfo);
-document.querySelector(".info-btn-back").addEventListener("click",nextOrPreviousFormInfo);
-window.addEventListener("keydown",nextOrPreviousFormInfo);
+    }
+    else if(element.classList.contains("info-btn-back") ){
+        if(thisElement <= 0 ){
+            document.querySelector(".info-btn-back").classList.add("hide-element");
+            return;
+        }
+        document.querySelector(".info-btn-next").classList.remove("hide-element");
+        thisElement--;
+    }
+}
+
+document.querySelector(".info-btn-next").addEventListener("click",(event)=>{
+    clickButton(event.target);
+    nextOrPreviousFormInfo();
+});
+document.querySelector(".info-btn-back").addEventListener("click",(event)=>{
+    clickButton(event.target);
+    nextOrPreviousFormInfo();
+});
+window.addEventListener("keydown",(event)=>{
+    pressKey(event)
+    nextOrPreviousFormInfo();
+});
+let oldClientX = 0;
+informationFilmForm.addEventListener("touchstart",(event)=>{
+    oldClientX = event.changedTouches[0].clientX;
+});
+
+informationFilmForm.addEventListener("touchend",(event)=>{
+    if(event.changedTouches[0].clientX > oldClientX+20){
+        if(thisElement == document.querySelectorAll(".info-film").length-1) {
+            document.querySelector(".info-btn-next").classList.add("hide-element");
+            return;
+        }
+        document.querySelector(".info-btn-back").classList.remove("hide-element");
+        thisElement++;
+        
+        
+    }else if(event.changedTouches[0].clientX < oldClientX-20){
+        if(thisElement <= 0 ) {
+            document.querySelector(".info-btn-back").classList.add("hide-element");
+            return;
+        }
+        document.querySelector(".info-btn-next").classList.remove("hide-element");
+        thisElement--;
+        
+    }
+    nextOrPreviousFormInfo();
+});
 // انتهاء فورم معلومات الفيلم
 //===================================================================================================
 function btnEdit(){

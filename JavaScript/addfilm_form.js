@@ -83,6 +83,7 @@ function addMovie(){
                 const info_film = document.createElement("span");
                 info_film.classList.add("info-film",isDarkMode?"info-film-dark-mode-on":"info-film-dark-mode-off");
                 info_film.textContent = "i";
+                info_film.addEventListener("click",showInformationFilm);
                 //
                 actors_name.classList.add("add-actors","disappear-element");
                 let stractorn = "";
