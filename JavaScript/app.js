@@ -505,8 +505,7 @@ function clearInformationFromForm(){
 }
 //---------------------------------------
 function nextOrPreviousFormInfo(event){
-    if(isEdit == false){
-        if(informationFilmForm.classList.contains("disappear-element")) return;        
+            
         
     
         infoFilmActors.innerHTML ="";
@@ -532,9 +531,11 @@ function nextOrPreviousFormInfo(event){
 
         if(thisElement == document.querySelectorAll(".info-film").length-1) document.querySelector(".info-btn-next").classList.add("hide-element");
         else if(thisElement <= 0) document.querySelector(".info-btn-back").classList.add("hide-element");
-    }
+    
 }
 function pressKey(event){
+    if(isEdit == false){
+        if(informationFilmForm.classList.contains("disappear-element")) return;
     if(event.key){
         if(event.key == "ArrowRight"){
         
@@ -557,9 +558,13 @@ function pressKey(event){
         }else{
             return;
         }
-    } 
+        nextOrPreviousFormInfo();
+    }
+}
 }
 function clickButton(element){
+    if(isEdit == false){
+        if(informationFilmForm.classList.contains("disappear-element")) return;
     if(element.classList.contains("info-btn-next")){
         if(thisElement == document.querySelectorAll(".info-film").length-1) {
             document.querySelector(".info-btn-next").classList.add("hide-element");
@@ -577,19 +582,19 @@ function clickButton(element){
         document.querySelector(".info-btn-next").classList.remove("hide-element");
         thisElement--;
     }
+    nextOrPreviousFormInfo();
 }
-
+}
 document.querySelector(".info-btn-next").addEventListener("click",(event)=>{
     clickButton(event.target);
-    nextOrPreviousFormInfo();
+    
 });
 document.querySelector(".info-btn-back").addEventListener("click",(event)=>{
     clickButton(event.target);
-    nextOrPreviousFormInfo();
+    
 });
 window.addEventListener("keydown",(event)=>{
     pressKey(event)
-    nextOrPreviousFormInfo();
 });
 let oldClientX = 0;
 informationFilmForm.addEventListener("touchstart",(event)=>{
@@ -597,7 +602,9 @@ informationFilmForm.addEventListener("touchstart",(event)=>{
 });
 
 informationFilmForm.addEventListener("touchend",(event)=>{
-    if(event.changedTouches[0].clientX > oldClientX+20){
+    if(isEdit == false){
+        if(informationFilmForm.classList.contains("disappear-element")) return;
+    if(event.changedTouches[0].clientX < oldClientX-20){
         if(thisElement == document.querySelectorAll(".info-film").length-1) {
             document.querySelector(".info-btn-next").classList.add("hide-element");
             return;
@@ -606,7 +613,7 @@ informationFilmForm.addEventListener("touchend",(event)=>{
         thisElement++;
         
         
-    }else if(event.changedTouches[0].clientX < oldClientX-20){
+    }else if(event.changedTouches[0].clientX > oldClientX+20){
         if(thisElement <= 0 ) {
             document.querySelector(".info-btn-back").classList.add("hide-element");
             return;
@@ -615,7 +622,9 @@ informationFilmForm.addEventListener("touchend",(event)=>{
         thisElement--;
         
     }
+    
     nextOrPreviousFormInfo();
+}
 });
 // انتهاء فورم معلومات الفيلم
 //===================================================================================================
