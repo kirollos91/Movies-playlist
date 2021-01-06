@@ -600,28 +600,29 @@ let oldClientX = 0;
 informationFilmForm.addEventListener("touchstart",(event)=>{
     oldClientX = event.changedTouches[0].clientX;
 });
-
+let firstTimeVisitInfoPage = true;
 informationFilmForm.addEventListener("touchend",(event)=>{
     if(isEdit == false){
         if(informationFilmForm.classList.contains("disappear-element")) return;
-    if(event.changedTouches[0].clientX < oldClientX-20){
-        if(thisElement == document.querySelectorAll(".info-film").length-1) {
-            document.querySelector(".info-btn-next").classList.add("hide-element");
-            return;
+        if(firstTimeVisitInfoPage){ alert("move right or left to change movie"); firstTimeVisitInfoPage = false;};
+        if(event.changedTouches[0].clientX < oldClientX-20){
+            if(thisElement == document.querySelectorAll(".info-film").length-1) {
+                document.querySelector(".info-btn-next").classList.add("hide-element");
+                return;
+            }
+            document.querySelector(".info-btn-back").classList.remove("hide-element");
+            thisElement++;
+            
+            
+        }else if(event.changedTouches[0].clientX > oldClientX+20){
+            if(thisElement <= 0 ) {
+                document.querySelector(".info-btn-back").classList.add("hide-element");
+                return;
+            }
+            document.querySelector(".info-btn-next").classList.remove("hide-element");
+            thisElement--;
+            
         }
-        document.querySelector(".info-btn-back").classList.remove("hide-element");
-        thisElement++;
-        
-        
-    }else if(event.changedTouches[0].clientX > oldClientX+20){
-        if(thisElement <= 0 ) {
-            document.querySelector(".info-btn-back").classList.add("hide-element");
-            return;
-        }
-        document.querySelector(".info-btn-next").classList.remove("hide-element");
-        thisElement--;
-        
-    }
     
     nextOrPreviousFormInfo();
 }

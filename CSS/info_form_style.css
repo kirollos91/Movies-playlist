@@ -109,16 +109,45 @@
    font-size: 13px;
 }
 .info-btn-update{
-
+    width:fit-content;
 }
 .info-btn-cancel{
-
+    width:fit-content;
 }
 .info-text-area{
 
 }
 .info-edit-off{
     
+}
+.info-btn-back{
+    border-radius: 50%;
+    background-color: rgb(0, 19, 105);
+    color: #fff;
+    width: fit-content;
+    margin-left: 90%;
+    padding: 7px;
+    box-shadow: -2px 2px 3px #666;
+    font-weight: bolder;
+    font-size: large;
+    cursor:pointer;
+}
+.info-btn-back:active{
+    background-color: rgb(1, 9, 44);
+}
+.info-btn-next{
+    border-radius: 50%;
+    background-color: rgb(0, 19, 105);;
+    color: #fff;
+    width: fit-content;
+    padding: 7px;
+    box-shadow: -2px 2px 3px #666;
+    font-weight: bolder;
+    font-size: large;
+    cursor:pointer;
+}
+.info-btn-next:active{
+    background-color: rgb(1, 9, 44);
 }
 .info-edit-on{
     padding: 0 7px;
