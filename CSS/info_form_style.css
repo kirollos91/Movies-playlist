@@ -125,12 +125,14 @@
     background-color: rgb(0, 19, 105);
     color: #fff;
     width: fit-content;
-    margin-left: 90%;
+    margin-left: 100%;
+    transform: translate(-100% ,0%);
     padding: 7px;
     box-shadow: -2px 2px 3px #666;
     font-weight: bolder;
     font-size: large;
     cursor:pointer;
+    user-select: none;
 }
 .info-btn-back:active{
     background-color: rgb(1, 9, 44);
@@ -141,10 +143,12 @@
     color: #fff;
     width: fit-content;
     padding: 7px;
+    margin-left: 20px;
     box-shadow: -2px 2px 3px #666;
     font-weight: bolder;
     font-size: large;
     cursor:pointer;
+    user-select: none;
 }
 .info-btn-next:active{
     background-color: rgb(1, 9, 44);
