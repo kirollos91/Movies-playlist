@@ -286,8 +286,8 @@ imgCloseMenuSearch.addEventListener("click",function(){
 //جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها {
 for(let i = 0;i<watchedBox1.length;i++){
     watchedBox1[i].children[0].addEventListener("change",()=>{
-        if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].checked = true;
-        else watchedBox1[i].children[0].checked = false;
+        if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].setAttribute("checked","true");
+        else watchedBox1[i].children[0].removeAttribute("checked");
     });
 }
 // } end
