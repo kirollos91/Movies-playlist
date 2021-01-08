@@ -286,8 +286,13 @@ imgCloseMenuSearch.addEventListener("click",function(){
 //جعل جميع الاتشيك بوكس تفاعلية مع الضغط عليها {
 for(let i = 0;i<watchedBox1.length;i++){
     watchedBox1[i].children[0].addEventListener("change",()=>{
-        if(watchedBox1[i].children[0].checked) watchedBox1[i].children[0].setAttribute("checked","true");
-        else watchedBox1[i].children[0].removeAttribute("checked");
+        if(watchedBox1[i].children[0].checked){
+            watchedBox1[i].children[0].setAttribute("checked","true");
+        }
+        else {
+            watchedBox1[i].children[0].removeAttribute("checked");
+
+        } 
     });
 }
 // } end
@@ -417,10 +422,16 @@ function showInformationFilm(){
     }
     this.classList.remove("here");
     // انتهاء
+    document.querySelector(".info-btn-back").classList.remove("hide-element");
+    document.querySelector(".info-btn-next").classList.remove("hide-element");
 
-    if(thisElement == document.querySelectorAll(".info-film").length-1) document.querySelector(".info-btn-next").classList.add("hide-element");
-    else if(thisElement <= 0) document.querySelector(".info-btn-back").classList.add("hide-element");
+    if(thisElement == document.querySelectorAll(".info-film").length-1)
+        document.querySelector(".info-btn-next").classList.add("hide-element");
+    else if(thisElement <= 0) 
+        document.querySelector(".info-btn-back").classList.add("hide-element");
 
+
+    
     btnAdd.classList.add(["disappear-element"]);
     header.classList.add("disappear-element");
     watchedContinar.classList.add("disappear-element");
@@ -432,7 +443,7 @@ function showInformationFilm(){
     informationFilmForm.classList.add("information-film-form-appear");
     informationFilmForm.classList.remove("disappear-element");
     //
-    
+
     putInformationInForm(this);
 }
 // جمبع ازرار الانفورميشن فى الصفحة
@@ -629,7 +640,7 @@ informationFilmForm.addEventListener("touchend",(event)=>{
 });
 // انتهاء فورم معلومات الفيلم
 //===================================================================================================
-function btnEdit(){
+function btnEdit(event){
     isEdit = true;
     if(isEdit){
         if(event.key == "ArrowLeft" || event.key == "ArrowRight")return;
@@ -744,8 +755,10 @@ function addNewKindInIfo(){
 
 infoBtnAddNewKind.addEventListener("click",addNewKindInIfo);
 
-function updateDataFromInfo(){
+function updateDataFromInfo(){    
         FilmLink[thisElement].textContent       = infoFilmName.textContent;
+        FilmImage[thisElement].src              = infoFilmImagePath.textContent;
+        infoFilmImage.src                       = infoFilmImagePath.textContent;
         ratingFilm[thisElement].textContent     = infoFilmRating.textContent;
         yearFilmNumber[thisElement].textContent = infoFilmYear.textContent;
         timeFilm[thisElement].textContent       = infoFilmTime.textContent;
@@ -762,4 +775,3 @@ infoBtnUpdate.addEventListener("click",updateDataFromInfo);
 //===================================================================================================
 
 //===================================================================================================
-
