@@ -108,6 +108,30 @@
 #info-film-image-path{
    font-size: 13px;
 }
+.info-btn-add-new-actor{
+    padding: 2px 8px;
+    margin-left: 5px;
+    font-weight: bold;
+    user-select: none;
+    cursor:pointer;
+    box-shadow: -2px 2px 5px .5px #777;
+    border-radius: 50%;
+}
+.info-btn-add-new-actor:active{
+    background-color: #999;
+}
+.info-btn-add-new-kind{
+    padding: 2px 8px;
+    margin-left: 5px;
+    font-weight: bold;
+    user-select: none;
+    cursor:pointer;
+    box-shadow: -2px 2px 5px .5px #777;
+    border-radius: 50%;
+}
+.info-btn-add-new-kind:active{
+    background-color: #999;
+}
 .info-btn-update{
     width:fit-content;
     margin-left: 100%;
