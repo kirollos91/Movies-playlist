@@ -102,6 +102,9 @@ const infoFilmDirector          = document.querySelector("#info-film-director");
 const infoFilmActors            = document.querySelector("#info-film-actors");
 const infoFilmKinds             = document.querySelector("#info-film-kinds");
 const infoFilmDescription       = document.querySelector("#info-film-description");
+const infoTextArea              = document.querySelector(".info-text-area");
+
+
 // end
 /*================================================================================*/
 /*

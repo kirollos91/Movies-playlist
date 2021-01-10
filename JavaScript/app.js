@@ -608,15 +608,18 @@ window.addEventListener("keydown",(event)=>{
     pressKey(event)
 });
 let oldClientX = 0;
+let oldClientY = 0;
 informationFilmForm.addEventListener("touchstart",(event)=>{
     oldClientX = event.changedTouches[0].clientX;
+    oldClientY = event.changedTouches[0].clientY;
 });
+
 let firstTimeVisitInfoPage = true;
 informationFilmForm.addEventListener("touchend",(event)=>{
     if(isEdit == false){
         if(informationFilmForm.classList.contains("disappear-element")) return;
         if(firstTimeVisitInfoPage){ alert("move right or left to change movie"); firstTimeVisitInfoPage = false;};
-        if(event.changedTouches[0].clientX < oldClientX-20){
+        if(event.changedTouches[0].clientX < oldClientX-10 && (event.changedTouches[0].clientY < oldClientY+10 && event.changedTouches[0].clientY > oldClientY-10)){
             if(thisElement == document.querySelectorAll(".info-film").length-1) {
                 document.querySelector(".info-btn-next").classList.add("hide-element");
                 return;
@@ -625,7 +628,7 @@ informationFilmForm.addEventListener("touchend",(event)=>{
             thisElement++;
             
             
-        }else if(event.changedTouches[0].clientX > oldClientX+20){
+        }else if(event.changedTouches[0].clientX > oldClientX+10 && (event.changedTouches[0].clientY < oldClientY+10 && event.changedTouches[0].clientY > oldClientY-10)){
             if(thisElement <= 0 ) {
                 document.querySelector(".info-btn-back").classList.add("hide-element");
                 return;
@@ -697,6 +700,7 @@ function btnCancelEdit(){
     infoBtnUpdate.classList.add("disappear-element");
     infoBtnAddNewActor.classList.add("disappear-element");
     infoBtnAddNewKind.classList.add("disappear-element");
+    infoTextArea.classList.add("disappear-element");
     infoFilmImagePath.parentElement.classList.add("disappear-element");
     document.querySelector("#br-info").classList.add("br-info");
 
@@ -763,8 +767,43 @@ function updateDataFromInfo(){
         yearFilmNumber[thisElement].textContent = infoFilmYear.textContent;
         timeFilm[thisElement].textContent       = infoFilmTime.textContent;
         ditectorMovie[thisElement].textContent  = infoFilmDirector.textContent;
+        
+        //
+        let countActor = document.querySelectorAll(".add-actors")[thisElement].children.length-1;
+        let stractorn ="";
+        for(let actor= countActor;actor>=0;actor-- ){
+            document.querySelectorAll(".add-actors")[thisElement].children[actor].remove();
+        }
+        for(let actor of document.querySelector("#info-film-actors").children){
+            if(actor.textContent != ""){
+                let actors = document.createElement("span");
+                actors.textContent = actor.textContent;
+                stractorn += `<span>${actor.textContent}</span>`;
+                document.querySelectorAll(".add-actors")[thisElement].append(actors);
+            }
+        }
+        //
+        let countKind = document.querySelectorAll(".add-films-kind")[thisElement].children.length-1;
+        let strfilmk ="";
+        for(let kind= countKind;kind>=0;kind-- ){
+            document.querySelectorAll(".add-films-kind")[thisElement].children[kind].remove();
+        }
+        for(let kind of document.querySelector("#info-film-kinds").children){
+            if(kind.textContent != ""){
+                let kinds = document.createElement("span");
+                kinds.textContent = kind.textContent;
+                strfilmk += `<span>${kind.textContent}</span>`;
+                document.querySelectorAll(".add-films-kind")[thisElement].append(kinds);
+            }
+        }
 
         whatAbout1[thisElement].textContent     = infoFilmDescription.textContent;
+
+        const textOfRow =`<div class="filmName"><!-- 1:1 --><img class="fImage" src="${infoFilmImagePath.textContent}" alt="${infoFilmName.textContent}"><!-- 1:2 --><a class="link-film a-in-dark-mode-off" href="${FilmLink[thisElement].href}"><!-- 1:3 -->${infoFilmName.textContent}</a><!-- 1:4 --><span class="year-num disappear-element">${infoFilmYear.textContent}</span><!-- 1:5 --><span class="rating-movie disappear-element">${infoFilmRating.textContent}</span><!-- 1:6 --><span class="film-time disappear-element">${infoFilmTime.textContent}</span><!-- 1:7 --><span class="director-movie disappear-element">${infoFilmDirector.textContent}</span><!-- 1:8 --><span class="info-film info-film-dark-mode-off">i</span></div><!-- 2:1 --><div class="add-actors disappear-element">${stractorn}</div><!-- 3:1 --><div class="add-films-kind disappear-element">${strfilmk}</div><!-- 4:1 --><div lang="ar" class="whatAbout whatAbout-in-dark-mode-off">${infoFilmDescription.textContent}</div><!-- 5:1 --><div class="watchedBox"><!-- 5:1 --><input type="checkbox" name="watched" ${watchedBox1[thisElement].children[0].checked?"checked":""}  value="watched"></div>`; 
+        infoTextArea.textContent += textOfRow +"\n=======================================================================================\n";
+
+
+        infoTextArea.classList.remove("disappear-element");
 }
 
 infoBtnUpdate.addEventListener("click",updateDataFromInfo);
