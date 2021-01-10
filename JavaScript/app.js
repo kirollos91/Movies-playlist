@@ -619,7 +619,7 @@ informationFilmForm.addEventListener("touchend",(event)=>{
     if(isEdit == false){
         if(informationFilmForm.classList.contains("disappear-element")) return;
         if(firstTimeVisitInfoPage){ alert("move right or left to change movie"); firstTimeVisitInfoPage = false;};
-        if(event.changedTouches[0].clientX < oldClientX-10 && (event.changedTouches[0].clientY < oldClientY+10 && event.changedTouches[0].clientY > oldClientY-10)){
+        if(event.changedTouches[0].clientX < oldClientX-10 && (event.changedTouches[0].clientY < oldClientY+20 && event.changedTouches[0].clientY > oldClientY-20)){
             if(thisElement == document.querySelectorAll(".info-film").length-1) {
                 document.querySelector(".info-btn-next").classList.add("hide-element");
                 return;
@@ -628,7 +628,7 @@ informationFilmForm.addEventListener("touchend",(event)=>{
             thisElement++;
             
             
-        }else if(event.changedTouches[0].clientX > oldClientX+10 && (event.changedTouches[0].clientY < oldClientY+10 && event.changedTouches[0].clientY > oldClientY-10)){
+        }else if(event.changedTouches[0].clientX > oldClientX+10 && (event.changedTouches[0].clientY < oldClientY+20 && event.changedTouches[0].clientY > oldClientY-20)){
             if(thisElement <= 0 ) {
                 document.querySelector(".info-btn-back").classList.add("hide-element");
                 return;
