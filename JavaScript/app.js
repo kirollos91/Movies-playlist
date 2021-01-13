@@ -112,10 +112,12 @@ function showMoviesNotWatched(){
             watchedBox1[i].parentElement.children[1].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[2].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.classList.remove(["disappear-element"]);
+            whatAbout1[i].classList.add(["whatAbout-flex"]);
         }else{
             txtNameFile[i].classList.add(["disappear-element"]);
             whatAbout1[i].classList.add(["disappear-element"]);
             watchedBox1[i].classList.add(["disappear-element"]);
+            whatAbout1[i].classList.remove(["whatAbout-flex"]);
         }
     }
 }
@@ -137,10 +139,12 @@ function showMoviesWatched(){
             watchedBox1[i].parentElement.children[1].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.children[2].classList.remove(["disappear-element"]);
             watchedBox1[i].parentElement.classList.remove(["disappear-element"]);
+            whatAbout1[i].classList.add(["whatAbout-flex"]);
         }else{
             txtNameFile[i].classList.add(["disappear-element"]);
             whatAbout1[i].classList.add(["disappear-element"]);
             watchedBox1[i].classList.add(["disappear-element"]);
+            whatAbout1[i].classList.remove(["whatAbout-flex"]);
         }
     }
 }
