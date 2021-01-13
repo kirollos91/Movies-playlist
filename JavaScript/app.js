@@ -59,10 +59,15 @@ function searchFilm(){
                 whatAbout1[i].classList.remove(["disappear-element"]);
                 watchedBox1[i].classList.remove(["disappear-element"]);
                 txtNameFile[i].parentElement.classList.remove(["disappear-element"]);
+                txtNameFile[i].parentElement.children[0].classList.remove(["disappear-element"]);
+                txtNameFile[i].parentElement.children[1].classList.remove(["disappear-element"]);
+                txtNameFile[i].parentElement.children[2].classList.remove(["disappear-element"]);
+                whatAbout1[i].classList.add(["whatAbout-flex"]);
             }else{
                 txtNameFile[i].classList.add(["disappear-element"]);
                 whatAbout1[i].classList.add(["disappear-element"]);
                 watchedBox1[i].classList.add(["disappear-element"]);
+                whatAbout1[i].classList.remove(["whatAbout-flex"]);
                 
             }
         }
@@ -81,6 +86,7 @@ function showAllMovies(){
         whatAbout1[i].classList.remove(["disappear-element"]);
         watchedBox1[i].classList.remove(["disappear-element"]);
         watchedBox1[i].parentElement.classList.remove(["disappear-element"]);
+        whatAbout1[i].classList.add(["whatAbout-flex"]);
     }
     for(let i = 0;i < wTitle1.length;i++){
         wTitle1[i].classList.remove(["disappear-element"]);

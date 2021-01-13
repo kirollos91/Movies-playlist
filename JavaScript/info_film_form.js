@@ -42,7 +42,7 @@ for(let btn of informationFilm )
 btn.addEventListener("click",showInformationFilm);
 //
 function returnPageFromInfoFilm(event){
-    if(event.key == "Escape" || event.target.classList.contains("btn-form-information-close")){
+    if((event.key == "Escape" && !(informationFilmForm.classList.contains("disappear-element"))) || event.target.classList.contains("btn-form-information-close")){
         informationFilmForm.classList.remove("information-film-form-appear");
         informationFilmForm.classList.add("disappear-element");
         watchedContinar.classList.remove(["disappear-element"]);

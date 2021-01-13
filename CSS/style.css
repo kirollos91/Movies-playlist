@@ -213,11 +213,11 @@ header{
 /**/
 .grid{
     display:grid;
-    grid-template-columns: 26% 73% 1%;
+    grid-template-columns: 30% 69% 1%;
     align-items: center;
-    padding:8px 8px;
-    padding-bottom: 8px;
+    padding:4px 6px;
     margin-left: 60px;
+    row-gap: 5px;
 }
 .grid-in-dark-mode-off{
     border-bottom: #000 solid 2px;
@@ -225,12 +225,14 @@ header{
 .grid-in-dark-mode-on{
     border-bottom: #fff solid 2px;
 }
+/*
 .grid :nth-last-child(2){
     border-bottom:none;
 }
 .grid div:nth-last-child(5){
     border-bottom:none;
 }
+*/
 .disappear-element{
     display:none;
 }
@@ -242,10 +244,17 @@ header{
 /*===========================================================================================*/
 /* Start Movie Name and Image */
 .filmName{
+    
     padding-top:5px;
-    border-bottom:.5px solid #ccc;
+    padding-left:5px;
     height:100%;
     position: relative;
+    border-radius: 15px 0% 0% 15px;
+    border-top: 0.5px solid #aaa;
+    border-bottom: 0.5px solid #aaa;
+    border-left: 0.5px solid #aaa;
+    margin-bottom: 25px;
+    box-shadow: -3px 3px 5px .4px #aaa;
     }
 .filmname-in-dark-mode-off{
     color:navy;
@@ -256,7 +265,7 @@ header{
 .link-film{	
     position: absolute;
     text-decoration: none;
-    left:35px;
+    left:40px;
     top:22%;
     overflow: auto;
     margin-right: 27px; 
@@ -286,6 +295,7 @@ header{
     width:30px;
     height:30px;
     border-radius:5%;
+    z-index: 5;
 }
 .fImage:hover{
     position: fixed;
@@ -329,12 +339,18 @@ header{
 /*===========================================================================================*/
 /*  */
 .whatAbout{
-    margin-top:auto;
-    padding: 8px;
+    height: 100%;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 5px;
     font-family: Mirza-Regular;
     direction: rtl;
-    border-bottom:.5px solid #ccc;
     text-align: justify;
+    border-radius: 0% 15px 15px 0%;
+    border-top: 0.5px solid #aaa;
+    border-bottom: 0.5px solid #aaa;
+    border-right: 0.5px solid #aaa;
+    box-shadow: 3px 3px 5px 0 #aaa;
 }
 .whatAbout-in-dark-mode-off{
     color:#000;
@@ -342,11 +358,20 @@ header{
 .whatAbout-in-dark-mode-on{
     color:#fff;
 }
+.whatAbout-flex{
+    display: inline-flex;
+}
 
 /*===========================================================================================*/
 .wTitle{
+    margin: 5px 0 10px auto;
+    padding: 8px;
     text-align:right;
-    
+    border-radius: 15px 0% 0% 15px;
+    border-top: 0.5px solid #aaa;
+    border-bottom: 0.5px solid #aaa;
+    border-left: 0.5px solid #aaa;
+    box-shadow: -3px 3px 5px .4px #aaa;
 }
 .wTitle-in-dark-mode-off{
     color:#000;
@@ -355,6 +380,15 @@ header{
 .wTitle-in-dark-mode-on{
     color:#fff;
     text-decoration:#eee underline double;
+}
+.title{
+    padding: 8px;
+    margin: 5px auto 10px 0;
+    border-radius: 0% 15px 15px 0%;
+    border-top: 0.5px solid #aaa;
+    border-bottom: 0.5px solid #aaa;
+    border-right: 0.5px solid #aaa;
+    box-shadow: 3px 3px 5px 0 #aaa;
 }
 .title-in-dark-mode-off{
     color:#000;
@@ -415,6 +449,9 @@ header{
     .title{
         margin: 5px auto;
         text-align: center;
+        border-radius:15px;
+        border-left: .5px solid #aaa;
+        box-shadow: -3px 3px 5px .5px #aaa;
     }
     .wTitle{
         display: none;
@@ -422,13 +459,21 @@ header{
     .filmName{
         border: none;
         text-align: center;
+        box-shadow: none;
+        border-top: .5px solid #aaa;
+        border-radius: 0;
+        margin-top: 15px;
     }
     .fImage{
-        margin: auto;
-        margin-bottom: 15px;
+        margin: 10px auto;
         position: static;
-        width: 60px;
-        height:60px ;
+        width: 80px;
+        height:70px ;
+    }
+    .fImage:hover{
+        margin-left:30px;
+        width: 75%;
+        
     }
     .link-film{
         position: static;
@@ -491,9 +536,13 @@ header{
         margin: 7px auto;
     }
     .whatAbout{
-        margin: 15px auto;
+        /*margin: 15px auto ;*/
         /*text-align: justify;*/
         width: 100%;
+        border-radius:15px;
+        border-left: .5px solid #aaa;
+        box-shadow: -3px 3px 5px .5px #aaa;
+        
     }
     .watchedBox{
         display: none;
